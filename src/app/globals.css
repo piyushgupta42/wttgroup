@@ -1,0 +1,331 @@
+@import "tailwindcss";
+
+:root {
+  --wtt-blue: #0976b2;
+  --wtt-black: #050505;
+  --wtt-white: #ffffff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+  background: var(--wtt-black);
+  color: var(--wtt-white);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+img,
+video,
+iframe {
+  max-width: 100%;
+}
+
+::selection {
+  background: #007aff;
+  color: white;
+}
+
+/* Premium scrollbar */
+
+::-webkit-scrollbar {
+  width: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050505;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #007aff;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #ffffff;
+}
+
+/* Remove iframe border */
+
+iframe {
+  border: 0;
+}
+
+/* Mobile viewport */
+
+@media (max-width: 767px) {
+  html,
+  body {
+    overflow-x: hidden;
+  }
+}
+
+/* contact form  */
+.contact-input {
+  width: 100%;
+  border: 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+  background: transparent;
+  padding: 12px 0;
+  color: white;
+  outline: none;
+  font-size: 15px;
+  transition:
+    border-color 300ms ease,
+    padding-left 300ms ease;
+}
+
+.contact-input::placeholder {
+  color: rgba(255, 255, 255, 0.2);
+}
+
+.contact-input:focus {
+  border-bottom-color: #007aff;
+  padding-left: 8px;
+}
+
+textarea.contact-input {
+  line-height: 1.7;
+}
+
+.contact-input:focus::placeholder {
+  color: rgba(255, 255, 255, 0.3);
+}
+
+
+/* office addres */
+
+/* =========================================================
+   WTT INDIA MAP
+========================================================= */
+
+.wtt-map-marker {
+  background: transparent !important;
+  border: 0 !important;
+}
+
+.wtt-marker-wrapper {
+  position: relative;
+  width: 50px;
+  height: 50px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wtt-marker-dot {
+  position: relative;
+  z-index: 5;
+
+  width: 18px;
+  height: 18px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  border-radius: 9999px;
+
+  background: #007aff;
+
+  border: 4px solid white;
+
+  box-shadow:
+    0 0 0 1px rgba(0, 122, 255, 0.4),
+    0 8px 30px rgba(0, 122, 255, 0.4);
+
+  transition:
+    transform 300ms ease,
+    box-shadow 300ms ease;
+}
+
+.wtt-marker-dot span {
+  width: 4px;
+  height: 4px;
+
+  border-radius: 9999px;
+
+  background: white;
+}
+
+.wtt-marker-wrapper.is-active .wtt-marker-dot {
+  transform: scale(1.35);
+
+  box-shadow:
+    0 0 0 1px rgba(0, 122, 255, 0.6),
+    0 0 30px rgba(0, 122, 255, 0.7),
+    0 10px 35px rgba(0, 122, 255, 0.4);
+}
+
+.wtt-marker-pulse {
+  position: absolute;
+
+  width: 25px;
+  height: 25px;
+
+  border-radius: 9999px;
+
+  border: 1px solid rgba(0, 122, 255, 0.6);
+
+  animation: wtt-marker-pulse 2.2s
+    cubic-bezier(0.22, 1, 0.36, 1) infinite;
+}
+
+.wtt-marker-pulse-two {
+  animation-delay: 1.1s;
+}
+
+@keyframes wtt-marker-pulse {
+  0% {
+    transform: scale(0.6);
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(2.2);
+    opacity: 0;
+  }
+}
+/* =========================================================
+   WTT MAP
+========================================================= */
+
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background: #e5e5e0;
+  font-family: inherit;
+}
+
+.leaflet-control-attribution {
+  font-size: 8px !important;
+  background: rgba(255, 255, 255, 0.75) !important;
+}
+
+.leaflet-control-zoom {
+  border: none !important;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08) !important;
+}
+
+.leaflet-control-zoom a {
+  border: none !important;
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #050509 !important;
+}
+
+.leaflet-popup-content-wrapper {
+  border-radius: 0 !important;
+  padding: 10px !important;
+}
+
+.leaflet-popup-content {
+  margin: 5px !important;
+}
+
+.leaflet-popup-tip {
+  background: white !important;
+}
+
+/* =========================================================
+   WTT MARKER
+========================================================= */
+
+.wtt-map-marker {
+  background: transparent !important;
+  border: none !important;
+}
+
+.wtt-marker-wrapper {
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 30px;
+  height: 30px;
+}
+
+.wtt-marker-dot {
+  position: relative;
+  z-index: 3;
+
+  width: 11px;
+  height: 11px;
+
+  border: 3px solid white;
+  border-radius: 999px;
+
+  background: #007aff;
+
+  box-shadow:
+    0 0 0 1px rgba(0, 122, 255, 0.35),
+    0 5px 20px rgba(0, 122, 255, 0.35);
+}
+
+.wtt-marker-pulse {
+  position: absolute;
+
+  width: 28px;
+  height: 28px;
+
+  border-radius: 999px;
+
+  background: rgba(0, 122, 255, 0.15);
+
+  animation: wtt-marker-pulse 2s infinite;
+}
+
+@keyframes wtt-marker-pulse {
+  0% {
+    transform: scale(0.5);
+    opacity: 0.8;
+  }
+
+  70% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+
+  100% {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+/* Leaflet popup */
+
+.wtt-popup .leaflet-popup-content-wrapper {
+  border-radius: 18px;
+  padding: 12px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.18);
+}
+
+.wtt-popup .leaflet-popup-content {
+  margin: 8px;
+}
+
+.wtt-popup .leaflet-popup-tip {
+  box-shadow: none;
+}
+
+.leaflet-container {
+  font-family: inherit;
+}
