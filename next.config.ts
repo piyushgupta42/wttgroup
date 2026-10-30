@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
   // images: {
   //   unoptimized: true,
   // },
-  basePath: "/wtt"
+  //basePath: "/wtt"
 };
 
 export default nextConfig;
