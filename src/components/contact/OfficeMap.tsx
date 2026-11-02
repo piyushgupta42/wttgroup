@@ -236,9 +236,9 @@ export default function OfficeMap({
     };
   }, []);
 
-  const apiKey = "AIzaSyAMSQec30b6lqEAUMzLYJUHbKzEnsaVlTY";
+  const apiKey = process.env.NEXT_PUBLIC_GOOGLE_MAPS_API_KEY
 
-  const mapId = `"6f2e8c7a4b93d1ab" || "DEMO_MAP_ID"`;
+  const mapId = process.env.NEXT_PUBLIC_GOOGLE_MAP_ID || "DEMO_MAP_ID";
 
   if (!apiKey) {
     return (
