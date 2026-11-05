@@ -69,6 +69,7 @@ const awards: Award[] = [
   },
 ];
 
+
 function AwardCard({
   award,
   active,
@@ -82,184 +83,118 @@ function AwardCard({
 }) {
   return (
     <motion.button
+      layout
       type="button"
       onClick={onClick}
       style={{ order: position }}
       animate={{
-        opacity: active ? 1 : 0.58,
-        scale: active ? 1 : 0.9,
-        y: active ? -28 : 0,
+        opacity: active ? 1 : 0.62,
+        scale: active ? 1 : 0.92,
+        y: active ? -22 : 0,
       }}
       transition={{
-        duration: 0.45,
-        ease: [0.16, 1, 0.3, 1],
+        layout: {
+          duration: 1.4,
+          ease: [0.22, 1, 0.36, 1],
+        },
+        opacity: {
+          duration: 1.1,
+          ease: "easeInOut",
+        },
+        scale: {
+          duration: 1.4,
+          ease: [0.22, 1, 0.36, 1],
+        },
+        y: {
+          duration: 1.4,
+          ease: [0.22, 1, 0.36, 1],
+        },
       }}
       className={`
-        group
-        relative
-        flex
-        h-[280px]
-        w-[165px]
-        shrink-0
-        flex-col
-        overflow-hidden
-        rounded-[18px]
-        border
-        text-left
-        transition-colors
-        duration-500
-        sm:h-[315px]
-        sm:w-[190px]
-        lg:h-[345px]
-        lg:w-[215px]
+        group relative flex h-[280px] w-[165px]
+        shrink-0 flex-col overflow-hidden
+        rounded-[18px] border text-left
+        sm:h-[315px] sm:w-[190px]
+        lg:h-[345px] lg:w-[215px]
         ${
           active
             ? "border-[#0976b2] bg-[#08296a] shadow-[0_25px_60px_rgba(0,0,0,0.5)]"
-            : "border-[#0976b2]/50 bg-[#0976b2] hover:bg-[#0b8acb]"
+            : "border-white/10 bg-[#0976b2]/65"
         }
       `}
     >
       {/* Card grid */}
-      <div
-        className="
-          pointer-events-none
-          absolute
-          inset-0
-          opacity-[0.08]
-          [background-image:linear-gradient(rgba(255,255,255,.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.7)_1px,transparent_1px)]
-          [background-size:35px_35px]
-        "
-      />
+      <div className="
+        pointer-events-none absolute inset-0 opacity-[0.08]
+        [background-image:linear-gradient(rgba(255,255,255,.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.7)_1px,transparent_1px)]
+        [background-size:35px_35px]
+      " />
 
       {/* Number */}
-      <span
-        className="
-          absolute
-          right-4
-          top-4
-          z-20
-          flex
-          h-7
-          w-7
-          items-center
-          justify-center
-          rounded-full
-          border
-          border-white/20
-          text-[8px]
-          font-bold
-          text-white/60
-        "
-      >
+      <span className="
+        absolute right-4 top-4 z-20 flex h-7 w-7
+        items-center justify-center rounded-full
+        border border-white/20 text-[9px]
+        font-medium tracking-wider text-white/65
+      ">
         {award.id}
       </span>
 
-      {/* Award image */}
-      <div
-        className="
-          relative
-          z-10
-          flex
-          h-[145px]
-          items-center
-          justify-center
-          px-5
-          pt-6
-          sm:h-[165px]
-          lg:h-[180px]
-        "
-      >
+      {/* Artwork */}
+      <div className="
+        relative z-10 flex h-[145px] items-center
+        justify-center px-5 pt-6
+        sm:h-[165px] lg:h-[180px]
+      ">
         <div className="relative h-full w-full">
           <Image
             src={award.image}
             alt={`${award.award} - ${award.title}`}
             fill
             sizes="215px"
-            className="
-              object-contain
-              transition-transform
-              duration-500
-              group-hover:scale-105
-            "
+            className="object-contain transition-transform duration-700 group-hover:scale-105"
           />
         </div>
       </div>
 
-      {/* Award details */}
-      <div
-        className="
-          relative
-          z-10
-          mt-auto
-          border-t
-          border-white/15
-          px-4
-          py-4
-          sm:px-5
-          sm:py-5
-        "
-      >
-        <p
-          className="
-            text-[7px]
-            font-bold
-            uppercase
-            tracking-[0.16em]
-            text-white/50
-            sm:text-[8px]
-          "
-        >
+      {/* Details */}
+      <div className="
+        relative z-10 mt-auto border-t border-white/15
+        px-4 py-4 sm:px-5 sm:py-5
+      ">
+        <p className="
+          text-[8px] font-medium uppercase
+          tracking-[0.2em] text-white/55
+        ">
           {award.organization}
         </p>
 
-        <h3
-          className="
-            mt-2
-            text-[16px]
-            font-black
-            uppercase
-            leading-[0.92]
-            tracking-[-0.04em]
-            text-white
-            sm:text-[18px]
-            lg:text-[20px]
-          "
-        >
+        <h3 className="
+          mt-3 text-[17px] font-bold uppercase
+          leading-[1.05] tracking-[-0.035em]
+          text-white sm:text-[19px]
+        ">
           {award.award}
         </h3>
 
-        <p
-          className="
-            mt-3
-            min-h-[28px]
-            text-[9px]
-            font-medium
-            uppercase
-            leading-[1.25]
-            tracking-[-0.01em]
-            text-white/75
-            sm:text-[10px]
-          "
-        >
+        <p className="
+          mt-3 min-h-[28px] text-[10px]
+          font-normal uppercase leading-[1.5]
+          tracking-[0.02em] text-white/70
+        ">
           {award.title}
         </p>
 
-        <div
-          className={`
-            absolute
-            bottom-0
-            left-0
-            h-[2px]
-            bg-white
-            transition-all
-            duration-500
-            ${active ? "w-full" : "w-0 group-hover:w-full"}
-          `}
-        />
+        <div className={`
+          absolute bottom-0 left-0 h-[2px]
+          bg-white transition-all duration-700
+          ${active ? "w-full" : "w-0"}
+        `} />
       </div>
     </motion.button>
   );
 }
+
 
 export default function AwardsSection() {
   const [activeIndex, setActiveIndex] = useState(0);
@@ -268,13 +203,15 @@ export default function AwardsSection() {
 
   // Automatically highlight the next award while preserving the centered,
   // enlarged active-card animation.
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % awards.length);
-    }, 1500);
+  
+useEffect(() => {
+  const intervalId = window.setInterval(() => {
+    setActiveIndex((current) => (current + 1) % awards.length);
+  }, 4500);
 
-    return () => window.clearInterval(intervalId);
-  }, []);
+  return () => window.clearInterval(intervalId);
+}, []);
+
 
   const previousAward = () => {
     setActiveIndex((current) =>
@@ -452,7 +389,7 @@ export default function AwardsSection() {
             lg:gap-16
           "
         >
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 35 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
@@ -477,7 +414,32 @@ export default function AwardsSection() {
                 The Industry Listens.
               </span>
             </h2>
-          </motion.div>
+          </motion.div> */}
+          <div className="overflow-hidden">
+              <motion.h2
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="
+                  max-w-[800px]
+                  text-[clamp(3.4rem,6vw,7.2rem)]
+                  font-semibold
+                  leading-[0.84]
+                  tracking-[-0.07em]
+                  uppercase
+                "
+              >
+                When The Work Speaks.
+              <br />
+              <span className="text-white/45">
+                The Industry Listens.
+              </span>
+              </motion.h2>
+            </div>
 
           <motion.div
             initial={{ opacity: 0, x: 30 }}

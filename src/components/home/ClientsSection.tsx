@@ -188,7 +188,7 @@ export default function ClientsSection() {
             lg:gap-16
           "
         >
-          <motion.div
+          {/* <motion.div
             initial={{ opacity: 0, y: 40 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.2 }}
@@ -215,7 +215,34 @@ export default function ClientsSection() {
                 Trust.
               </span>
             </h2>
-          </motion.div>
+          </motion.div> */}
+
+<div className="overflow-hidden">
+              <motion.h2
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="
+                  max-w-[800px]
+                  text-[clamp(3.4rem,6vw,7.2rem)]
+                  font-semibold
+                  leading-[0.84]
+                  tracking-[-0.07em]
+                  uppercase
+                "
+              >
+                Our Growing
+              <br />
+              Circle Of{" "}
+              <span className="text-[#0976b2]">
+                Trust.
+              </span>
+              </motion.h2>
+            </div>
 
           <motion.div
             initial={{ opacity: 0, x: 30 }}

@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   metadataBase: new URL(siteUrl),
 
   title: {
-    default: "Walk The Talk | Out-of-Home Advertising Agency",
+    default: "Walk The Talk",
     template: "%s | Walk The Talk",
   },
 

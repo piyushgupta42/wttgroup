@@ -575,7 +575,7 @@ export default function WhatWeDoSection() {
                       text-white/40
                     "
                   >
-                    Media that moves
+                    Media on the moves
                   </div>
 
                   <div

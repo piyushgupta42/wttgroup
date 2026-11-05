@@ -20,10 +20,9 @@ const offices = [
       "401-402 Thapar House, Yusuf Sarai Community Center, New Delhi - 110049.",
   },
   {
-    city: "KOLKATA",
+    city: "BENGALURU",
     number: "03",
-    address:
-      "Godrej Waterside, 12th Floor, Tower 2, D-5, DP Block, Sector V, Bidhan Nagar, Kolkata - 700091.",
+    address: "A/509, Mittal Towers, MG Road, Bengaluru - 560001.",
   },
   {
     city: "CHENNAI",
@@ -32,15 +31,16 @@ const offices = [
       "No 11/38, Status Quo Building, Sterling Road, Seetha Nagar, Nungambakkam, Chennai - 600034.",
   },
   {
-    city: "BENGALURU",
-    number: "05",
-    address: "A/509, Mittal Towers, MG Road, Bengaluru - 560001.",
-  },
-  {
     city: "HYDERABAD",
-    number: "06",
+    number: "05",
     address:
       "505, No. 6-3-252/2, Sri Ram Nest, Mega City, Irram Manzil Colony, Banjara Hills, Hyderabad - 500082.",
+  },
+  {
+    city: "KOLKATA",
+    number: "06",
+    address:
+      "Godrej Waterside, 12th Floor, Tower 2, D-5, DP Block, Sector V, Bidhan Nagar, Kolkata - 700091.",
   },
 ];
 

@@ -22,6 +22,7 @@ import {
 import { motion } from "framer-motion";
 
 export interface Office {
+  wtt: string;
   city: string;
   address: string;
   lat: number;
@@ -31,6 +32,7 @@ export interface Office {
 
 export const offices: Office[] = [
     {
+      wtt: "WTT",
       city: "Mumbai",
       address:
         "Walk The Talk Communications Pvt. Ltd., 910, Summit Business Park, Behind Guru Nanak Petrol Pump, Off Andheri Kurla Road, Andheri (East), Mumbai - 400093.",
@@ -38,6 +40,7 @@ export const offices: Office[] = [
       lng: 72.8567,
     },
     {
+      wtt: "WTT",
       city: "Delhi",
       address:
         "Walk The Talk Communications Pvt. Ltd., 401-402 Thapar House, Yusuf Sarai Community Center, New Delhi - 110049.",
@@ -45,20 +48,7 @@ export const offices: Office[] = [
       lng: 77.2047,
     },
     {
-      city: "Kolkata",
-      address:
-        "Walk The Talk Communications Pvt. Ltd., Godrej Waterside, 12th Floor, Tower 2, D-5, DP Block, Sector V, Bidhan Nagar, Kolkata - 700091.",
-      lat: 22.5797,
-      lng: 88.433,
-    },
-    {
-      city: "Chennai",
-      address:
-        "Walk The Talk Communications Pvt. Ltd., No 11/38, Status Quo Building, Sterling Road, Seetha Nagar, Nungambakkam, Chennai - 600034.",
-      lat: 13.0604,
-      lng: 80.2496,
-    },
-    {
+      wtt: "WTT",
       city: "Bengaluru",
       address:
         "Walk The Talk Communications Pvt. Ltd., A/509, Mittal Towers, MG Road, Bengaluru - 560001.",
@@ -66,12 +56,30 @@ export const offices: Office[] = [
       lng: 77.6033,
     },
     {
+      wtt: "WTT",
+      city: "Chennai",
+      address:
+        "Walk The Talk Communications Pvt. Ltd., No 11/38, Status Quo Building, Sterling Road, Seetha Nagar, Nungambakkam, Chennai - 600034.",
+      lat: 13.0604,
+      lng: 80.2496,
+    },
+    {
+      wtt: "WTT",
       city: "Hyderabad",
       address:
         "Walk The Talk Communications Pvt. Ltd., 505, No. 6-3-252/2, Sri Ram Nest, Mega City, Irram Manzil Colony, Banjara Hills, Hyderabad - 500082.",
       lat: 17.4156,
       lng: 78.4486,
     },
+    {
+      wtt: "WTT",
+      city: "Kolkata",
+      address:
+        "Walk The Talk Communications Pvt. Ltd., Godrej Waterside, 12th Floor, Tower 2, D-5, DP Block, Sector V, Bidhan Nagar, Kolkata - 700091.",
+      lat: 22.5797,
+      lng: 88.433,
+    },
+
   ];
 
 interface OfficeMapProps {
@@ -328,12 +336,12 @@ export default function OfficeMap({
               <div className="min-w-[230px] p-1 text-[#050509]">
                 <div className="mb-3 flex items-start justify-between gap-4">
                   <div>
-                    <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#007aff]">
+                    {/* <p className="text-[9px] font-bold uppercase tracking-[0.2em] text-[#007aff]">
                       WTT Office
-                    </p>
+                    </p> */}
 
                     <h3 className="mt-1 text-lg font-black">
-                      {selectedOffice.city}
+                     {selectedOffice.wtt} {selectedOffice.city}
                     </h3>
                   </div>
 

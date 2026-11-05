@@ -264,7 +264,7 @@ export default function TeamPage() {
         <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1600px] items-center px-6 pb-16 pt-28 sm:px-10 lg:px-16">
           <div className="grid w-full items-center gap-10 lg:grid-cols-12">
             <div className="lg:col-span-7">
-              <motion.div
+              {/* <motion.div
                 initial={{
                   opacity: 0,
                   y: 70,
@@ -280,7 +280,7 @@ export default function TeamPage() {
               >
                 <div className="mb-8 flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-[#0976b2]">
                   <span className="h-px w-12 bg-[#0976b2]" />
-                  WTT / THE SQUAD
+                  WTT / CHANGE MAKERS
                 </div>
 
                 <h1 className="text-[15vw] font-black uppercase leading-[0.72] tracking-[-0.1em] sm:text-[13vw] lg:text-[9.5vw]">
@@ -290,7 +290,35 @@ export default function TeamPage() {
                   <br />
                   WALK THE TALK.
                 </h1>
-              </motion.div>
+              </motion.div> */}
+              <div className="overflow-hidden">
+              <div className="mb-8 flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-[#0976b2]">
+                  <span className="h-px w-12 bg-[#0976b2]" />
+                  WTT / CHANGE MAKERS
+                </div>
+              <motion.h2
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="
+                  max-w-[800px]
+                  
+                  font-semibold
+                  leading-[0.84]
+                  tracking-[-0.07em]
+                  text-[8vw]
+                "
+              >
+                THE PEOPLE
+                <br />
+                <span className="text-[#0976b2]">WHO </span>
+                  WALK THE TALK.
+              </motion.h2>
+            </div>
 
               <motion.div
                 initial={{
@@ -322,7 +350,7 @@ export default function TeamPage() {
                   }}
                   className="group flex shrink-0 cursor-pointer items-center gap-3 text-xs font-bold uppercase tracking-[0.25em] text-white/40 transition-colors duration-300 hover:text-white"
                 >
-                  <span>MEET THE SQUAD</span>
+                  <span>MEET CHANGE MAKERS</span>
 
                   <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 transition-all duration-300 group-hover:border-[#007aff] group-hover:bg-[#007aff] group-hover:text-white">
                     <ArrowDown
@@ -343,19 +371,19 @@ export default function TeamPage() {
 
       <section
         id="team"
-        className="bg-[#f3f3f0] py-24 text-[#050509] sm:py-32 lg:py-40"
+        className="bg-[#f3f3f0] py-24 text-[#050509] sm:py-16 lg:py-20"
       >
         <div className="mx-auto max-w-[1600px] px-6 sm:px-10 lg:px-16">
           <div className="mb-16 flex flex-col justify-between gap-10 lg:flex-row lg:items-end">
             <div>
-              <div className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-[#0976b2]">
+              {/* <div className="mb-6 flex items-center gap-3 text-xs font-bold uppercase tracking-[0.3em] text-[#0976b2]">
                 <span className="h-2 w-2 rounded-full bg-[#0976b2]" />
                 02 / THE SQUAD
-              </div>
+              </div> */}
 
               <h2 className="text-6xl font-black uppercase leading-[0.75] tracking-[-0.08em] sm:text-8xl lg:text-[8vw]">
-                <span className="text-black/15">YOUNG</span>
-                <span className="block text-[#0976b2]">TURKS</span>
+                <span className="text-black/15">CHNAGE</span>
+                <span className="block text-[#0976b2]">MAKERS</span>
               </h2>
             </div>
 

@@ -37,7 +37,22 @@ const stagger = {
 
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
-  const [activeOffice, setActiveOffice] = useState<Office>(offices[0]);
+  const cityOrder = [
+    "Mumbai",
+    "Delhi",
+    "Bengaluru",
+    "Chennai",
+    "Hyderabad",
+    "Kolkata",
+  ];
+
+  const orderedOffices = cityOrder
+    .map((city) => offices.find((office) => office.city === city))
+    .filter((office): office is Office => Boolean(office));
+
+  const [activeOffice, setActiveOffice] = useState<Office>(
+    () => orderedOffices[0] ?? offices[0]
+  );
 
   const handleSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -58,11 +73,11 @@ export default function ContactPage() {
   const selectOffice = (office: Office) => {
     setActiveOffice(office);
 
-    window.dispatchEvent(
-      new CustomEvent("wtt-office-select", {
-        detail: office,
-      })
-    );
+    // window.dispatchEvent(
+    //   new CustomEvent("wtt-office-select", {
+    //     detail: office,
+    //   })
+    // );
   };
 
   return (
@@ -115,7 +130,7 @@ export default function ContactPage() {
 
         {/* Top */}
         <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1600px] flex-col px-5 py-6 sm:px-8 lg:px-12">
-          <div className="flex items-center justify-between">
+          {/* <div className="flex items-center justify-between">
             <div className="flex items-center gap-3">
               <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0976b2] text-sm font-black">
                 W
@@ -141,7 +156,7 @@ export default function ContactPage() {
                 className="transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
               />
             </button>
-          </div>
+          </div> */}
 
           {/* Hero content */}
           <div className="grid flex-1 items-center gap-10 py-12 lg:grid-cols-[0.9fr_1.1fr] lg:gap-14 lg:py-16">
@@ -162,17 +177,51 @@ export default function ContactPage() {
                   Six cities. One network.
                 </span>
               </motion.div> */}
+              {/* <div className="mb-8 flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-[#0976b2]">
+                <span className="h-px w-12 bg-[#0976b2]" />
+                WTT / CONTACT US
+              </div>
 
               <motion.h1
                 variants={fadeUp}
                 className="max-w-4xl text-[clamp(4rem,9vw,9rem)] font-black leading-[0.78] tracking-[-0.075em]"
               >
-                YOUR NEXT 
+                YOUR NEXT
                 <br />
                 <span className="text-white">BIG IDEA </span>
                 <br />
                 <span className="text-[#0976b2]">STARTS HERE.</span>
-              </motion.h1>
+              </motion.h1> */}
+
+<div className="overflow-hidden">
+              <div className="mb-8 flex items-center gap-4 text-xs font-bold uppercase tracking-[0.3em] text-[#0976b2]">
+                  <span className="h-px w-12 bg-[#0976b2]" />
+                  WTT / CONTACT US
+                </div>
+              <motion.h2
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="
+                  max-w-[800px]
+                  
+                  font-semibold
+                  leading-[0.84]
+                  tracking-[-0.07em]
+                  text-[8vw]
+                "
+              >
+                YOUR NEXT
+                <br />
+                <span className="text-white">BIG IDEA </span>
+                <br />
+                <span className="text-[#0976b2]">STARTS HERE.</span>
+              </motion.h2>
+            </div>
 
               <motion.p
                 variants={fadeUp}
@@ -285,7 +334,7 @@ export default function ContactPage() {
               viewport={{ once: true, amount: 0.2 }}
               variants={stagger}
             >
-              <motion.div
+              {/* <motion.div
                 variants={fadeUp}
                 className="mb-6 flex items-center gap-3"
               >
@@ -294,22 +343,49 @@ export default function ContactPage() {
                 <span className="text-xs font-bold uppercase tracking-[0.25em] text-black/40">
                   Get in touch
                 </span>
-              </motion.div>
+              </motion.div> */}
 
+<div className="overflow-hidden">
               <motion.h2
+                initial={{ opacity: 0, y: 100 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.2 }}
+                transition={{
+                  duration: 0.9,
+                  ease: [0.16, 1, 0.3, 1],
+                }}
+                className="
+                  max-w-[800px]
+                  text-[clamp(3.4rem,6vw,7.2rem)]
+                  font-semibold
+                  leading-[0.84]
+                  tracking-[-0.07em]
+                "
+              >
+                LET’S
+                <br />
+                <span className="text-[#0976b2]">
+                CONNECT.
+                </span>
+              </motion.h2>
+            </div>
+
+              {/* <motion.h2
                 variants={fadeUp}
                 className="text-[clamp(3.5rem,7vw,7rem)] font-black leading-[0.82] tracking-[-0.07em]"
               >
-                LET’S 
+                LET’S
                 <br />
                 <span className="text-[#0976b2]">CONNECT.</span>
-              </motion.h2>
+              </motion.h2> */}
 
               <motion.p
                 variants={fadeUp}
                 className="mt-8 max-w-md text-base leading-7 text-black/55"
               >
-                Have a brief, an ambition or simply ideas you'd like to explore? We'd love to hear from you. Let's talk about how we can enrich your brand make a bigger impact, out there.
+                Have a brief, an ambition or simply ideas you'd like to explore?
+                We'd love to hear from you. Let's talk about how we can enrich
+                your brand make a bigger impact, out there.
               </motion.p>
 
               {/* Contact details */}
@@ -329,7 +405,7 @@ export default function ContactPage() {
                     </p>
 
                     <p className="mt-1 text-xs leading-5 text-black/45">
-                      Mumbai · Delhi · Kolkata · Chennai · Bengaluru · Hyderabad
+                      Mumbai · Delhi · Bengaluru · Chennai · Hyderabad · Kolkata
                     </p>
                   </div>
                 </div>
@@ -352,7 +428,7 @@ export default function ContactPage() {
                     </a>
 
                     <p className="mt-1 text-xs text-black/45">
-                      New business & general enquiries
+                      Let's Get Talking.
                     </p>
                   </div>
                 </div>
@@ -384,11 +460,11 @@ export default function ContactPage() {
                 <div className="mb-10 flex items-start justify-between gap-5">
                   <div>
                     <p className="text-[10px] font-bold uppercase tracking-[0.25em] text-[#0976b2]">
-                      New project
+                      Something Brewing?
                     </p>
 
                     <h3 className="mt-2 text-2xl font-black tracking-tight sm:text-3xl">
-                      Start something interesting.
+                      We Are All Ears
                     </h3>
                   </div>
 
@@ -458,8 +534,8 @@ export default function ContactPage() {
 
                 <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
                   <p className="max-w-xs text-[10px] leading-5 text-black/35">
-                    By sending this enquiry, you agree to be contacted by the
-                    WTT team regarding your request.
+                    By sending this note, you agree to be contacted by the
+                    WTT Team regarding your request.
                   </p>
 
                   <button
@@ -474,7 +550,7 @@ export default function ContactPage() {
                       </>
                     ) : (
                       <>
-                        Send Enquiry
+                        Send
                         <Send
                           size={15}
                           className="transition-transform group-hover:translate-x-1"
@@ -490,93 +566,196 @@ export default function ContactPage() {
       </section>
 
       {/* =====================================================
-          CITY NETWORK
-      ====================================================== */}
+    CITY NETWORK
+====================================================== */}
       <section
         data-snap-section
-        className="bg-[#0976b2] px-5 py-20 sm:px-8 lg:px-12 lg:py-28"
+        className="relative overflow-hidden bg-[#0976b2] px-5 py-24 text-white sm:px-8 lg:px-12 lg:py-32"
       >
-        <div className="mx-auto max-w-[1400px]">
-          <div className="mb-12 flex flex-col justify-between gap-5 md:flex-row md:items-end">
-            <div>
-              <p className="text-[10px] font-bold uppercase tracking-[0.3em] text-[#0976b2]">
-                Our network
-              </p>
+        {/* Background decoration */}
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
+          <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full border border-white/10" />
+          <div className="absolute -right-20 -top-20 h-[350px] w-[350px] rounded-full border border-white/10" />
+          <div className="absolute bottom-0 left-0 h-[350px] w-[350px] rounded-full bg-white/[0.04] blur-[100px]" />
+        </div>
 
-              <h2 className="mt-4 max-w-3xl text-[clamp(3rem,6vw,6rem)] font-black leading-[0.85] tracking-[-0.065em]">
+        <div className="relative z-10 mx-auto max-w-[1400px]">
+          {/* Heading */}
+          <div className="mb-16 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+            <div>
+              {/* <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6 }}
+          className="mb-7 flex items-center gap-3"
+        >
+          <span className="h-2 w-2 rounded-full bg-white" />
+          <span className="text-xs font-bold uppercase tracking-[0.3em] text-white">
+            Our network / India
+          </span>
+        </motion.div> */}
+
+              <motion.h2
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8 }}
+                className="
+            max-w-[900px]
+            text-[clamp(3.5rem,8vw,8rem)]
+            font-black
+            leading-[0.82]
+            tracking-[-0.075em]
+            text-white
+          "
+              >
                 SIX CITIES.
                 <br />
-                <span className="text-white/30">ONE WTT.</span>
-              </h2>
+                <span className="text-white/40">ONE WTT.</span>
+              </motion.h2>
             </div>
 
-            <p className="max-w-sm text-sm leading-6 text-white/40">
-              From Mumbai to Hyderabad, our teams work across culture,
-              creativity, technology and experiences.
-            </p>
+            <motion.div
+              initial={{ opacity: 0, x: 25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="lg:pb-2"
+            >
+              <p className="max-w-md text-base leading-8 text-white sm:text-lg">
+                From Mumbai to Hyderabad, our teams work across culture,
+                creativity, technology and experiences. One network. Six cities.
+                Countless possibilities.
+              </p>
+
+              <div className="mt-7 flex items-center gap-3">
+                <span className="h-px w-12 bg-white/60" />
+                <span className="text-xs font-bold uppercase tracking-[0.2em] text-white">
+                  Explore our locations
+                </span>
+              </div>
+            </motion.div>
           </div>
 
-          <div className="grid border-l border-t border-white/10 sm:grid-cols-2 lg:grid-cols-3">
-            {offices.map((office, index) => {
+          {/* City Cards */}
+          <div className="grid border-l border-t border-white/25 sm:grid-cols-2 lg:grid-cols-3">
+            {[
+              "Mumbai",
+              "Delhi",
+              "Bengaluru",
+              "Chennai",
+              "Hyderabad",
+              "Kolkata",
+            ].map((city, index) => {
+              const office = offices.find((item) => item.city === city);
+
+              if (!office) return null;
+
               const isActive = activeOffice.city === office.city;
 
               return (
                 <motion.button
                   key={office.city}
                   onClick={() => selectOffice(office)}
-                  initial={{
-                    opacity: 0,
-                    y: 20,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                  }}
+                  initial={{ opacity: 0, y: 30 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.15 }}
                   transition={{
-                    delay: index * 0.05,
+                    duration: 0.6,
+                    delay: index * 0.07,
                   }}
-                  className={`group relative min-h-[190px] border-b border-r border-white/10 p-6 text-left transition sm:p-8 ${
-                    isActive
-                      ? "bg-[#050509]"
-                      : "bg-white/[0.02] hover:bg-black/[0.08]"
-                  }`}
+                  className={`
+              group relative flex min-h-[260px] flex-col
+              justify-between border-b border-r
+              border-white/25 p-7 text-left
+              transition-all duration-500
+              sm:p-8 lg:min-h-[285px] lg:p-9
+              ${
+                isActive
+                  ? "bg-[#050509] shadow-2xl"
+                  : "bg-white/[0.035] hover:bg-white/[0.12]"
+              }
+            `}
                 >
-                  <div className="flex items-start justify-between">
-                    <span
-                      className={`text-[10px] font-bold uppercase tracking-[0.2em] ${
-                        isActive ? "text-white/70" : "text-white/25"
-                      }`}
-                    >
+                  {/* Top */}
+                  <div className="flex items-center justify-between">
+                    <span className="text-xs font-bold tracking-[0.25em] text-white">
                       0{index + 1}
                     </span>
 
-                    <ArrowUpRight
-                      size={17}
-                      className={`transition-transform group-hover:translate-x-1 group-hover:-translate-y-1 ${
-                        isActive ? "text-white" : "text-white/25"
-                      }`}
-                    />
+                    <span
+                      className={`
+                  flex h-10 w-10 items-center justify-center
+                  rounded-full border border-white/30
+                  transition-all duration-300
+                  ${
+                    isActive
+                      ? "bg-white text-black"
+                      : "text-white group-hover:bg-white group-hover:text-black"
+                  }
+                `}
+                    >
+                      <ArrowUpRight
+                        size={18}
+                        className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
+                      />
+                    </span>
                   </div>
 
-                  <div className="mt-14">
-                    <h3 className="text-2xl font-black tracking-tight">
+                  {/* Bottom */}
+                  <div className="mt-12">
+                    <h3
+                      className={`
+                  text-3xl font-black tracking-[-0.04em]
+                  transition-colors duration-300
+                  ${
+                    isActive
+                      ? "text-white"
+                      : "text-white group-hover:text-white"
+                  }
+                `}
+                    >
                       {office.city}
                     </h3>
 
-                    <p
-                      className={`mt-2 max-w-sm text-xs leading-5 ${
-                        isActive ? "text-white/75" : "text-white/35"
-                      }`}
-                    >
+                    <p className="mt-4 max-w-sm text-sm leading-7 text-white">
                       {office.address}
                     </p>
+
+                    <div className="mt-5 flex items-center gap-2">
+                      <span
+                        className={`h-1.5 w-1.5 rounded-full ${
+                          isActive ? "bg-white" : "bg-white/50"
+                        }`}
+                      />
+                      <span className="text-[10px] font-bold uppercase tracking-[0.2em] text-white">
+                        {isActive ? "Currently selected" : "Explore office"}
+                      </span>
+                    </div>
                   </div>
+
+                  {/* Active indicator */}
+                  {isActive && (
+                    <motion.div
+                      layoutId="active-office-indicator"
+                      className="absolute bottom-0 left-0 h-1 w-full bg-white"
+                    />
+                  )}
                 </motion.button>
               );
             })}
+          </div>
+
+          {/* Footer */}
+          <div className="mt-8 flex flex-col justify-between gap-4 border-t border-white/25 pt-6 sm:flex-row sm:items-center">
+            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
+              One network. Six locations. Endless possibilities.
+            </p>
+
+            <p className="text-xs font-bold uppercase tracking-[0.2em] text-white">
+              06 / Offices across India
+            </p>
           </div>
         </div>
       </section>

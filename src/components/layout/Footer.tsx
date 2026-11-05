@@ -1,33 +1,19 @@
+
 "use client";
 
 import Image from "next/image";
 import Link from "next/link";
-import { FormEvent, useState } from "react";
 import { motion } from "framer-motion";
 import {
   ArrowUpRight,
-  Check,
-  Mail,
-  MapPin,
-  Phone,
-  Send,
 } from "lucide-react";
 
-import { 
-    FaFacebook, 
-    FaInstagram, 
-    FaLinkedin, 
-    FaTwitter, 
-    FaYoutube
-  } from "react-icons/fa6"; 
-
-const services = [
-  "Brand Strategy",
-  "Creative",
-  "Digital",
-  "Media",
-  "Outdoor",
-];
+import {
+  FaFacebook,
+  FaInstagram,
+  FaLinkedin,
+  FaTwitter,
+} from "react-icons/fa6";
 
 const companyLinks = [
   { label: "HOME", href: "/" },
@@ -61,589 +47,369 @@ const socialLinks = [
 ];
 
 export default function Footer() {
-  const [email, setEmail] = useState("");
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-
-    if (!email.trim()) return;
-
-    setSubmitted(true);
-    setEmail("");
-
-    setTimeout(() => {
-      setSubmitted(false);
-    }, 3000);
-  };
-
   return (
-    <footer className="relative w-full overflow-hidden bg-[#050509] rounded-t-[24px]">
-      {/* =========================================================
-          BACKGROUND GLOW
-      ========================================================= */}
+    <footer className="relative w-full overflow-hidden bg-[#050509] text-white">
 
-<div className="pointer-events-none absolute inset-0 overflow-hidden">
-  <div
-    className="
-      absolute
-      left-1/2
-      top-0
-      h-[350px]
-      w-[700px]
-      -translate-x-1/2
-      rounded-full
-      bg-[#0976b2]/[0.06]
-      blur-[140px]
-    "
-  />
-</div>
+      {/* =====================================================
+          BACKGROUND
+      ===================================================== */}
 
-      {/* =========================================================
-          MAIN FOOTER PANEL
-      ========================================================= */}
+      <div className="pointer-events-none absolute inset-0 overflow-hidden">
+        <div className="absolute left-1/2 top-0 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-[#0976b2]/[0.06] blur-[150px]" />
 
-<div className="relative w-full overflow-hidden rounded-t-[24px] bg-[#050509] text-white">
-        {/* subtle grid */}
         <div
           className="
-            pointer-events-none
-            absolute
-            inset-0
-            opacity-[0.035]
+            absolute inset-0 opacity-[0.025]
             [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)]
-            [background-size:60px_60px]
+            [background-size:65px_65px]
           "
         />
+      </div>
 
-        {/* blue glow */}
-        <div
-          className="
-            pointer-events-none
-            absolute
-            -right-32
-            -top-32
-            h-[400px]
-            w-[400px]
-            rounded-full
-            bg-[#0976b2]/20
-            blur-[120px]
-          "
-        />
+      <div className="relative mx-auto w-full max-w-[1800px] px-5 pt-16 sm:px-8 lg:px-10">
 
-        <div className="relative">
-          {/* =====================================================
-              TOP CONTENT
-          ===================================================== */}
+        {/* =====================================================
+            TOP FOOTER CONTENT
+        ===================================================== */}
 
-          <div className="grid grid-cols-1 gap-12 p-7 sm:p-10 lg:grid-cols-[1.4fr_0.8fr_1fr] lg:gap-16 lg:p-14 xl:p-16">
-            {/* ===================================================
-                NEWSLETTER
-            =================================================== */}
+        <div className="
+          grid grid-cols-1 gap-3
+          lg:grid-cols-[1fr_1.15fr_215px]
+          xl:grid-cols-[1fr_1.15fr_215px]
+        ">
 
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.6 }}
-            >
-              {/* <div className="mb-7 flex items-center gap-3">
-                <span className="h-2 w-2 rounded-full bg-[#0976b2]" />
+          {/* =================================================
+              LEFT PANEL - HAVE A BRAND TO MOVE
+          ================================================= */}
 
-                <span className="text-[10px] font-semibold uppercase tracking-[0.28em] text-white/40">
-                  Stay connected
-                </span>
-              </div> */}
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7 }}
+            className="
+              relative flex min-h-[280px] items-center
+              overflow-hidden border border-white/[0.04]
+              bg-[#08090f] p-7 sm:p-10
+              lg:min-h-[330px] xl:p-16
+            "
+          >
+            {/* Grid background */}
+            <div
+              className="
+                pointer-events-none absolute inset-0 opacity-[0.045]
+                [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)]
+                [background-size:65px_65px]
+              "
+            />
 
+            <div className="relative z-10">
               <h2
                 className="
-                  max-w-xl
-                  text-[clamp(2.5rem,5vw,5rem)]
-                  font-black
-                  uppercase
-                  leading-[0.88]
-                  tracking-[-0.06em]
+                  max-w-[520px]
+                  text-[clamp(3rem,5.2vw,5.2rem)]
+                  font-black uppercase
+                  leading-[0.86]
+                  tracking-[-0.075em]
+                  text-white
                 "
               >
-                HAVE A BRAND 
+                HAVE A
+                <br />
+                BRAND
                 <br />
                 TO MOVE?
-                <br/>
-                <span className="text-[#0976b2]">LET'S GET IT OUT THERE.</span>
+              </h2>
+            </div>
+          </motion.div>
+
+          {/* =================================================
+              CENTER PANEL - LET'S GET IT OUT THERE
+          ================================================= */}
+
+          <motion.div
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.7, delay: 0.1 }}
+            className="
+              group relative flex min-h-[280px] flex-col
+              justify-center overflow-hidden
+              border border-white/[0.04]
+              bg-[#08090f] p-7 sm:p-10
+              lg:min-h-[330px] lg:p-8 xl:p-9
+            "
+          >
+            {/* Grid background */}
+            <div
+              className="
+                pointer-events-none absolute inset-0 opacity-[0.045]
+                [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)]
+                [background-size:65px_65px]
+              "
+            />
+
+            {/* Blue glow */}
+            <div className="
+              pointer-events-none absolute -right-24 top-0
+              h-[300px] w-[300px] rounded-full
+              bg-[#0976b2]/[0.12] blur-[100px]
+            " />
+
+            {/* Decorative plus */}
+            {/* <div className="
+              absolute -top-[46px] left-1/2 z-20
+              flex h-[82px] w-[82px] -translate-x-1/2
+              items-center justify-center rounded-full
+              border border-[#0976b2]/70
+              bg-[#477bb2] shadow-[0_0_30px_rgba(9,118,178,0.15)]
+              lg:-top-[46px]
+            ">
+              <span className="
+                flex h-[66px] w-[66px] items-center
+                justify-center rounded-full
+                border border-dashed border-white/50
+                text-[30px] font-light text-white
+              ">
+                +
+              </span>
+            </div> */}
+
+            <div className="relative z-10 pt-5">
+              <h2 className="
+                max-w-[650px]
+                text-[clamp(2.7rem,5vw,5rem)]
+                font-black uppercase
+                leading-[0.86]
+                tracking-[-0.075em]
+                text-[#477bb2]
+                transition-colors duration-500
+                group-hover:text-[#5b91c9]
+              ">
+                LET&apos;S GET IT
+                <br />
+                OUT THERE.
               </h2>
 
-              <p className="mt-7 max-w-md text-sm leading-6 text-white/45">
-              Bring us your ambition. We'll bring in the possibilities. <br/>let's think bold, Go beyond and Walk the Talk.
+              <p className="
+                mt-7 max-w-[450px]
+                text-[13px] font-medium
+                leading-7 text-white/50
+                sm:text-sm
+              ">
+                Bring us your ambition. We&apos;ll bring in
+                the possibilities.
+                <br />
+                Let&apos;s think bold, Go beyond and Walk the Talk.
               </p>
+            </div>
+          </motion.div>
 
-              {/* Newsletter */}
-              {/* <form
-                onSubmit={handleSubmit}
-                className="
-                  mt-8
-                  flex
-                  max-w-xl
-                  items-center
-                  rounded-full
-                  border
-                  border-white/20
-                  bg-white/[0.03]
-                  p-1.5
-                  transition-all
-                  focus-within:border-[#0976b2]
-                  focus-within:bg-white/[0.05]
-                "
-              >
-                <Mail
-                  size={17}
-                  className="ml-4 shrink-0 text-white/35"
-                />
+          {/* =================================================
+              RIGHT SIDE - EXPLORE + CONNECT
+          ================================================= */}
 
-                <input
-                  type="email"
-                  value={email}
-                  onChange={(event) => setEmail(event.target.value)}
-                  placeholder="Your email address"
-                  required
-                  className="
-                    min-w-0
-                    flex-1
-                    bg-transparent
-                    px-3
-                    py-3
-                    text-sm
-                    text-white
-                    outline-none
-                    placeholder:text-white/30
-                  "
-                />
+          <div className="flex flex-col gap-3">
 
-                <button
-                  type="submit"
-                  aria-label="Subscribe"
-                  className="
-                    flex
-                    h-11
-                    w-11
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-[#0976b2]
-                    text-white
-                    transition-all
-                    duration-300
-                    hover:scale-105
-                    hover:bg-white
-                    hover:text-black
-                  "
-                >
-                  {submitted ? (
-                    <Check size={17} />
-                  ) : (
-                    <Send size={16} />
-                  )}
-                </button>
-              </form>
-
-              {submitted && (
-                <p className="mt-3 text-xs text-[#0976b2]">
-                  Thanks — you&apos;re on the list.
-                </p>
-              )} */}
-            </motion.div>
-
-            {/* ===================================================
-                SERVICES
-            =================================================== */}
-
+            {/* EXPLORE */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.1 }}
+              transition={{ duration: 0.7, delay: 0.2 }}
+              className="
+                border border-white/[0.04]
+                bg-[#08090f] p-5 sm:p-6
+              "
             >
-              {/* <p className="mb-7 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/35">
-                Our services
+              <p className="
+                mb-6 text-[10px] font-bold
+                uppercase tracking-[0.3em]
+                text-white/40
+              ">
+                EXPLORE
               </p>
 
-              <div className="flex flex-col gap-3">
-                {services.map((service, index) => (
+              <div className="flex flex-col gap-[15px]">
+                {companyLinks.map((link) => (
                   <Link
-                    key={service}
-                    href="/services"
+                    key={link.href}
+                    href={link.href}
                     className="
-                      group
-                      flex
-                      items-center
-                      gap-3
-                      text-[15px]
-                      text-white/75
-                      transition-colors
+                      group/link flex w-fit items-center
+                      gap-2 text-[13px] font-medium
+                      text-white/60
+                      transition-colors duration-300
                       hover:text-white
                     "
                   >
-                    <span className="text-[10px] text-[#0976b2]">
-                      0{index + 1}
-                    </span>
-
-                    <span>{service}</span>
+                    {link.label}
 
                     <ArrowUpRight
-                      size={13}
+                      size={12}
                       className="
-                        -translate-x-2
-                        opacity-0
-                        transition-all
-                        duration-300
-                        group-hover:translate-x-0
-                        group-hover:opacity-100
-                        group-hover:text-[#0976b2]
+                        -translate-y-1 translate-x-[-4px]
+                        opacity-0 transition-all duration-300
+                        group-hover/link:translate-x-0
+                        group-hover/link:translate-y-0
+                        group-hover/link:opacity-100
                       "
                     />
                   </Link>
                 ))}
-              </div> */}
-
-              <div className="mt-10">
-                <p className="mb-5 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/35">
-                  EXPLORE
-                </p>
-
-                <div className="flex flex-col gap-3">
-                  {companyLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      className="
-                        w-fit
-                        text-sm
-                        text-white/55
-                        transition-colors
-                        hover:text-[#0976b2]
-                      "
-                    >
-                      {link.label}
-                    </Link>
-                  ))}
-                </div>
               </div>
             </motion.div>
 
-            {/* ===================================================
-                CONTACT
-            =================================================== */}
-
+            {/* CONNECT */}
             <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: 20 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: 0.2 }}
+              transition={{ duration: 0.7, delay: 0.3 }}
+              className="
+                flex-1 border border-white/[0.04]
+                bg-[#08090f] p-5 sm:p-6
+              "
             >
-              <p className="mb-7 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/35">
+              <p className="
+                mb-8 text-[10px] font-bold
+                uppercase tracking-[0.3em]
+                text-white/40
+              ">
                 CONNECT
               </p>
 
               <a
                 href="mailto:hello@wttgroup.in"
                 className="
-                  group
-                  inline-flex
-                  items-center
-                  gap-2
-                  text-lg
-                  font-medium
-                  text-white
-                  transition-colors
+                  group flex items-center justify-between
+                  gap-2 text-[15px] font-medium
+                  text-white transition-colors
                   hover:text-[#0976b2]
+                  sm:text-base
                 "
               >
-                hello@wttgroup.in
+                <span className="break-all">
+                  hello@wttgroup.in
+                </span>
 
                 <ArrowUpRight
-                  size={16}
+                  size={17}
                   className="
-                    transition-transform
-                    duration-300
-                    group-hover:translate-x-1
+                    shrink-0 transition-transform duration-300
                     group-hover:-translate-y-1
+                    group-hover:translate-x-1
                   "
                 />
               </a>
-
-              {/* Contact details */}
-              {/* <div className="mt-9 space-y-5">
-                <div className="flex gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10">
-                    <MapPin size={15} />
-                  </div>
-
-                  <div>
-                    <p className="text-xs uppercase tracking-wider text-white/30">
-                      Visit us
-                    </p>
-
-                    <p className="mt-1 text-sm leading-6 text-white/65">
-                      Mumbai, Maharashtra
-                      <br />
-                      India
-                    </p>
-                  </div>
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full border border-white/10">
-                    <Phone size={15} />
-                  </div>
-
-                  <div>
-                    <p className="text-xs uppercase tracking-wider text-white/30">
-                      Call us
-                    </p>
-
-                    <a
-                      href="tel:+910000000000"
-                      className="mt-1 block text-sm text-white/65 transition-colors hover:text-[#0976b2]"
-                    >
-                      +91 00000 00000
-                    </a>
-                  </div>
-                </div>
-              </div> */}
-
-              {/* Let's Chat */}
-              {/* <div className="mt-10">
-                <p className="mb-4 text-[10px] font-semibold uppercase tracking-[0.28em] text-white/35">
-                  Let&apos;s chat
-                </p>
-
-                <Link
-                  href="/contact"
-                  className="
-                    group
-                    inline-flex
-                    items-center
-                    gap-3
-                    rounded-full
-                    border
-                    border-[#0976b2]
-                    px-5
-                    py-3
-                    text-xs
-                    font-semibold
-                    uppercase
-                    tracking-wider
-                    text-white
-                    transition-all
-                    duration-300
-                    hover:bg-[#0976b2]
-                  "
-                >
-                  Start a conversation
-
-                  <span
-                    className="
-                      flex
-                      h-7
-                      w-7
-                      items-center
-                      justify-center
-                      rounded-full
-                      bg-[#0976b2]
-                      transition-all
-                      group-hover:bg-white
-                      group-hover:text-black
-                    "
-                  >
-                    <ArrowUpRight size={14} />
-                  </span>
-                </Link>
-              </div> */}
             </motion.div>
           </div>
+        </div>
 
-          {/* =====================================================
-              TRUST / BADGES
-          ===================================================== */}
+        {/* =====================================================
+            COPYRIGHT + SOCIAL LINKS
+        ===================================================== */}
 
-          {/* <div className="border-t border-white/10 px-7 py-6 sm:px-10 lg:px-14">
-            <div className="flex flex-wrap items-center gap-3">
-              {[
-                "CREATIVE",
-                "MEDIA",
-                "OUTDOOR",
-                "DIGITAL",
-                "TECH",
-                "WTT GROUP",
-              ].map((item, index) => (
-                <div
-                  key={item}
-                  className="
-                    flex
-                    h-12
-                    min-w-[105px]
-                    items-center
-                    justify-center
-                    rounded-lg
-                    border
-                    border-white/10
-                    bg-white/[0.025]
-                    px-4
-                    text-center
-                    text-[9px]
-                    font-bold
-                    uppercase
-                    tracking-[0.15em]
-                    text-white/45
-                    transition-all
-                    duration-300
-                    hover:border-[#0976b2]
-                    hover:bg-[#0976b2]/10
-                    hover:text-white
-                  "
-                >
-                  {index === 5 ? (
-                    <Image
-                      src="/images/logo.png"
-                      alt="WTT"
-                      width={55}
-                      height={55}
-                      className="h-8 w-8 object-contain"
-                    />
-                  ) : (
-                    item
-                  )}
-                </div>
-              ))}
-            </div>
-          </div> */}
+        <div className="
+          mt-3 border-y border-white/[0.10]
+          bg-[#08090f]
+          px-5 py-6 sm:px-8
+        ">
+          <div className="
+            flex flex-col gap-5
+            md:flex-row md:items-center
+            md:justify-between
+          ">
 
-          {/* =====================================================
-              SOCIAL / LINKS
-          ===================================================== */}
+            {/* Copyright */}
+            <p className="
+              text-[10px] font-medium
+              uppercase tracking-[0.12em]
+              leading-5 text-white/40
+            ">
+              © {new Date().getFullYear()} WALK THE TALK
+              COMMUNICATIONS PVT. LTD. ALL RIGHTS RESERVED.
+            </p>
 
-          <div className="border-t border-white/10 px-7 py-5 sm:px-10 lg:px-14">
-            <div
-              className="
-                flex
-                flex-col
-                gap-5
-                md:flex-row
-                md:items-center
-                md:justify-between
-              "
-            >
-              {/* Copyright */}
-              <div className="flex items-center gap-3">
-                {/* <Image
-                  src="/images/logo.png"
-                  alt="WTT"
-                  width={40}
-                  height={40}
-                  className="h-7 w-7 object-contain"
-                /> */}
+            {/* Social links */}
+            <div className="flex items-center gap-2">
+              {socialLinks.map((social) => {
+                const Icon = social.icon;
 
-                <p className="text-[10px] uppercase tracking-[0.12em] text-white/35">
-                  © {new Date().getFullYear()} WALT THE TALK COMMUNITAIONS PVT. LTD. ALL RIGHTS RESERVED.
-                </p>
-              </div>
-
-              {/* Social */}
-              <div className="flex items-center gap-2">
-                {socialLinks.map((social) => {
-                  const Icon = social.icon;
-
-                  return (
-                    <a
-                      key={social.label}
-                      href={social.href}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={social.label}
-                      className="
-                        flex
-                        h-9
-                        w-9
-                        items-center
-                        justify-center
-                        rounded-full
-                        border
-                        border-white/15
-                        text-white/55
-                        transition-all
-                        duration-300
-                        hover:border-[#0976b2]
-                        hover:bg-[#0976b2]
-                        hover:text-white
-                      "
-                    >
-                      <Icon size={14} />
-                    </a>
-                  );
-                })}
-              </div>
-
-              {/* Legal */}
-              {/* <div className="flex gap-5 text-[10px] uppercase tracking-[0.12em] text-white/35"> */}
-                {/* <Link
-                  href="/terms"
-                  className="transition-colors hover:text-white"
-                >
-                  Terms
-                </Link> */}
-
-                {/* <Link
-                  href="/privacy-policy"
-                  className="transition-colors hover:text-white"
-                >
-                  Privacy Policy
-                </Link> */}
-              {/* </div> */}
+                return (
+                  <a
+                    key={social.label}
+                    href={social.href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={social.label}
+                    title={social.label}
+                    className="
+                      flex h-10 w-10 items-center
+                      justify-center rounded-full
+                      border border-white/20
+                      text-white/60
+                      transition-all duration-300
+                      hover:border-white
+                      hover:bg-white
+                      hover:text-[#050509]
+                    "
+                  >
+                    <Icon size={15} />
+                  </a>
+                );
+              })}
             </div>
           </div>
-
-         {/* =====================================================
-    GIANT WTT BRAND
-===================================================== */}
-
-<div className="relative overflow-hidden border-t border-white/[0.06]">
-  <motion.div
-    initial={{ opacity: 0, y: 40 }}
-    whileInView={{ opacity: 1, y: 0 }}
-    viewport={{ once: true }}
-    transition={{
-      duration: 1,
-      ease: [0.16, 1, 0.3, 1],
-    }}
-    className="
-      select-none
-      whitespace-nowrap
-      px-4
-      pt-16
-      text-center
-      text-[clamp(8rem,24vw,22rem)]
-      font-black
-      uppercase
-      leading-[0.7]
-      tracking-[-0.1em]
-    "
-  >
-    <span
-      className="
-        bg-gradient-to-b
-        from-[#0976b2]/30
-        via-[#0976b2]/10
-        to-transparent
-        bg-clip-text
-        text-transparent
-      "
-    >
-      WTT
-    </span>
-  </motion.div>
-</div>
         </div>
+
+        {/* =====================================================
+            BOTTOM BRAND LOGO
+        ===================================================== */}
+
+        <motion.div
+          initial={{ opacity: 0, y: 35 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{
+            duration: 1,
+            ease: [0.16, 1, 0.3, 1],
+          }}
+          className="
+            flex min-h-[260px] items-center
+            justify-center overflow-hidden
+            py-12 sm:min-h-[300px] sm:py-16
+          "
+        >
+          <Link
+            href="/"
+            aria-label="WTT Group Home"
+            className="
+              group relative block
+              w-full max-w-[520px]
+              transition-transform duration-500
+              hover:scale-[1.03]
+            "
+          >
+            <Image
+              src="/images/WTT_Logo_Brand_Blue.png"
+              alt="Walk The Talk - Let's Do It Together"
+              width={650}
+              height={220}
+              priority={false}
+              className="
+                mx-auto h-auto w-full
+                object-contain
+              "
+            />
+          </Link>
+        </motion.div>
+
       </div>
+
+      {/* BOTTOM BORDER */}
+      {/* <div className="h-[2px] w-full bg-white/90" /> */}
+
     </footer>
   );
 }
