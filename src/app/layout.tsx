@@ -43,13 +43,7 @@ export const metadata: Metadata = {
     "India advertising agency",
   ],
 
-  authors: [
-    {
-      name: "Walk The Talk",
-      url: siteUrl,
-    },
-  ],
-
+  authors: [{ name: "Walk The Talk", url: siteUrl }],
   creator: "Walk The Talk",
   publisher: "Walk The Talk",
 
@@ -122,7 +116,9 @@ export default function RootLayout({
       lang="en-IN"
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
-      <body className="flex min-h-full flex-col">{children}</body>
+      <body className="flex min-h-full flex-col font-sans">
+        {children}
+      </body>
     </html>
   );
 }

@@ -1,3 +1,4 @@
+
 "use client";
 
 import {
@@ -6,16 +7,10 @@ import {
   useSpring,
   useTransform,
 } from "framer-motion";
-import {
-  ArrowDown,
-  ArrowUpRight,
-  Plus,
-} from "lucide-react";
-import {
-  useEffect,
-  useState,
-  type ReactNode,
-} from "react";
+
+import { ArrowDown, ArrowUpRight } from "lucide-react";
+
+import { useEffect, useState } from "react";
 
 const principles = [
   {
@@ -56,8 +51,9 @@ const principles = [
 ];
 
 export default function WhyWttSection() {
-  const [active, setActive] = useState(0);
+  const [active] = useState(0);
 
+  // Mouse movement
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -74,6 +70,7 @@ export default function WhyWttSection() {
   const orbX = useTransform(smoothX, [-500, 500], [-35, 35]);
   const orbY = useTransform(smoothY, [-500, 500], [-35, 35]);
 
+  // Background mouse interaction
   useEffect(() => {
     const handleMouseMove = (event: MouseEvent) => {
       mouseX.set(event.clientX - window.innerWidth / 2);
@@ -87,6 +84,7 @@ export default function WhyWttSection() {
     };
   }, [mouseX, mouseY]);
 
+  // Desktop section scrolling
   useEffect(() => {
     const section = document.getElementById("why-wtt");
 
@@ -152,12 +150,13 @@ export default function WhyWttSection() {
         overflow-hidden
         bg-[#0976b2]
         text-white
+        font-sans
       "
     >
-      {/* =====================================================
-          BACKGROUND
-      ====================================================== */}
+      {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
+
+        {/* Grid */}
         <div
           className="
             absolute
@@ -168,6 +167,7 @@ export default function WhyWttSection() {
           "
         />
 
+        {/* Animated circles */}
         <motion.div
           style={{ x: orbX, y: orbY }}
           className="
@@ -204,6 +204,7 @@ export default function WhyWttSection() {
           "
         />
 
+        {/* Glow */}
         <motion.div
           animate={{
             scale: [1, 1.12, 1],
@@ -228,6 +229,7 @@ export default function WhyWttSection() {
           "
         />
 
+        {/* Noise texture */}
         <div className="absolute inset-0 opacity-[0.035] mix-blend-overlay">
           <svg className="h-full w-full">
             <filter id="wtt-noise">
@@ -247,13 +249,12 @@ export default function WhyWttSection() {
           </svg>
         </div>
 
+        {/* Borders */}
         <div className="absolute left-0 top-0 h-full w-px bg-white/10" />
         <div className="absolute right-0 top-0 h-full w-px bg-white/10" />
       </div>
 
-      {/* =====================================================
-          MAIN CONTAINER
-      ====================================================== */}
+      {/* MAIN CONTAINER */}
       <div
         className="
           relative
@@ -272,311 +273,230 @@ export default function WhyWttSection() {
           xl:px-16
         "
       >
-        {/* =================================================
-            TOP BAR
-        ================================================== */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: -15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7 }}
-          className="
-            flex
-            items-center
-            justify-between
-            border-b
-            border-white/20
-            pb-5
-          "
-        >
-          <div className="flex items-center gap-4">
-            <span className="h-2 w-2 rounded-full bg-white" />
+        {/* MAIN CONTENT */}
+        <div className="flex-1 py-4 lg:py-2">
 
-            <span
+          {/* TOP CONTENT */}
+          <div
+            className="
+              grid
+              items-start
+              gap-12
+              lg:grid-cols-[1.1fr_0.9fr]
+              lg:gap-16
+              xl:gap-24
+            "
+          >
+            {/* LEFT TITLE */}
+            <div className="relative">
+              <div className="overflow-hidden">
+                <motion.h2
+                  initial={{ opacity: 0, y: 100 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.25 }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="
+                    wtt-display-title
+                    max-w-[900px]
+                  "
+                >
+                  NOT JUST OUT
+                  <br />
+                  OF THE BOX.
+                  <br />
+                  <span className="text-white/55">
+                    MUCH BEYOND IT.
+                  </span>
+                </motion.h2>
+              </div>
+            </div>
+
+            {/* RIGHT CONTENT */}
+            <motion.div
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.8,
+                delay: 0.15,
+              }}
               className="
-                text-[10px]
-                font-medium
-                uppercase
-                tracking-[0.3em]
+                border-l
+                border-white/20
+                pl-6
+                sm:pl-8
+                lg:mt-6
               "
             >
-              Why WTT
-            </span>
+              <p
+                className="
+                  text-xl
+                  font-medium
+                  leading-8
+                  text-white/90
+                  sm:text-2xl
+                  sm:leading-9
+                "
+              >
+                A smarter way to think. A bolder way to create. A better way to
+                deliver.
+              </p>
+
+              <p
+                className="
+                  mt-6
+                  max-w-[620px]
+                  text-sm
+                  font-normal
+                  leading-7
+                  text-white/65
+                  sm:text-[15px]
+                  lg:text-base
+                "
+              >
+                We believe OOH Advertising deserves more than conventional
+                thinking. At WTT, research-backed intelligence, AI-driven
+                planning, creative ingenuity and execution excellence come
+                together to create OOH solutions that are relevant, impactful
+                and accountable.
+              </p>
+            </motion.div>
           </div>
 
-          <span
+          {/* FIVE PRINCIPLES GRID */}
+          <div
             className="
-              hidden
-              text-[10px]
-              uppercase
-              tracking-[0.25em]
-              text-white/55
-              sm:block
+              mt-6
+              grid
+              grid-cols-1
+              border-l
+              border-t
+              border-white/20
+              sm:grid-cols-2
+              lg:grid-cols-3
+              xl:grid-cols-5
             "
           >
-            Our Philosophy
-          </span>
-        </motion.div> */}
+            {principles.map((service, index) => (
+              <motion.article
+                key={service.number}
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true, amount: 0.1 }}
+                transition={{
+                  duration: 0.65,
+                  delay: index * 0.08,
+                }}
+                className="
+                  group
+                  relative
+                  flex
+                  min-h-[310px]
+                  flex-col
+                  border-b
+                  border-r
+                  border-white/20
+                  p-5
+                  transition-colors
+                  duration-500
+                  hover:bg-white/[0.07]
+                  sm:p-6
+                "
+              >
+                {/* Card number */}
+                <div className="flex items-start justify-between gap-4">
+                  <span
+                    className="
+                      text-[10px]
+                      font-medium
+                      tracking-[0.2em]
+                      text-white/50
+                    "
+                  >
+                    {service.number}
+                  </span>
 
-        {/* =================================================
-            MAIN CONTENT
-        ================================================== */}
-        {/* =================================================
-    MAIN CONTENT
-================================================= */}
-<div className="flex-1 py-4 lg:py-2">
-  {/* =================================================
-      TOP CONTENT
-  ================================================== */}
-  <div
-    className="
-      grid
-      items-start
-      gap-12
-      lg:grid-cols-[1.1fr_0.9fr]
-      lg:gap-16
-      xl:gap-24
-    "
-  >
-    {/* Left */}
-    <div className="relative">
+                  <ArrowUpRight
+                    size={16}
+                    strokeWidth={1.4}
+                    className="
+                      text-white/35
+                      transition-all
+                      duration-500
+                      group-hover:-translate-y-1
+                      group-hover:translate-x-1
+                      group-hover:text-white
+                    "
+                  />
+                </div>
 
-      <div className="overflow-hidden">
-        <motion.h2
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.25 }}
-          transition={{
-            duration: 0.9,
-            ease: [0.16, 1, 0.3, 1],
-          }}
-          className="
-            max-w-[900px]
-            text-[clamp(3.4rem,6vw,7.5rem)]
-            font-semibold
-            leading-[0.82]
-            tracking-[-0.075em]
-          "
-        >
-          NOT JUST OUT
-          <br />
-          OF THE BOX.
-          <br />
-          <span className="text-white/55">
-            MUCH BEYOND IT.
-          </span>
-        </motion.h2>
-      </div>
-    </div>
+                {/* Card heading */}
+                <h3
+                  className="
+                    mt-7
+                    text-xl
+                    font-semibold
+                    leading-[1.05]
+                    tracking-[-0.04em]
+                    text-white
+                    sm:text-[1.35rem]
+                  "
+                >
+                  {service.title}
+                </h3>
 
-    {/* Right */}
-    <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, amount: 0.2 }}
-      transition={{ duration: 0.8, delay: 0.15 }}
-      className="
-        border-l
-        border-white/20
-        pl-6
-        sm:pl-8
-        lg:mt-6
-      "
-    >
-      <p
-        className="
-          text-xl
-          font-medium
-          leading-8
-          text-white/90
-          sm:text-2xl
-          sm:leading-9
-        "
-      >
-        A smarter way to think. A bolder way to create. A better way to
-        deliver.
-      </p>
+                {/* Lead */}
+                <p
+                  className="
+                    mt-6
+                    text-sm
+                    font-medium
+                    leading-6
+                    text-white/90
+                  "
+                >
+                  {service.lead}
+                </p>
 
-      <p
-        className="
-          mt-6
-          max-w-[620px]
-          text-sm
-          leading-7
-          text-white/65
-          sm:text-[15px]
-          lg:text-base
-        "
-      >
-        We believe OOH Advertising deserves more than conventional thinking. At
-        WTT, research-backed intelligence, AI-driven planning, creative
-        ingenuity and execution excellence come together to create OOH
-        solutions that are relevant, impactful and accountable.
-      </p>
+                {/* Description */}
+                <p
+                  className="
+                    mt-5
+                    text-[13px]
+                    font-normal
+                    leading-6
+                    text-white/60
+                  "
+                >
+                  {service.description}
+                </p>
 
-      {/* <div className="mt-8 flex items-center gap-4">
-        <span
-          className="
-            flex
-            h-11
-            w-11
-            shrink-0
-            items-center
-            justify-center
-            rounded-full
-            bg-white
-            text-[#0976b2]
-          "
-        >
-          <ArrowUpRight size={18} strokeWidth={1.5} />
-        </span>
-
-        <span
-          className="
-            text-[10px]
-            font-medium
-            uppercase
-            tracking-[0.2em]
-            text-white/75
-            sm:text-[11px]
-          "
-        >
-          Intelligence. Innovation. Accountability.
-        </span>
-      </div> */}
-    </motion.div>
-  </div>
-
-  {/* =================================================
-      FIVE SERVICES GRID
-  ================================================== */}
-  <div
-    className="
-      mt-6
-      grid
-      grid-cols-1
-      border-l
-      border-t
-      border-white/20
-      sm:grid-cols-2
-      lg:grid-cols-3
-      xl:grid-cols-5
-    "
-  >
-    {principles.map((service, index) => (
-      <motion.article
-        key={service.number}
-        initial={{ opacity: 0, y: 30 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.1 }}
-        transition={{
-          duration: 0.65,
-          delay: index * 0.08,
-        }}
-        className="
-          group
-          relative
-          flex
-          min-h-[310px]
-          flex-col
-          border-b
-          border-r
-          border-white/20
-          p-5
-          transition-colors
-          duration-500
-          hover:bg-white/[0.07]
-          sm:p-6
-        "
-      >
-        <div className="flex items-start justify-between gap-4">
-          <span
-            className="
-              text-[10px]
-              font-medium
-              tracking-[0.2em]
-              text-white/50
-            "
-          >
-            {service.number}
-          </span>
-
-          <ArrowUpRight
-            size={16}
-            strokeWidth={1.4}
-            className="
-              text-white/35
-              transition-all
-              duration-500
-              group-hover:-translate-y-1
-              group-hover:translate-x-1
-              group-hover:text-white
-            "
-          />
+                {/* Hover line */}
+                <div
+                  className="
+                    absolute
+                    bottom-0
+                    left-0
+                    h-[2px]
+                    w-full
+                    origin-left
+                    scale-x-0
+                    bg-white
+                    transition-transform
+                    duration-500
+                    group-hover:scale-x-100
+                  "
+                />
+              </motion.article>
+            ))}
+          </div>
         </div>
 
-        <h3
-          className="
-            mt-7
-            text-xl
-            font-semibold
-            leading-[1.05]
-            tracking-[-0.04em]
-            text-white
-            sm:text-[1.35rem]
-          "
-        >
-          {service.title}
-        </h3>
-
-        <p
-          className="
-            mt-6
-            text-sm
-            font-medium
-            leading-6
-            text-white/90
-          "
-        >
-          {service.lead}
-        </p>
-
-        <p
-          className="
-            mt-5
-            text-[13px]
-            leading-6
-            text-white/60
-          "
-        >
-          {service.description}
-        </p>
-
-        <motion.div
-          initial={false}
-          className="
-            absolute
-            bottom-0
-            left-0
-            h-[2px]
-            w-full
-            origin-left
-            scale-x-0
-            bg-white
-            transition-transform
-            duration-500
-            group-hover:scale-x-100
-          "
-        />
-      </motion.article>
-    ))}
-  </div>
-</div>
-
-        {/* =================================================
-            BOTTOM
-        ================================================== */}
-        <div
+        {/* BOTTOM */}
+        {/* <div
           className="
             mt-3
             flex
@@ -588,13 +508,16 @@ export default function WhyWttSection() {
           "
         >
           <div className="flex items-center gap-3">
-            <span className="text-[10px] text-white/50">02</span>
+            <span className="text-[10px] text-white/50">
+              02
+            </span>
 
             <div className="h-px w-10 bg-white/30 sm:w-12" />
 
             <span
               className="
                 text-[9px]
+                font-medium
                 uppercase
                 tracking-[0.25em]
                 text-white/50
@@ -615,6 +538,7 @@ export default function WhyWttSection() {
               items-center
               gap-3
               text-[9px]
+              font-medium
               uppercase
               tracking-[0.25em]
               text-white/50
@@ -624,34 +548,8 @@ export default function WhyWttSection() {
             Scroll
             <ArrowDown size={13} />
           </motion.div>
-        </div>
+        </div> */}
       </div>
     </section>
-  );
-}
-
-function AnimateHeight({
-  active,
-  children,
-}: {
-  active: boolean;
-  children: ReactNode;
-}) {
-  return (
-    <motion.div
-      initial={false}
-      animate={{
-        height: active ? "auto" : 0,
-        opacity: active ? 1 : 0,
-        marginTop: active ? 16 : 0,
-      }}
-      transition={{
-        duration: 0.35,
-        ease: [0.16, 1, 0.3, 1],
-      }}
-      className="overflow-hidden"
-    >
-      <div className="text-xs leading-6 text-white/60">{children}</div>
-    </motion.div>
   );
 }

@@ -4,9 +4,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import {
-  ArrowUpRight,
-} from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 
 import {
   FaFacebook,
@@ -48,14 +46,22 @@ const socialLinks = [
 
 export default function Footer() {
   return (
-    <footer className="relative w-full overflow-hidden bg-[#050509] text-white">
-
-      {/* =====================================================
-          BACKGROUND
-      ===================================================== */}
-
+    <footer
+      className="
+        relative w-full overflow-hidden
+        bg-[#050509] font-sans text-white
+      "
+    >
+      {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-        <div className="absolute left-1/2 top-0 h-[400px] w-[700px] -translate-x-1/2 rounded-full bg-[#0976b2]/[0.06] blur-[150px]" />
+        <div
+          className="
+            absolute left-1/2 top-0
+            h-[400px] w-[700px]
+            -translate-x-1/2 rounded-full
+            bg-[#0976b2]/[0.06] blur-[150px]
+          "
+        />
 
         <div
           className="
@@ -66,35 +72,35 @@ export default function Footer() {
         />
       </div>
 
-      <div className="relative mx-auto w-full max-w-[1800px] px-5 pt-16 sm:px-8 lg:px-10">
-
-        {/* =====================================================
-            TOP FOOTER CONTENT
-        ===================================================== */}
-
-        <div className="
-          grid grid-cols-1 gap-3
-          lg:grid-cols-[1fr_1.15fr_215px]
-          xl:grid-cols-[1fr_1.15fr_215px]
-        ">
-
-          {/* =================================================
-              LEFT PANEL - HAVE A BRAND TO MOVE
-          ================================================= */}
-
+      <div
+        className="
+          relative mx-auto w-full max-w-[1800px]
+          px-5 pt-16 sm:px-8 lg:px-10
+        "
+      >
+        {/* Top Footer Content */}
+        <div
+          className="
+            grid grid-cols-1 gap-3
+            lg:grid-cols-[1fr_1.15fr_215px]
+            xl:grid-cols-[1fr_1.15fr_215px]
+          "
+        >
+          {/* Left Panel */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7 }}
             className="
-              relative flex min-h-[280px] items-center
-              overflow-hidden border border-white/[0.04]
+              relative flex min-h-[280px]
+              items-center overflow-hidden
+              border border-white/[0.04]
               bg-[#08090f] p-7 sm:p-10
               lg:min-h-[330px] xl:p-16
             "
           >
-            {/* Grid background */}
+            {/* Grid Background */}
             <div
               className="
                 pointer-events-none absolute inset-0 opacity-[0.045]
@@ -106,12 +112,9 @@ export default function Footer() {
             <div className="relative z-10">
               <h2
                 className="
+                  wtt-display-title
                   max-w-[520px]
-                  text-[clamp(3rem,5.2vw,5.2rem)]
-                  font-black uppercase
-                  leading-[0.86]
-                  tracking-[-0.075em]
-                  text-white
+                  uppercase
                 "
               >
                 HAVE A
@@ -123,24 +126,21 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* =================================================
-              CENTER PANEL - LET'S GET IT OUT THERE
-          ================================================= */}
-
+          {/* Center Panel */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ duration: 0.7, delay: 0.1 }}
             className="
-              group relative flex min-h-[280px] flex-col
-              justify-center overflow-hidden
+              group relative flex min-h-[280px]
+              flex-col justify-center overflow-hidden
               border border-white/[0.04]
               bg-[#08090f] p-7 sm:p-10
               lg:min-h-[330px] lg:p-8 xl:p-9
             "
           >
-            {/* Grid background */}
+            {/* Grid Background */}
             <div
               className="
                 pointer-events-none absolute inset-0 opacity-[0.045]
@@ -149,54 +149,38 @@ export default function Footer() {
               "
             />
 
-            {/* Blue glow */}
-            <div className="
-              pointer-events-none absolute -right-24 top-0
-              h-[300px] w-[300px] rounded-full
-              bg-[#0976b2]/[0.12] blur-[100px]
-            " />
-
-            {/* Decorative plus */}
-            {/* <div className="
-              absolute -top-[46px] left-1/2 z-20
-              flex h-[82px] w-[82px] -translate-x-1/2
-              items-center justify-center rounded-full
-              border border-[#0976b2]/70
-              bg-[#477bb2] shadow-[0_0_30px_rgba(9,118,178,0.15)]
-              lg:-top-[46px]
-            ">
-              <span className="
-                flex h-[66px] w-[66px] items-center
-                justify-center rounded-full
-                border border-dashed border-white/50
-                text-[30px] font-light text-white
-              ">
-                +
-              </span>
-            </div> */}
+            {/* Blue Glow */}
+            <div
+              className="
+                pointer-events-none absolute -right-24 top-0
+                h-[300px] w-[300px] rounded-full
+                bg-[#0976b2]/[0.12] blur-[100px]
+              "
+            />
 
             <div className="relative z-10 pt-5">
-              <h2 className="
-                max-w-[650px]
-                text-[clamp(2.7rem,5vw,5rem)]
-                font-black uppercase
-                leading-[0.86]
-                tracking-[-0.075em]
-                text-[#477bb2]
-                transition-colors duration-500
-                group-hover:text-[#5b91c9]
-              ">
+              <h2
+                className="
+                  wtt-display-title
+                  max-w-[650px]
+                  text-[#477bb2]
+                  transition-colors duration-500
+                  group-hover:text-[#5b91c9]
+                "
+              >
                 LET&apos;S GET IT
                 <br />
                 OUT THERE.
               </h2>
 
-              <p className="
-                mt-7 max-w-[450px]
-                text-[13px] font-medium
-                leading-7 text-white/50
-                sm:text-sm
-              ">
+              <p
+                className="
+                  mt-7 max-w-[450px]
+                  text-[13px] font-medium
+                  leading-7 text-white/50
+                  sm:text-sm
+                "
+              >
                 Bring us your ambition. We&apos;ll bring in
                 the possibilities.
                 <br />
@@ -205,13 +189,9 @@ export default function Footer() {
             </div>
           </motion.div>
 
-          {/* =================================================
-              RIGHT SIDE - EXPLORE + CONNECT
-          ================================================= */}
-
+          {/* Right Side - Explore & Connect */}
           <div className="flex flex-col gap-3">
-
-            {/* EXPLORE */}
+            {/* Explore */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -222,11 +202,13 @@ export default function Footer() {
                 bg-[#08090f] p-5 sm:p-6
               "
             >
-              <p className="
-                mb-6 text-[10px] font-bold
-                uppercase tracking-[0.3em]
-                text-white/40
-              ">
+              <p
+                className="
+                  mb-6 text-[10px] font-semibold
+                  uppercase tracking-[0.3em]
+                  text-white/40
+                "
+              >
                 EXPLORE
               </p>
 
@@ -248,7 +230,7 @@ export default function Footer() {
                     <ArrowUpRight
                       size={12}
                       className="
-                        -translate-y-1 translate-x-[-4px]
+                        -translate-x-1 -translate-y-1
                         opacity-0 transition-all duration-300
                         group-hover/link:translate-x-0
                         group-hover/link:translate-y-0
@@ -260,7 +242,7 @@ export default function Footer() {
               </div>
             </motion.div>
 
-            {/* CONNECT */}
+            {/* Connect */}
             <motion.div
               initial={{ opacity: 0, x: 20 }}
               whileInView={{ opacity: 1, x: 0 }}
@@ -271,11 +253,13 @@ export default function Footer() {
                 bg-[#08090f] p-5 sm:p-6
               "
             >
-              <p className="
-                mb-8 text-[10px] font-bold
-                uppercase tracking-[0.3em]
-                text-white/40
-              ">
+              <p
+                className="
+                  mb-8 text-[10px] font-semibold
+                  uppercase tracking-[0.3em]
+                  text-white/40
+                "
+              >
                 CONNECT
               </p>
 
@@ -285,8 +269,7 @@ export default function Footer() {
                   group flex items-center justify-between
                   gap-2 text-[15px] font-medium
                   text-white transition-colors
-                  hover:text-[#0976b2]
-                  sm:text-base
+                  hover:text-[#0976b2] sm:text-base
                 "
               >
                 <span className="break-all">
@@ -306,32 +289,33 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* =====================================================
-            COPYRIGHT + SOCIAL LINKS
-        ===================================================== */}
-
-        <div className="
-          mt-3 border-y border-white/[0.10]
-          bg-[#08090f]
-          px-5 py-6 sm:px-8
-        ">
-          <div className="
-            flex flex-col gap-5
-            md:flex-row md:items-center
-            md:justify-between
-          ">
-
+        {/* Copyright & Social Links */}
+        <div
+          className="
+            mt-3 border-y border-white/[0.10]
+            bg-[#08090f] px-5 py-6 sm:px-8
+          "
+        >
+          <div
+            className="
+              flex flex-col gap-5
+              md:flex-row md:items-center
+              md:justify-between
+            "
+          >
             {/* Copyright */}
-            <p className="
-              text-[10px] font-medium
-              uppercase tracking-[0.12em]
-              leading-5 text-white/40
-            ">
+            <p
+              className="
+                text-[10px] font-medium
+                uppercase tracking-[0.12em]
+                leading-5 text-white/40
+              "
+            >
               © {new Date().getFullYear()} WALK THE TALK
               COMMUNICATIONS PVT. LTD. ALL RIGHTS RESERVED.
             </p>
 
-            {/* Social links */}
+            {/* Social Links */}
             <div className="flex items-center gap-2">
               {socialLinks.map((social) => {
                 const Icon = social.icon;
@@ -350,8 +334,7 @@ export default function Footer() {
                       border border-white/20
                       text-white/60
                       transition-all duration-300
-                      hover:border-white
-                      hover:bg-white
+                      hover:border-white hover:bg-white
                       hover:text-[#050509]
                     "
                   >
@@ -363,10 +346,7 @@ export default function Footer() {
           </div>
         </div>
 
-        {/* =====================================================
-            BOTTOM BRAND LOGO
-        ===================================================== */}
-
+        {/* Bottom Brand Logo */}
         <motion.div
           initial={{ opacity: 0, y: 35 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -385,8 +365,7 @@ export default function Footer() {
             href="/"
             aria-label="WTT Group Home"
             className="
-              group relative block
-              w-full max-w-[520px]
+              group relative block w-full max-w-[520px]
               transition-transform duration-500
               hover:scale-[1.03]
             "
@@ -396,20 +375,11 @@ export default function Footer() {
               alt="Walk The Talk - Let's Do It Together"
               width={650}
               height={220}
-              priority={false}
-              className="
-                mx-auto h-auto w-full
-                object-contain
-              "
+              className="mx-auto h-auto w-full object-contain"
             />
           </Link>
         </motion.div>
-
       </div>
-
-      {/* BOTTOM BORDER */}
-      {/* <div className="h-[2px] w-full bg-white/90" /> */}
-
     </footer>
   );
 }

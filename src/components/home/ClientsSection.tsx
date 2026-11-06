@@ -1,16 +1,20 @@
+
 "use client";
 
 import Image from "next/image";
+
 import {
   animate,
   motion,
   useAnimationFrame,
   useMotionValue,
 } from "framer-motion";
+
 import {
   ArrowLeft,
   ArrowRight,
 } from "lucide-react";
+
 import {
   useCallback,
   useEffect,
@@ -51,13 +55,14 @@ export default function ClientsSection() {
         max-w-[100vw]
         overflow-hidden
         bg-[#f5f5f3]
+        font-sans
         text-[#050509]
       "
     >
-      {/* =====================================================
-          BACKGROUND
-      ====================================================== */}
+      {/* BACKGROUND */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
+
+        {/* Background typography */}
         <div
           className="
             absolute
@@ -76,6 +81,7 @@ export default function ClientsSection() {
           CLIENTS
         </div>
 
+        {/* Blue glow */}
         <div
           className="
             absolute
@@ -89,6 +95,7 @@ export default function ClientsSection() {
           "
         />
 
+        {/* Background grid */}
         <div className="absolute inset-0 opacity-[0.035]">
           <div
             className="h-full w-full"
@@ -101,9 +108,7 @@ export default function ClientsSection() {
         </div>
       </div>
 
-      {/* =====================================================
-          MAIN CONTENT
-      ====================================================== */}
+      {/* MAIN CONTAINER */}
       <div
         className="
           relative
@@ -122,60 +127,7 @@ export default function ClientsSection() {
           lg:py-12
         "
       >
-        {/* =================================================
-            TOP LABEL
-        ================================================== */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 15 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="
-            flex
-            items-center
-            justify-between
-             border-b
-            border-[#0976b2]/35
-            pb-2
-          "
-        >
-          <div className="flex items-center gap-4">
-            <span className="h-[7px] w-[7px] rounded-full bg-[#0976b2]" />
-
-            <span
-              className="
-                text-[9px]
-                font-bold
-                uppercase
-                tracking-[0.35em]
-                text-black/45
-                sm:text-[10px]
-              "
-            >
-              Our Clients
-            </span>
-          </div>
-
-          <span
-            className="
-              hidden
-              text-[9px]
-              font-semibold
-              uppercase
-              tracking-[0.3em]
-              text-black/30
-              sm:block
-            "
-          >
-            100+ Brands
-          </span>
-        </motion.div> */}
-
-        
-
-        {/* =================================================
-            CONTENT HEADER
-        ================================================== */}
+        {/* HEADER */}
         <div
           className="
             grid
@@ -188,24 +140,20 @@ export default function ClientsSection() {
             lg:gap-16
           "
         >
-          {/* <motion.div
-            initial={{ opacity: 0, y: 40 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{
-              duration: 0.8,
-              ease: [0.22, 1, 0.36, 1],
-            }}
-          >
-            <h2
+          {/* LEFT TITLE */}
+          <div className="overflow-hidden">
+            <motion.h2
+              initial={{ opacity: 0, y: 100 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{
+                duration: 0.9,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="
-                max-w-[1050px]
-                text-[clamp(3.7rem,7.4vw,8rem)]
-                font-black
+                wtt-display-title
+                max-w-[800px]
                 uppercase
-                leading-[0.78]
-                tracking-[-0.085em]
-                text-[#050509]
               "
             >
               Our Growing
@@ -214,36 +162,10 @@ export default function ClientsSection() {
               <span className="text-[#0976b2]">
                 Trust.
               </span>
-            </h2>
-          </motion.div> */}
+            </motion.h2>
+          </div>
 
-<div className="overflow-hidden">
-              <motion.h2
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.9,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="
-                  max-w-[800px]
-                  text-[clamp(3.4rem,6vw,7.2rem)]
-                  font-semibold
-                  leading-[0.84]
-                  tracking-[-0.07em]
-                  uppercase
-                "
-              >
-                Our Growing
-              <br />
-              Circle Of{" "}
-              <span className="text-[#0976b2]">
-                Trust.
-              </span>
-              </motion.h2>
-            </div>
-
+          {/* RIGHT DESCRIPTION */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -260,6 +182,7 @@ export default function ClientsSection() {
               lg:mb-1
             "
           >
+            {/* Lead paragraph */}
             <p
               className="
                 text-lg
@@ -273,11 +196,13 @@ export default function ClientsSection() {
               The brands which walked with us in our journey.
             </p>
 
+            {/* Description */}
             <p
               className="
                 mt-5
                 max-w-[480px]
                 text-sm
+                font-normal
                 leading-7
                 text-black/55
                 sm:text-[15px]
@@ -291,14 +216,15 @@ export default function ClientsSection() {
           </motion.div>
         </div>
 
-        {/* =================================================
-            CLIENT LOGO MARQUEE
-        ================================================== */}
+        {/* CLIENT LOGO MARQUEE */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.1 }}
-          transition={{ duration: 0.7, delay: 0.2 }}
+          transition={{
+            duration: 0.7,
+            delay: 0.2,
+          }}
           className="
             flex
             flex-1
@@ -309,7 +235,7 @@ export default function ClientsSection() {
             sm:gap-5
           "
         >
-          {/* Right button moves the first row to the left */}
+          {/* FIRST ROW */}
           <ClientMarquee
             clients={rowOne}
             direction="left"
@@ -317,7 +243,7 @@ export default function ClientsSection() {
             duration={45}
           />
 
-          {/* Left button moves the second row to the right */}
+          {/* SECOND ROW */}
           {rowTwo.length > 0 && (
             <ClientMarquee
               clients={rowTwo}
@@ -328,19 +254,20 @@ export default function ClientsSection() {
           )}
         </motion.div>
 
-        {/* =================================================
-            BOTTOM STATEMENT
-        ================================================== */}
+        {/* BOTTOM STATEMENT */}
         <motion.div
           initial={{ opacity: 0 }}
           whileInView={{ opacity: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.35 }}
+          transition={{
+            duration: 0.7,
+            delay: 0.35,
+          }}
         >
           <p
             className="
               text-[11px]
-              font-black
+              font-semibold
               uppercase
               tracking-[-0.02em]
               text-[#050509]
@@ -375,11 +302,16 @@ function ClientMarquee({
   const items = [...clients, ...clients];
 
   const x = useMotionValue(0);
+
   const singleSetWidth = useRef(0);
   const cardStep = useRef(0);
   const speed = useRef(0);
+
   const isAnimating = useRef(false);
-  const clickAnimation = useRef<{ stop: () => void } | null>(null);
+
+  const clickAnimation = useRef<{
+    stop: () => void;
+  } | null>(null);
 
   const movementDirection = useRef(
     direction === "left" ? -1 : 1
@@ -401,11 +333,16 @@ function ClientMarquee({
 
     const firstCard = trackRef.current.firstElementChild;
 
-    singleSetWidth.current = trackRef.current.scrollWidth / 2;
-    speed.current = singleSetWidth.current / duration;
+    singleSetWidth.current =
+      trackRef.current.scrollWidth / 2;
+
+    speed.current =
+      singleSetWidth.current / duration;
 
     if (firstCard instanceof HTMLElement) {
-      const styles = window.getComputedStyle(trackRef.current);
+      const styles = window.getComputedStyle(
+        trackRef.current
+      );
 
       cardStep.current =
         firstCard.getBoundingClientRect().width +
@@ -413,15 +350,19 @@ function ClientMarquee({
     }
   }, [duration]);
 
+  // Automatic seamless scrolling
   useAnimationFrame((_, delta) => {
     if (!singleSetWidth.current || isAnimating.current) return;
 
     const movement =
       (speed.current * delta * movementDirection.current) / 1000;
 
-    x.set(normalizePosition(x.get() + movement));
+    x.set(
+      normalizePosition(x.get() + movement)
+    );
   });
 
+  // Measure track dimensions
   useEffect(() => {
     measureTrack();
 
@@ -439,28 +380,33 @@ function ClientMarquee({
     };
   }, [measureTrack]);
 
+  // Directional controls
   const moveMarquee = (newDirection: -1 | 1) => {
     movementDirection.current = newDirection;
 
     const step = cardStep.current || 270;
-    const targetX = x.get() + step * newDirection;
 
-    // Stop any previous button animation before starting another one.
+    const targetX =
+      x.get() + step * newDirection;
+
     clickAnimation.current?.stop();
+
     isAnimating.current = true;
 
     clickAnimation.current = animate(x, targetX, {
       duration: 0.75,
       ease: [0.22, 1, 0.36, 1],
+
       onComplete: () => {
-        // Keep the duplicated marquee track in its seamless range.
         x.set(normalizePosition(x.get()));
+
         isAnimating.current = false;
         clickAnimation.current = null;
       },
     });
   };
 
+  // Cleanup animation
   useEffect(() => {
     return () => {
       clickAnimation.current?.stop();
@@ -469,7 +415,8 @@ function ClientMarquee({
 
   return (
     <div className="relative w-full overflow-hidden">
-      {/* Left fade */}
+
+      {/* LEFT FADE */}
       <div
         className="
           pointer-events-none
@@ -488,7 +435,7 @@ function ClientMarquee({
         "
       />
 
-      {/* Right fade */}
+      {/* RIGHT FADE */}
       <div
         className="
           pointer-events-none
@@ -507,7 +454,7 @@ function ClientMarquee({
         "
       />
 
-      {/* Left button: moves the second row right */}
+      {/* LEFT CONTROL */}
       {control === "left" && (
         <button
           type="button"
@@ -544,7 +491,7 @@ function ClientMarquee({
         </button>
       )}
 
-      {/* Right button: moves the first row left */}
+      {/* RIGHT CONTROL */}
       {control === "right" && (
         <button
           type="button"
@@ -581,6 +528,7 @@ function ClientMarquee({
         </button>
       )}
 
+      {/* MARQUEE TRACK */}
       <motion.div
         ref={trackRef}
         style={{ x }}
@@ -648,31 +596,30 @@ function ClientCard({
           ease: [0.22, 1, 0.36, 1],
         }}
       >
-        
-<Image
-  src={client.logo}
-  alt={client.name}
-  fill
-  sizes="
-    (max-width: 640px) 200px,
-    (max-width: 1024px) 230px,
-    270px
-  "
-  className="
-    object-contain
-    scale-[1.5]
-    grayscale
-    opacity-60
-    transition-all
-    duration-500
-    group-hover/card:scale-[1.4]
-    group-hover/card:grayscale-0
-    group-hover/card:opacity-100
-  "
-/>
-
+        <Image
+          src={client.logo}
+          alt={client.name}
+          fill
+          sizes="
+            (max-width: 640px) 200px,
+            (max-width: 1024px) 230px,
+            270px
+          "
+          className="
+            object-contain
+            scale-[1.5]
+            grayscale
+            opacity-60
+            transition-all
+            duration-500
+            group-hover/card:scale-[1.4]
+            group-hover/card:grayscale-0
+            group-hover/card:opacity-100
+          "
+        />
       </motion.div>
 
+      {/* HOVER LINE */}
       <div
         className="
           absolute
