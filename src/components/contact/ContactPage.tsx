@@ -1,4 +1,3 @@
-
 "use client";
 
 import { useState, type FormEvent } from "react";
@@ -14,6 +13,7 @@ import {
 } from "lucide-react";
 
 import OfficeMap, { offices, type Office } from "./OfficeMap";
+import WttHero from "../../components/common/WttHero";
 
 /* ============================================================
    ANIMATION VARIANTS
@@ -92,275 +92,61 @@ export default function ContactPage() {
 
   return (
     <main className="w-full overflow-x-hidden bg-[#050509] font-sans text-white">
-
-
       {/* =====================================================
     HERO SECTION — CONTACT US
 ====================================================== */}
 
-<section
-  data-snap-section
-  className="relative min-h-[100svh] overflow-hidden mt-4 bg-[#050509]"
->
-  {/* Background Grid */}
-  <div className="pointer-events-none absolute inset-0 opacity-[0.08]">
-    <div
-      className="absolute inset-0"
-      style={{
-        backgroundImage:
-          "linear-gradient(rgba(255,255,255,.15) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,.15) 1px, transparent 1px)",
-        backgroundSize: "70px 70px",
-      }}
-    />
-  </div>
-
-  {/* Atmospheric Glows */}
-  <motion.div
-    animate={{
-      x: [0, 60, 0],
-      y: [0, -40, 0],
-    }}
-    transition={{
-      duration: 12,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-    className="pointer-events-none absolute -right-40 -top-40 h-[600px] w-[600px] rounded-full bg-[#0976b2]/20 blur-[140px]"
-  />
-
-  <motion.div
-    animate={{
-      x: [0, -50, 0],
-      y: [0, 40, 0],
-    }}
-    transition={{
-      duration: 14,
-      repeat: Infinity,
-      ease: "easeInOut",
-    }}
-    className="pointer-events-none absolute -bottom-40 -left-40 h-[500px] w-[500px] rounded-full bg-[#0976b2]/10 blur-[130px]"
-  />
-
-  {/* Hero Content */}
-  <div className="relative z-10 mx-auto flex min-h-[100svh] max-w-[1600px] flex-col justify-center px-5 py-24 sm:px-8 lg:px-12 lg:py-20">
-    <div className="grid flex-1 items-center gap-12 lg:grid-cols-[0.95fr_1.05fr] lg:gap-10">
-
-      {/* LEFT CONTENT */}
-      <motion.div
-        variants={stagger}
-        initial="hidden"
-        animate="visible"
-        className="relative z-20"
-      >
-        {/* Eyebrow */}
-        <motion.div
-          variants={fadeUp}
-          className="mb-8 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#0976b2]"
-        >
-          <span className="h-px w-12 bg-[#0976b2]" />
-          WTT / CONTACT US
-        </motion.div>
-
-        {/* Heading */}
-        <div className="overflow-hidden">
-          <motion.h1
-            initial={{
-              opacity: 0,
-              y: 100,
-            }}
-            whileInView={{
-              opacity: 1,
-              y: 0,
-            }}
-            viewport={{
-              once: true,
-              amount: 0.2,
-            }}
-            transition={{
-              duration: 0.9,
-              ease: [0.16, 1, 0.3, 1],
-            }}
-            className="
-              wtt-display-title
-              max-w-[900px]
-              text-[clamp(3.4rem,8vw,8rem)]
-              uppercase
-            "
-          >
+      <WttHero
+        eyebrow="WTT / CONTACT US"
+        visualType="custom"
+        scrollTarget="contact-form"
+        footerText="Mumbai / Delhi / Bengaluru / Chennai / Hyderabad / Kolkata"
+        description={<>Every great idea starts with a conversation.</>}
+        heading={
+          <>
             YOUR NEXT
             <br />
             <span className="text-white">BIG IDEA</span>
             <br />
             <span className="text-[#0976b2]">STARTS HERE.</span>
-          </motion.h1>
-        </div>
+          </>
+        }
+        rightContent={
+          <div className="relative">
+            <div className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#0976b2]/10" />
 
-        {/* Description */}
-        <motion.p
-          variants={fadeUp}
-          className="mt-8 max-w-xl text-base font-normal leading-7 text-white/55 sm:text-lg"
-        >
-          Every great idea starts with a conversation.
-          Let’s connect, collaborate and create something
-          extraordinary together.
-        </motion.p>
+            <div className="relative h-[200px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-2xl sm:h-[500px] lg:h-[550px]">
+              <div className="pointer-events-none absolute left-5 top-5 z-20">
+                <div className="rounded-2xl border border-white/10 bg-[#050509]/80 px-4 py-3 backdrop-blur-xl">
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[#0976b2]">
+                    WTT Network
+                  </p>
+                  <p className="mt-1 text-sm font-semibold text-white">
+                    We are closer than you think.
+                  </p>
+                </div>
+              </div>
 
-        {/* CTA */}
-        <motion.div
-          variants={fadeUp}
-          className="mt-9 flex flex-wrap gap-3"
-        >
-          <button
-            type="button"
-            onClick={scrollToForm}
-            className="group flex items-center gap-3 rounded-full bg-[#0976b2] px-7 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white transition-all duration-300 hover:bg-[#1685ff] hover:shadow-[0_0_40px_rgba(0,122,255,.3)]"
-          >
-            Start a conversation
+              <OfficeMap selectedOffice={activeOffice} />
 
-            <ArrowUpRight
-              size={17}
-              className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-            />
-          </button>
-        </motion.div>
+              <div className="pointer-events-none absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between">
+                <div>
+                  <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/40">
+                    Currently viewing
+                  </p>
+                  <p className="mt-1 text-xl font-semibold text-white">
+                    {activeOffice.city}
+                  </p>
+                </div>
 
-        {/* Scroll Indicator */}
-        <motion.button
-          type="button"
-          onClick={scrollToForm}
-          initial={{ opacity: 0, y: 10 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.2, duration: 0.6 }}
-          className="mt-16 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/30 transition-colors hover:text-white"
-        >
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/10">
-            <ArrowDown size={13} />
-          </span>
-
-          Scroll to connect
-        </motion.button>
-      </motion.div>
-
-      {/* RIGHT SIDE — OFFICE MAP */}
-      <motion.div
-        initial={{
-          opacity: 0,
-          scale: 0.94,
-          x: 40,
-        }}
-        animate={{
-          opacity: 1,
-          scale: 1,
-          x: 0,
-        }}
-        transition={{
-          duration: 1,
-          delay: 0.2,
-          ease: [0.16, 1, 0.3, 1],
-        }}
-        className="relative mx-auto w-full max-w-[750px]"
-      >
-        {/* Decorative Rings */}
-        <div className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#0976b2]/10" />
-
-        <div className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[95%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.06]" />
-
-        <div className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[75%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/[0.06]" />
-
-        {/* Map Container */}
-        <div className="relative h-[430px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-[0_30px_100px_rgba(0,0,0,.4)] sm:h-[500px] lg:h-[620px]">
-
-          {/* Map Glow */}
-          <div className="pointer-events-none absolute inset-0 z-10 bg-gradient-to-b from-[#050509]/20 via-transparent to-[#050509]/40" />
-
-          {/* Map Heading */}
-          <div className="pointer-events-none absolute left-5 top-5 z-20">
-            <div className="rounded-2xl border border-white/10 bg-[#050509]/80 px-4 py-3 backdrop-blur-xl">
-              <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[#0976b2]">
-                WTT Network
-              </p>
-
-              <p className="mt-1 text-sm font-semibold text-white">
-                We are closer than you think.
-              </p>
+                <div className="rounded-full border border-white/10 bg-black/60 px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/70 backdrop-blur-xl">
+                  06 Offices
+                </div>
+              </div>
             </div>
           </div>
-
-          {/* Interactive Office Map */}
-          <OfficeMap selectedOffice={activeOffice} />
-
-          {/* Map Bottom Information */}
-          <div className="pointer-events-none absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between">
-            <div>
-              <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/40">
-                Currently viewing
-              </p>
-
-              <p className="mt-1 text-xl font-semibold text-white">
-                {activeOffice.city}
-              </p>
-            </div>
-
-            <div className="rounded-full border border-white/10 bg-black/60 px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/70 backdrop-blur-xl">
-              06 Offices
-            </div>
-          </div>
-        </div>
-
-        {/* FLOATING CARD — TOP RIGHT */}
-        <motion.div
-          animate={{ y: [0, -8, 0] }}
-          transition={{
-            duration: 4,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute -right-2 top-16 z-30 hidden rounded-2xl border border-white/10 bg-[#101016]/90 px-5 py-4 shadow-2xl backdrop-blur-xl sm:block lg:-right-8"
-        >
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0976b2]/15 text-[#1685ff]">
-              <MapPin size={18} />
-            </div>
-
-            <div>
-              <p className="text-xl font-semibold text-white">06</p>
-              <p className="text-[9px] font-semibold uppercase tracking-[0.18em] text-white/40">
-                Cities across India
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-        {/* FLOATING CARD — BOTTOM LEFT */}
-        <motion.div
-          animate={{ y: [0, 8, 0] }}
-          transition={{
-            duration: 5,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="absolute -bottom-7 left-5 z-30 hidden rounded-2xl border border-white/10 bg-[#101016]/95 px-5 py-4 shadow-2xl backdrop-blur-xl sm:block lg:-left-8"
-        >
-          <div className="flex items-center gap-3">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[#0976b2]/15 text-[#1685ff]">
-              <MessageCircle size={18} />
-            </div>
-
-            <div>
-              <p className="text-sm font-semibold text-white">
-                Let’s Connect
-              </p>
-              <p className="mt-1 text-[9px] font-medium uppercase tracking-[0.15em] text-white/40">
-                hello@wttgroup.in
-              </p>
-            </div>
-          </div>
-        </motion.div>
-
-      </motion.div>
-    </div>
-  </div>
-</section>
+        }
+      />
 
       {/* =====================================================
           CONTACT FORM SECTION
@@ -436,8 +222,7 @@ export default function ContactPage() {
                     </p>
 
                     <p className="mt-1 text-xs leading-5 text-black/45">
-                      Mumbai · Delhi · Bengaluru · Chennai · Hyderabad ·
-                      Kolkata
+                      Mumbai · Delhi · Bengaluru · Chennai · Hyderabad · Kolkata
                     </p>
                   </div>
                 </div>
@@ -770,9 +555,7 @@ export default function ContactPage() {
                       />
 
                       <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">
-                        {isActive
-                          ? "Currently selected"
-                          : "Explore office"}
+                        {isActive ? "Currently selected" : "Explore office"}
                       </span>
                     </div>
                   </div>

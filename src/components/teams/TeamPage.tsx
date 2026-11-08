@@ -1,4 +1,3 @@
-
 "use client";
 
 import Image from "next/image";
@@ -6,6 +5,7 @@ import { motion } from "framer-motion";
 import { ArrowUpRight, ArrowDown } from "lucide-react";
 import { useRef, useState, type MouseEvent } from "react";
 import { FaLinkedin } from "react-icons/fa6";
+import WttHero from "../../components/common/WttHero";
 
 /* ============================================================
    TYPES
@@ -208,309 +208,275 @@ export default function TeamPage() {
   return (
     <main className="overflow-hidden bg-[#050509] font-sans text-white">
       {/* HERO SECTION */}
-     
-{/* =====================================================
+
+      {/* =====================================================
     HERO SECTION — ABOUT US DESIGN PATTERN
 ===================================================== */}
 
-<section className="relative min-h-[100svh] overflow-hidden bg-[#050509]">
+      <section className="relative min-h-[100svh] overflow-hidden bg-[#050509]">
+        {/* Background Grid */}
+        <div className="pointer-events-none absolute inset-0 opacity-[0.055]">
+          <div
+            className="absolute inset-0"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px)",
+              backgroundSize: "100px 100px",
+            }}
+          />
+        </div>
 
-{/* Background Grid */}
-<div className="pointer-events-none absolute inset-0 opacity-[0.055]">
-  <div
-    className="absolute inset-0"
-    style={{
-      backgroundImage:
-        "linear-gradient(rgba(255,255,255,.3) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.3) 1px,transparent 1px)",
-      backgroundSize: "100px 100px",
-    }}
-  />
-</div>
-
-{/* Animated Glow */}
-<motion.div
-  animate={{
-    x: [0, 60, 0],
-    y: [0, -40, 0],
-    scale: [1, 1.15, 1],
-  }}
-  transition={{
-    duration: 12,
-    repeat: Infinity,
-    ease: "easeInOut",
-  }}
-  className="pointer-events-none absolute right-[-15%] top-[10%] h-[55vw] w-[55vw] rounded-full bg-[#0976b2]/20 blur-[150px]"
-/>
-
-<motion.div
-  animate={{
-    opacity: [0.15, 0.35, 0.15],
-    scale: [0.9, 1.15, 0.9],
-  }}
-  transition={{
-    duration: 8,
-    repeat: Infinity,
-    ease: "easeInOut",
-  }}
-  className="pointer-events-none absolute right-[12%] top-[28%] h-[25vw] w-[25vw] rounded-full bg-[#0976b2] blur-[120px]"
-/>
-
-{/* Background Typography */}
-<div className="pointer-events-none absolute bottom-[-4vw] right-[-4vw] select-none">
-  <span className="whitespace-nowrap text-[25vw] font-black leading-none tracking-[-0.1em] text-white/[0.025]">
-    PEOPLE
-  </span>
-</div>
-
-{/* Hero Content */}
-<div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1600px] items-center px-6 pb-16 pt-32 sm:px-10 lg:px-16">
-
-  <div className="grid w-full items-center gap-12 lg:grid-cols-12">
-
-    {/* LEFT CONTENT */}
-    <motion.div
-      initial={{ opacity: 0, x: -60 }}
-      animate={{ opacity: 1, x: 0 }}
-      transition={{
-        duration: 1,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className="lg:col-span-7"
-    >
-
-      {/* Section Label */}
-      <div className="mb-8 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#0976b2]">
-        <span className="h-px w-12 bg-[#0976b2]" />
-        WTT / CHANGE MAKERS
-      </div>
-
-      {/* Main Heading */}
-      <div className="overflow-hidden">
-        <motion.h1
-          initial={{ opacity: 0, y: 100 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.2 }}
-          transition={{
-            duration: 0.9,
-            ease: [0.16, 1, 0.3, 1],
+        {/* Animated Glow */}
+        <motion.div
+          animate={{
+            x: [0, 60, 0],
+            y: [0, -40, 0],
+            scale: [1, 1.15, 1],
           }}
-          className="
+          transition={{
+            duration: 12,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="pointer-events-none absolute right-[-15%] top-[10%] h-[55vw] w-[55vw] rounded-full bg-[#0976b2]/20 blur-[150px]"
+        />
+
+        <motion.div
+          animate={{
+            opacity: [0.15, 0.35, 0.15],
+            scale: [0.9, 1.15, 0.9],
+          }}
+          transition={{
+            duration: 8,
+            repeat: Infinity,
+            ease: "easeInOut",
+          }}
+          className="pointer-events-none absolute right-[12%] top-[28%] h-[25vw] w-[25vw] rounded-full bg-[#0976b2] blur-[120px]"
+        />
+
+        {/* Background Typography */}
+        <div className="pointer-events-none absolute bottom-[-4vw] right-[-4vw] select-none">
+          <span className="whitespace-nowrap text-[25vw] font-black leading-none tracking-[-0.1em] text-white/[0.025]">
+            PEOPLE
+          </span>
+        </div>
+
+        {/* Hero Content */}
+        <div className="relative z-10 mx-auto flex min-h-[100svh] w-full max-w-[1600px] items-center px-6 pb-16 pt-32 sm:px-10 lg:px-16">
+          <div className="grid w-full items-center gap-12 lg:grid-cols-12">
+            {/* LEFT CONTENT */}
+            <motion.div
+              initial={{ opacity: 0, x: -60 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{
+                duration: 1,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="lg:col-span-7"
+            >
+              {/* Section Label */}
+              <div className="mb-8 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#0976b2]">
+                <span className="h-px w-12 bg-[#0976b2]" />
+                WTT / CHANGE MAKERS
+              </div>
+
+              {/* Main Heading */}
+              <div className="overflow-hidden">
+                <motion.h1
+                  initial={{ opacity: 0, y: 100 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true, amount: 0.2 }}
+                  transition={{
+                    duration: 0.9,
+                    ease: [0.16, 1, 0.3, 1],
+                  }}
+                  className="
   wtt-display-title
   max-w-[900px]
   text-[clamp(3.4rem,8vw,8rem)]
   uppercase
 "
-        >
-          THE PEOPLE
-          <br />
-          <span className="text-[#0976b2]">
-            WHO
-          </span>
-          <br />
-          WALK THE TALK.
-        </motion.h1>
-      </div>
+                >
+                  THE PEOPLE
+                  <br />
+                  <span className="text-[#0976b2]">WHO</span>
+                  <br />
+                  WALK THE TALK.
+                </motion.h1>
+              </div>
 
-      {/* Description */}
-      <motion.div
-        initial={{ opacity: 0, y: 30 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{
-          delay: 0.55,
-          duration: 0.8,
-        }}
-        className="mt-8 flex max-w-[650px] flex-col justify-between gap-6 border-t border-white/10 pt-6 sm:mt-10 md:flex-row md:items-end"
-      >
+              {/* Description */}
+              <motion.div
+                initial={{ opacity: 0, y: 30 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{
+                  delay: 0.55,
+                  duration: 0.8,
+                }}
+                className="mt-8 flex max-w-[650px] flex-col justify-between gap-6 border-t border-white/10 pt-6 sm:mt-10 md:flex-row md:items-end"
+              >
+                <p className="max-w-xl text-base font-normal leading-[1.8] text-white/55 sm:text-lg">
+                  The thinkers, doers, problem-solvers and go-getters. Turning
+                  ideas into real-world experiences.
+                </p>
 
-        <p className="max-w-xl text-base font-normal leading-[1.8] text-white/55 sm:text-lg">
-          The thinkers, doers, problem-solvers and go-getters.
-          Turning ideas into real-world experiences.
-        </p>
+                <button
+                  type="button"
+                  onClick={scrollToTeam}
+                  className="group flex shrink-0 cursor-pointer items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-white/50 transition-colors duration-300 hover:text-white"
+                >
+                  <span>MEET CHANGE MAKERS</span>
 
-        <button
-          type="button"
-          onClick={scrollToTeam}
-          className="group flex shrink-0 cursor-pointer items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-white/50 transition-colors duration-300 hover:text-white"
-        >
-          <span>MEET CHANGE MAKERS</span>
+                  <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 transition-all duration-300 group-hover:border-[#007aff] group-hover:bg-[#007aff] group-hover:text-white">
+                    <ArrowDown
+                      size={17}
+                      className="transition-transform duration-300 group-hover:translate-y-1"
+                    />
+                  </span>
+                </button>
+              </motion.div>
+            </motion.div>
 
-          <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 transition-all duration-300 group-hover:border-[#007aff] group-hover:bg-[#007aff] group-hover:text-white">
-            <ArrowDown
-              size={17}
-              className="transition-transform duration-300 group-hover:translate-y-1"
-            />
-          </span>
-        </button>
+            {/* RIGHT HERO VISUAL */}
+            <motion.div
+              initial={{ opacity: 0, scale: 0.8, rotate: 4 }}
+              animate={{ opacity: 1, scale: 1, rotate: 0 }}
+              transition={{
+                duration: 1.1,
+                delay: 0.25,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="relative hidden min-h-[600px] lg:col-span-5 lg:block"
+            >
+              {/* Outer Ring */}
+              <motion.div
+                animate={{ rotate: 360 }}
+                transition={{
+                  duration: 35,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="absolute left-1/2 top-1/2 h-[470px] w-[470px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#0976b2]/20"
+              />
 
-      </motion.div>
+              {/* Inner Ring */}
+              <motion.div
+                animate={{ rotate: -360 }}
+                transition={{
+                  duration: 45,
+                  repeat: Infinity,
+                  ease: "linear",
+                }}
+                className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
+              />
 
-    </motion.div>
+              {/* Central Card */}
+              <motion.div
+                animate={{
+                  y: [0, -10, 0],
+                  rotate: [-2, 2, -2],
+                }}
+                transition={{
+                  duration: 6,
+                  repeat: Infinity,
+                  ease: "easeInOut",
+                }}
+                className="absolute left-1/2 top-1/2 z-20 w-[310px] -translate-x-1/2 -translate-y-1/2"
+              >
+                <div className="border border-white/15 bg-[#0c0d12] p-3 shadow-2xl">
+                  {/* Card Header */}
+                  <div className="mb-3 flex items-center justify-between border-b border-white/10 pb-3">
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/30">
+                      WTT / PEOPLE
+                    </span>
 
-    {/* RIGHT HERO VISUAL */}
-    <motion.div
-      initial={{ opacity: 0, scale: 0.8, rotate: 4 }}
-      animate={{ opacity: 1, scale: 1, rotate: 0 }}
-      transition={{
-        duration: 1.1,
-        delay: 0.25,
-        ease: [0.22, 1, 0.36, 1],
-      }}
-      className="relative hidden min-h-[600px] lg:col-span-5 lg:block"
-    >
+                    <span className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
+                      Our Team
+                      <span className="h-1.5 w-1.5 rounded-full bg-[#0976b2]" />
+                    </span>
+                  </div>
 
-      {/* Outer Ring */}
-      <motion.div
-        animate={{ rotate: 360 }}
-        transition={{
-          duration: 35,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        className="absolute left-1/2 top-1/2 h-[470px] w-[470px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#0976b2]/20"
-      />
+                  {/* Card Visual */}
+                  <div className="relative flex h-[250px] flex-col justify-between overflow-hidden bg-[#0976b2] p-6">
+                    <div className="absolute right-[-40px] top-[-40px] h-32 w-32 rounded-full border border-white/30" />
 
-      {/* Inner Ring */}
-      <motion.div
-        animate={{ rotate: -360 }}
-        transition={{
-          duration: 45,
-          repeat: Infinity,
-          ease: "linear",
-        }}
-        className="absolute left-1/2 top-1/2 h-[350px] w-[350px] -translate-x-1/2 -translate-y-1/2 rounded-full border border-white/10"
-      />
+                    <div className="absolute bottom-[-80px] left-[-30px] h-52 w-52 rounded-full border border-white/20" />
 
-      {/* Central Card */}
-      <motion.div
-        animate={{
-          y: [0, -10, 0],
-          rotate: [-2, 2, -2],
-        }}
-        transition={{
-          duration: 6,
-          repeat: Infinity,
-          ease: "easeInOut",
-        }}
-        className="absolute left-1/2 top-1/2 z-20 w-[310px] -translate-x-1/2 -translate-y-1/2"
-      >
+                    <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
+                      One Team
+                      <br />
+                      One Vision
+                      <br />
+                      One Promise.
+                    </span>
 
-        <div className="border border-white/15 bg-[#0c0d12] p-3 shadow-2xl">
+                    <span className="relative z-10 text-4xl font-semibold uppercase leading-[0.85] tracking-[-0.07em]">
+                      People
+                      <br />
+                      Make
+                      <br />
+                      Impact.
+                    </span>
+                  </div>
 
-          {/* Card Header */}
-          <div className="mb-3 flex items-center justify-between border-b border-white/10 pb-3">
+                  {/* Card Footer */}
+                  <div className="mt-3 flex items-center justify-between">
+                    <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/30">
+                      Ideas / People / Culture
+                    </span>
 
-            <span className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/30">
-              WTT / PEOPLE
-            </span>
+                    <ArrowUpRight size={18} className="text-[#0976b2]" />
+                  </div>
+                </div>
+              </motion.div>
 
-            <span className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
-              Our Team
-              <span className="h-1.5 w-1.5 rounded-full bg-[#0976b2]" />
-            </span>
-
-          </div>
-
-          {/* Card Visual */}
-          <div className="relative flex h-[250px] flex-col justify-between overflow-hidden bg-[#0976b2] p-6">
-
-            <div className="absolute right-[-40px] top-[-40px] h-32 w-32 rounded-full border border-white/30" />
-
-            <div className="absolute bottom-[-80px] left-[-30px] h-52 w-52 rounded-full border border-white/20" />
-
-            <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
-              One Team
-              <br />
-              One Vision
-              <br />
-              One Promise.
-            </span>
-
-            <span className="relative z-10 text-4xl font-semibold uppercase leading-[0.85] tracking-[-0.07em]">
-              People
-              <br />
-              Make
-              <br />
-              Impact.
-            </span>
-
-          </div>
-
-          {/* Card Footer */}
-          <div className="mt-3 flex items-center justify-between">
-
-            <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/30">
-              Ideas / People / Culture
-            </span>
-
-            <ArrowUpRight size={18} className="text-[#0976b2]" />
-
-          </div>
-
-        </div>
-
-      </motion.div>
-
-      {/* Team Members Floating Card */}
-      <div className="absolute left-0 top-[20%] z-30 border border-white/10 bg-[#0a0b10]/90 p-5 backdrop-blur-xl">
-
-        {/* <div className="mb-2 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/40">
+              {/* Team Members Floating Card */}
+              <div className="absolute left-0 top-[20%] z-30 border border-white/10 bg-[#0a0b10]/90 p-5 backdrop-blur-xl">
+                {/* <div className="mb-2 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/40">
           <CircleDot size={11} className="text-[#0976b2]" />
           Our People
         </div> */}
 
-        <div className="text-3xl font-semibold tracking-[-0.06em]">
-          27+
+                <div className="text-3xl font-semibold tracking-[-0.06em]">
+                  27+
+                </div>
+              </div>
+
+              {/* Shared Vision Floating Card */}
+              <div className="absolute bottom-[18%] right-0 z-30 border border-[#0976b2]/30 bg-[#07142a]/90 p-5 backdrop-blur-xl">
+                <div className="mb-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
+                  Shared Vision
+                </div>
+
+                <div className="text-3xl font-semibold tracking-[-0.06em]">
+                  ONE
+                </div>
+              </div>
+            </motion.div>
+          </div>
         </div>
 
-      </div>
+        {/* Bottom Scroll Navigation */}
+        <div className="absolute bottom-8 left-0 right-0 z-20">
+          <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 sm:px-10 lg:px-16">
+            <button
+              type="button"
+              onClick={scrollToTeam}
+              className="group flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/30 transition-colors hover:text-[#0976b2]"
+            >
+              Scroll To Explore
+              <ArrowDown
+                size={14}
+                className="transition-transform duration-300 group-hover:translate-y-1"
+              />
+            </button>
 
-      {/* Shared Vision Floating Card */}
-      <div className="absolute bottom-[18%] right-0 z-30 border border-[#0976b2]/30 bg-[#07142a]/90 p-5 backdrop-blur-xl">
-
-        <div className="mb-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
-          Shared Vision
+            <span className="hidden text-[10px] font-semibold uppercase tracking-[0.25em] text-white/20 sm:block">
+              People / Ideas / Culture
+            </span>
+          </div>
         </div>
-
-        <div className="text-3xl font-semibold tracking-[-0.06em]">
-          ONE
-        </div>
-
-      </div>
-
-    </motion.div>
-
-  </div>
-
-</div>
-
-{/* Bottom Scroll Navigation */}
-<div className="absolute bottom-8 left-0 right-0 z-20">
-
-  <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 sm:px-10 lg:px-16">
-
-    <button
-      type="button"
-      onClick={scrollToTeam}
-      className="group flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.25em] text-white/30 transition-colors hover:text-[#0976b2]"
-    >
-      Scroll To Explore
-
-      <ArrowDown
-        size={14}
-        className="transition-transform duration-300 group-hover:translate-y-1"
-      />
-    </button>
-
-    <span className="hidden text-[10px] font-semibold uppercase tracking-[0.25em] text-white/20 sm:block">
-      People / Ideas / Culture
-    </span>
-
-  </div>
-
-</div>
-
-</section>
-
+      </section>
 
       {/* TEAM SECTION */}
       <section
@@ -542,11 +508,7 @@ export default function TeamPage() {
             className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-5 lg:grid-cols-4"
           >
             {squad.map((member, index) => (
-              <SquadCard
-                key={member.id}
-                member={member}
-                index={index}
-              />
+              <SquadCard key={member.id} member={member} index={index} />
             ))}
           </motion.div>
 
@@ -566,13 +528,7 @@ export default function TeamPage() {
    SQUAD CARD
 ============================================================ */
 
-function SquadCard({
-  member,
-  index,
-}: {
-  member: TeamMember;
-  index: number;
-}) {
+function SquadCard({ member, index }: { member: TeamMember; index: number }) {
   const [hovered, setHovered] = useState(false);
 
   return (
