@@ -4,7 +4,13 @@
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { useEffect, useState } from "react";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from "react";
 
 interface Award {
   id: string;
@@ -20,132 +26,129 @@ const awards: Award[] = [
     award: "OOHWARDS",
     organization: "MAD OVER MARKETING",
     title: "OOH AGENCY OF THE YEAR",
-    image: "/images/awards/OOHWARDS_OOH.png",
+    image:
+      "/images/awards/MAD-OVER-MARKETING–OOHWARDS-OOH-AGENCY-OF-THE-YEAR.png",
   },
   {
     id: "02",
     award: "MOMMYS",
     organization: "MAD OVER MARKETING",
     title: "BEST MARKETING CAMPAIGN",
-    image: "/images/awards/MOMMYS_Best.png",
+    image:
+      "/images/awards/MAD-OVER-MARKETING–MOMMYS-BEST-MARKETING-CAMPAIGN.png",
   },
   {
     id: "03",
     award: "MOMMYS",
     organization: "MAD OVER MARKETING",
     title: "MOM'S FAVOURITE",
-    image: "/images/awards/MOMMYS_MOM.png",
+    image:
+      "/images/awards/MAD-OVER-MARKETING–MOMMYS-MOM-FAVOURITE.png",
   },
   {
     id: "04",
     award: "MAVERICK AWARDS",
     organization: "EXCHANGE4MEDIA",
     title: "RISING MAVERICK AGENCY OF THE YEAR",
-    image: "/images/awards/MAVERICK_AWARDS_Rising.png",
+    image:
+      "/images/awards/EXCHANGE4MEDIA-MAVERICK-AWARDS-RISING-MAVERICK-AGENCY-OF-THE-YEAR.png",
   },
   {
     id: "05",
     award: "MAA AWARDS",
     organization: "ADGULLY",
     title: "PROMISING AGENCY OF THE YEAR",
-    image: "/images/awards/MAA_AWARDS_Promising.png",
+    image:
+      "/images/awards/ADGULLY-MAA-AWARDS-PROMISING-AGENCY-OF-THE-YEAR.png",
   },
   {
     id: "06",
     award: "MADX AWARDS",
     organization: "THE FOUNDER MEDIA",
     title: "INDEPENDENT AGENCY OF THE YEAR",
-    image: "/images/awards/MADX_AWARDS_Independent.png",
+    image:
+      "/images/awards/THE-FOUNDER-MEDIA-MADX-AWARDS-INDEPENDENT-AGENCY-OF-THE-YEAR.png",
   },
   {
     id: "07",
     award: "OOH PHOENIX AWARDS",
     organization: "THE FOUNDER MEDIA",
     title: "ADVERTISER OF THE YEAR",
-    image: "/images/awards/OOH_PHOENIX_AWARDS_Advertise.png",
+    image:
+      "/images/awards/THE-FOUNDER-MEDIA-OOH-PHOENIX-AWARDS-ADVERTISER-OF-THE-YEAR.png",
   },
+  {
+    id: "08",
+    award: "AFAQS FOXGLOVE AWARDS",
+    organization: "THE FOUNDER MEDIA",
+    title: "RISING STAR OF THE YEAR",
+    image:
+      "/images/awards/AFAQS-FOXGLOVE-AWARDS-RISING-STAR-OF-THE-YEAR.png",
+  },
+];
+
+const TOTAL_AWARDS = awards.length;
+const AUTO_PLAY_DELAY = 4500;
+const SLIDE_DURATION = 0.9;
+
+const carouselAwards = [
+  ...awards,
+  ...awards,
+  ...awards,
 ];
 
 function AwardCard({
   award,
   active,
-  position,
   onClick,
 }: {
   award: Award;
   active: boolean;
-  position: number;
   onClick: () => void;
 }) {
   return (
     <motion.button
-      layout
       type="button"
       onClick={onClick}
-      style={{ order: position }}
+      aria-label={`${award.award}: ${award.title}`}
+      aria-pressed={active}
       animate={{
-        opacity: active ? 1 : 0.62,
-        scale: active ? 1 : 0.92,
-        y: active ? -22 : 0,
+        scale: active ? 1.1 : 0.84,
+        opacity: active ? 1 : 0.48,
+        y: active ? -10 : 0,
       }}
       transition={{
-        layout: {
-          duration: 1.4,
-          ease: [0.22, 1, 0.36, 1],
-        },
-        opacity: {
-          duration: 1.1,
-          ease: "easeInOut",
-        },
-        scale: {
-          duration: 1.4,
-          ease: [0.22, 1, 0.36, 1],
-        },
-        y: {
-          duration: 1.4,
-          ease: [0.22, 1, 0.36, 1],
-        },
+        duration: 0.75,
+        ease: [0.22, 1, 0.36, 1],
       }}
       className={`
-        group relative flex h-[280px] w-[165px]
+        group relative flex h-[280px] w-[175px]
         shrink-0 flex-col overflow-hidden
-        rounded-[18px] border text-left
-        sm:h-[315px] sm:w-[190px]
-        lg:h-[345px] lg:w-[215px]
+        rounded-[20px] border text-left
+        transform-gpu
+        sm:h-[315px] sm:w-[205px]
+        lg:h-[345px] lg:w-[225px]
         ${
           active
-            ? "border-[#0976b2] bg-[#08296a] shadow-[0_25px_60px_rgba(0,0,0,0.5)]"
-            : "border-white/10 bg-[#0976b2]/65"
+            ? "z-20 border-[#3289dc] bg-[#142f78] shadow-[0_25px_65px_rgba(0,0,0,0.65)]"
+            : "z-10 border-white/10 bg-[#17476b]"
         }
       `}
     >
-      {/* Card grid */}
       <div
         className="
-          pointer-events-none absolute inset-0 opacity-[0.08]
+          pointer-events-none absolute inset-0
+          opacity-[0.08]
           [background-image:linear-gradient(rgba(255,255,255,.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.7)_1px,transparent_1px)]
           [background-size:35px_35px]
         "
       />
 
-      {/* Number */}
-      <span
-        className="
-          absolute right-4 top-4 z-20 flex h-7 w-7
-          items-center justify-center rounded-full
-          border border-white/20 text-[9px]
-          font-medium tracking-wider text-white/65
-        "
-      >
-        {award.id}
-      </span>
-
-      {/* Artwork */}
       <div
         className="
-          relative z-10 flex h-[145px] items-center
-          justify-center px-5 pt-6
-          sm:h-[165px] lg:h-[180px]
+          relative z-10 flex h-[145px]
+          items-center justify-center px-5 pt-5
+          sm:h-[165px] lg:h-[185px]
         "
       >
         <div className="relative h-full w-full">
@@ -153,7 +156,7 @@ function AwardCard({
             src={award.image}
             alt={`${award.award} - ${award.title}`}
             fill
-            sizes="215px"
+            sizes="(max-width: 640px) 175px, (max-width: 1024px) 205px, 225px"
             className="
               object-contain
               transition-transform duration-700
@@ -163,17 +166,17 @@ function AwardCard({
         </div>
       </div>
 
-      {/* Details */}
       <div
         className="
-          relative z-10 mt-auto border-t border-white/15
+          relative z-10 mt-auto
+          border-t border-white/15
           px-4 py-4 sm:px-5 sm:py-5
         "
       >
         <p
           className="
             text-[8px] font-medium uppercase
-            tracking-[0.2em] text-white/55
+            tracking-[0.2em] text-white/60
           "
         >
           {award.organization}
@@ -181,8 +184,8 @@ function AwardCard({
 
         <h3
           className="
-            mt-3 text-[17px] font-semibold uppercase
-            leading-[1.05] tracking-[-0.035em]
+            mt-3 text-[16px] font-semibold uppercase
+            leading-[1.08] tracking-[-0.035em]
             text-white sm:text-[19px]
           "
         >
@@ -192,19 +195,21 @@ function AwardCard({
         <p
           className="
             mt-3 min-h-[28px] text-[10px]
-            font-normal uppercase leading-[1.5]
-            tracking-[0.02em] text-white/70
+            uppercase leading-[1.5]
+            text-white/70
           "
         >
           {award.title}
         </p>
 
-        <div
-          className={`
-            absolute bottom-0 left-0 h-[2px]
-            bg-white transition-all duration-700
-            ${active ? "w-full" : "w-0"}
-          `}
+        <motion.div
+          animate={{ scaleX: active ? 1 : 0 }}
+          transition={{ duration: 0.5 }}
+          className="
+            absolute bottom-0 left-0
+            h-[3px] w-full origin-left
+            bg-[#55aaff]
+          "
         />
       </div>
     </motion.button>
@@ -212,38 +217,111 @@ function AwardCard({
 }
 
 export default function AwardsSection() {
-  const [activeIndex, setActiveIndex] = useState(0);
+  const [activeIndex, setActiveIndex] = useState(TOTAL_AWARDS);
+  const [trackOffset, setTrackOffset] = useState(0);
+  const [transitionEnabled, setTransitionEnabled] = useState(true);
 
-  // Automatically highlight the next award.
-  useEffect(() => {
-    const intervalId = window.setInterval(() => {
-      setActiveIndex((current) => (current + 1) % awards.length);
-    }, 4500);
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const trackRef = useRef<HTMLDivElement>(null);
 
-    return () => window.clearInterval(intervalId);
+  const isJumping = useRef(false);
+
+  const updatePosition = useCallback(() => {
+    const viewport = viewportRef.current;
+    const track = trackRef.current;
+
+    if (!viewport || !track) return;
+
+    const activeCard = track.children[
+      activeIndex
+    ] as HTMLElement | undefined;
+
+    if (!activeCard) return;
+
+    const cardCenter =
+      activeCard.offsetLeft + activeCard.offsetWidth / 2;
+
+    const viewportCenter = viewport.clientWidth / 2;
+
+    setTrackOffset(viewportCenter - cardCenter);
+  }, [activeIndex]);
+
+  useLayoutEffect(() => {
+    updatePosition();
+
+    const viewport = viewportRef.current;
+
+    if (!viewport) return;
+
+    const observer = new ResizeObserver(() => {
+      updatePosition();
+    });
+
+    observer.observe(viewport);
+
+    return () => observer.disconnect();
+  }, [updatePosition]);
+
+  const moveNext = useCallback(() => {
+    if (isJumping.current) return;
+
+    setActiveIndex((current) => current + 1);
   }, []);
 
-  const previousAward = () => {
-    setActiveIndex((current) =>
-      current === 0 ? awards.length - 1 : current - 1
-    );
+  const movePrevious = useCallback(() => {
+    if (isJumping.current) return;
+
+    setActiveIndex((current) => current - 1);
+  }, []);
+
+  const handleCardClick = useCallback(
+    (index: number) => {
+      if (isJumping.current) return;
+
+      const originalIndex = index % TOTAL_AWARDS;
+
+      setActiveIndex(TOTAL_AWARDS + originalIndex);
+    },
+    []
+  );
+
+  const handleAnimationComplete = () => {
+    if (isJumping.current) return;
+
+    if (activeIndex >= TOTAL_AWARDS * 2) {
+      isJumping.current = true;
+      setTransitionEnabled(false);
+      setActiveIndex(TOTAL_AWARDS);
+      return;
+    }
+
+    if (activeIndex < TOTAL_AWARDS) {
+      isJumping.current = true;
+      setTransitionEnabled(false);
+      setActiveIndex(TOTAL_AWARDS * 2 - 1);
+    }
   };
 
-  const nextAward = () => {
-    setActiveIndex((current) =>
-      (current + 1) % awards.length
-    );
-  };
+  useLayoutEffect(() => {
+    if (!isJumping.current) return;
 
-  const getPosition = (index: number) => {
-    const middle = Math.floor(awards.length / 2);
+    updatePosition();
 
-    return (
-      ((index - activeIndex + awards.length + middle) %
-        awards.length) -
-      middle
-    );
-  };
+    const frame = requestAnimationFrame(() => {
+      setTransitionEnabled(true);
+      isJumping.current = false;
+    });
+
+    return () => cancelAnimationFrame(frame);
+  }, [activeIndex, updatePosition]);
+
+  useEffect(() => {
+    const timeout = window.setTimeout(() => {
+      moveNext();
+    }, AUTO_PLAY_DELAY);
+
+    return () => window.clearTimeout(timeout);
+  }, [activeIndex, moveNext]);
 
   return (
     <section
@@ -256,7 +334,6 @@ export default function AwardsSection() {
         font-sans text-white
       "
     >
-      {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
         <div
           className="
@@ -270,8 +347,7 @@ export default function AwardsSection() {
           className="
             absolute -left-[14%] top-[15%]
             h-[480px] w-[480px]
-            rounded-full bg-[#0976b2]/10
-            blur-[150px]
+            rounded-full bg-[#0976b2]/10 blur-[150px]
           "
         />
 
@@ -279,8 +355,7 @@ export default function AwardsSection() {
           className="
             absolute -bottom-[18%] -right-[10%]
             h-[450px] w-[450px]
-            rounded-full bg-[#0976b2]/10
-            blur-[150px]
+            rounded-full bg-[#0976b2]/10 blur-[150px]
           "
         />
 
@@ -305,7 +380,6 @@ export default function AwardsSection() {
           lg:px-12 lg:py-12
         "
       >
-        {/* Introduction */}
         <div
           className="
             grid grid-cols-1 gap-7 py-5
@@ -314,7 +388,6 @@ export default function AwardsSection() {
             lg:items-end lg:gap-16
           "
         >
-          {/* Main heading */}
           <div className="overflow-hidden">
             <motion.h2
               initial={{ opacity: 0, y: 100 }}
@@ -334,37 +407,22 @@ export default function AwardsSection() {
             </motion.h2>
           </div>
 
-          {/* Description */}
           <motion.div
             initial={{ opacity: 0, x: 30 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true }}
-            transition={{
-              duration: 0.7,
-              delay: 0.15,
-            }}
+            transition={{ duration: 0.7 }}
             className="
               border-l border-[#0976b2]/40
               pl-5 sm:pl-7
             "
           >
-            <p
-              className="
-                text-lg font-medium leading-8
-                text-white/90 sm:text-xl
-              "
-            >
+            <p className="text-lg font-medium leading-8 text-white/90 sm:text-xl">
               Recognition is rewarding. The work that earns it matters even
               more.
             </p>
 
-            <p
-              className="
-                mt-4 max-w-[540px]
-                text-sm leading-7 text-white/55
-                sm:text-[15px] lg:text-base
-              "
-            >
+            <p className="mt-4 max-w-[540px] text-sm leading-7 text-white/55 sm:text-[15px] lg:text-base">
               Every accolade represents a challenge taken on, an idea pushed
               further and a team that went the extra mile. We are grateful to
               our clients, collaborators, teams and industry peers who make
@@ -373,7 +431,6 @@ export default function AwardsSection() {
           </motion.div>
         </div>
 
-        {/* Award carousel */}
         <motion.div
           initial={{ opacity: 0, y: 25 }}
           whileInView={{ opacity: 1, y: 0 }}
@@ -384,60 +441,72 @@ export default function AwardsSection() {
             items-center justify-center pb-5
           "
         >
-          {/* Previous */}
           <button
             type="button"
-            onClick={previousAward}
+            onClick={movePrevious}
             aria-label="Previous award"
             className="
               absolute left-0 top-1/2 z-30
-              flex h-10 w-10 -translate-y-1/2
+              flex h-11 w-11 -translate-y-1/2
               items-center justify-center rounded-full
               border border-white/20 bg-[#050509]
-              text-white/70 transition-all duration-300
+              text-white transition-all duration-300
               hover:scale-110 hover:border-[#0976b2]
-              hover:bg-[#0976b2] hover:text-white
-              sm:left-3
+              hover:bg-[#0976b2]
+              sm:left-2
             "
           >
-            <ArrowLeft size={17} />
+            <ArrowLeft size={19} />
           </button>
 
-          {/* Cards */}
           <div
+            ref={viewportRef}
             className="
-              flex w-full items-center justify-center
-              gap-1 overflow-hidden px-11 py-9
-              sm:gap-2 sm:px-16 lg:gap-2.5
+              relative w-full overflow-hidden
+              py-16
             "
           >
-            {awards.map((award, index) => (
-              <AwardCard
-                key={award.id}
-                award={award}
-                active={index === activeIndex}
-                position={getPosition(index)}
-                onClick={() => setActiveIndex(index)}
-              />
-            ))}
+            <motion.div
+              ref={trackRef}
+              initial={false}
+              animate={{ x: trackOffset }}
+              onAnimationComplete={handleAnimationComplete}
+              transition={{
+                duration: transitionEnabled ? SLIDE_DURATION : 0,
+                ease: [0.22, 1, 0.36, 1],
+              }}
+              className="
+                relative flex w-max
+                items-center gap-4
+                sm:gap-6 lg:gap-8
+              "
+            >
+              {carouselAwards.map((award, index) => (
+                <AwardCard
+                  key={`${award.id}-${index}`}
+                  award={award}
+                  active={index === activeIndex}
+                  onClick={() => handleCardClick(index)}
+                />
+              ))}
+            </motion.div>
           </div>
 
-          {/* Next */}
           <button
             type="button"
-            onClick={nextAward}
+            onClick={moveNext}
             aria-label="Next award"
             className="
               absolute right-0 top-1/2 z-30
-              flex h-10 w-10 -translate-y-1/2
+              flex h-11 w-11 -translate-y-1/2
               items-center justify-center rounded-full
               border border-[#0976b2] bg-[#0976b2]
               text-white transition-all duration-300
               hover:scale-110 hover:bg-[#08699d]
-              sm:right-3
+              sm:right-2
             "
           >
-            <ArrowRight size={17} />
+            <ArrowRight size={19} />
           </button>
         </motion.div>
       </div>
