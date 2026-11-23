@@ -1,16 +1,15 @@
 
 "use client";
 
+import { useEffect } from "react";
 import {
   motion,
   useMotionValue,
   useSpring,
   useTransform,
+  useReducedMotion,
 } from "framer-motion";
-
-import { ArrowDown, ArrowUpRight } from "lucide-react";
-
-import { useEffect, useState } from "react";
+import { ArrowUpRight } from "lucide-react";
 
 const principles = [
   {
@@ -50,10 +49,15 @@ const principles = [
   },
 ];
 
-export default function WhyWttSection() {
-  const [active] = useState(0);
+const COLORS = {
+  background: "#07558a",
+  hover: "#050509",
+  white: "#ffffff",
+};
 
-  // Mouse movement
+export default function WhyWttSection() {
+  const reduceMotion = useReducedMotion();
+
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
 
@@ -70,166 +74,95 @@ export default function WhyWttSection() {
   const orbX = useTransform(smoothX, [-500, 500], [-35, 35]);
   const orbY = useTransform(smoothY, [-500, 500], [-35, 35]);
 
-  // Background mouse interaction
   useEffect(() => {
+    if (reduceMotion) return;
+
     const handleMouseMove = (event: MouseEvent) => {
       mouseX.set(event.clientX - window.innerWidth / 2);
       mouseY.set(event.clientY - window.innerHeight / 2);
     };
 
-    window.addEventListener("mousemove", handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove, {
+      passive: true,
+    });
 
     return () => {
       window.removeEventListener("mousemove", handleMouseMove);
     };
-  }, [mouseX, mouseY]);
-
-  // Desktop section scrolling
-  useEffect(() => {
-    const section = document.getElementById("why-wtt");
-
-    if (!section) return;
-
-    let locked = false;
-
-    const handleWheel = (event: WheelEvent) => {
-      if (window.innerWidth < 768) return;
-
-      const rect = section.getBoundingClientRect();
-
-      const isSectionActive =
-        rect.top <= window.innerHeight * 0.25 &&
-        rect.bottom >= window.innerHeight * 0.75;
-
-      if (!isSectionActive) return;
-      if (Math.abs(event.deltaY) < 8) return;
-
-      event.preventDefault();
-
-      if (locked) return;
-
-      locked = true;
-
-      const target =
-        event.deltaY > 0
-          ? section.nextElementSibling
-          : section.previousElementSibling;
-
-      if (target instanceof HTMLElement) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-
-      window.setTimeout(() => {
-        locked = false;
-      }, 900);
-    };
-
-    window.addEventListener("wheel", handleWheel, {
-      passive: false,
-    });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
+  }, [mouseX, mouseY, reduceMotion]);
 
   return (
     <section
       id="why-wtt"
       data-snap-section
       className="
-        relative
-        flex
-        min-h-[100svh]
-        w-full
-        max-w-[100vw]
-        items-center
-        overflow-hidden
-        bg-[#0976b2]
+        relative flex w-full max-w-[100vw]
+        min-h-screen items-center overflow-hidden
         text-white
-        font-sans
+        lg:h-[100svh] lg:min-h-0
       "
+      style={{ backgroundColor: COLORS.background }}
     >
-      {/* BACKGROUND */}
+      {/* Background */}
       <div className="pointer-events-none absolute inset-0 overflow-hidden">
-
-        {/* Grid */}
         <div
           className="
-            absolute
-            inset-0
-            opacity-[0.07]
+            absolute inset-0 opacity-[0.055]
             [background-image:linear-gradient(rgba(255,255,255,.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.7)_1px,transparent_1px)]
             [background-size:80px_80px]
           "
         />
 
-        {/* Animated circles */}
         <motion.div
-          style={{ x: orbX, y: orbY }}
-          className="
-            absolute
-            left-1/2
-            top-1/2
-            h-[70vw]
-            w-[70vw]
-            max-h-[1100px]
-            max-w-[1100px]
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-            border
-            border-white/[0.08]
-          "
-        />
-
-        <motion.div
-          style={{ x: orbX, y: orbY }}
-          className="
-            absolute
-            left-1/2
-            top-1/2
-            h-[45vw]
-            w-[45vw]
-            max-h-[700px]
-            max-w-[700px]
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-            border
-            border-white/[0.1]
-          "
-        />
-
-        {/* Glow */}
-        <motion.div
-          animate={{
-            scale: [1, 1.12, 1],
-            opacity: [0.16, 0.3, 0.16],
+          style={{
+            x: reduceMotion ? 0 : orbX,
+            y: reduceMotion ? 0 : orbY,
           }}
+          className="
+            absolute left-1/2 top-1/2
+            h-[70vw] w-[70vw]
+            max-h-[1100px] max-w-[1100px]
+            -translate-x-1/2 -translate-y-1/2
+            rounded-full border border-white/[0.08]
+          "
+        />
+
+        <motion.div
+          style={{
+            x: reduceMotion ? 0 : orbX,
+            y: reduceMotion ? 0 : orbY,
+          }}
+          className="
+            absolute left-1/2 top-1/2
+            h-[45vw] w-[45vw]
+            max-h-[700px] max-w-[700px]
+            -translate-x-1/2 -translate-y-1/2
+            rounded-full border border-white/[0.1]
+          "
+        />
+
+        <motion.div
+          animate={
+            reduceMotion
+              ? {}
+              : {
+                  scale: [1, 1.12, 1],
+                  opacity: [0.12, 0.24, 0.12],
+                }
+          }
           transition={{
             duration: 6,
             repeat: Infinity,
             ease: "easeInOut",
           }}
           className="
-            absolute
-            left-1/2
-            top-1/2
-            h-[450px]
-            w-[450px]
-            -translate-x-1/2
-            -translate-y-1/2
-            rounded-full
-            bg-white/20
-            blur-[130px]
+            absolute left-1/2 top-1/2
+            h-[450px] w-[450px]
+            -translate-x-1/2 -translate-y-1/2
+            rounded-full bg-white/15 blur-[130px]
           "
         />
 
-        {/* Noise texture */}
         <div className="absolute inset-0 opacity-[0.035] mix-blend-overlay">
           <svg className="h-full w-full">
             <filter id="wtt-noise">
@@ -240,7 +173,6 @@ export default function WhyWttSection() {
                 stitchTiles="stitch"
               />
             </filter>
-
             <rect
               width="100%"
               height="100%"
@@ -249,49 +181,40 @@ export default function WhyWttSection() {
           </svg>
         </div>
 
-        {/* Borders */}
         <div className="absolute left-0 top-0 h-full w-px bg-white/10" />
         <div className="absolute right-0 top-0 h-full w-px bg-white/10" />
       </div>
 
-      {/* MAIN CONTAINER */}
+      {/* Main Container */}
       <div
         className="
-          relative
-          z-10
-          mx-auto
-          flex
-          min-h-[100svh]
-          w-full
-          max-w-[1700px]
-          flex-col
-          px-5
-          py-7
-          sm:px-8
-          md:px-10
-          lg:px-14
+          relative z-10 mx-auto flex w-full
+          max-w-[1700px] flex-col
+          px-5 py-7
+          sm:px-8 md:px-10
+          lg:h-full lg:min-h-0 lg:justify-center
+          lg:px-14 lg:py-5
           xl:px-16
         "
       >
-        {/* MAIN CONTENT */}
-        <div className="flex-1 py-4 lg:py-2">
+        <div className="flex-1 py-4 lg:flex lg:min-h-0 lg:flex-col lg:justify-center lg:py-2">
 
-          {/* TOP CONTENT */}
+          {/* Top Content */}
           <div
             className="
-              grid
-              items-start
-              gap-12
+              grid items-start gap-10
               lg:grid-cols-[1.1fr_0.9fr]
-              lg:gap-16
-              xl:gap-24
+              lg:gap-12
+              xl:gap-20
             "
           >
-            {/* LEFT TITLE */}
+            {/* Left Title */}
             <div className="relative">
               <div className="overflow-hidden">
                 <motion.h2
-                  initial={{ opacity: 0, y: 100 }}
+                  initial={
+                    reduceMotion ? false : { opacity: 0, y: 60 }
+                  }
                   whileInView={{ opacity: 1, y: 0 }}
                   viewport={{ once: true, amount: 0.25 }}
                   transition={{
@@ -314,9 +237,11 @@ export default function WhyWttSection() {
               </div>
             </div>
 
-            {/* RIGHT CONTENT */}
+            {/* Right Content */}
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
+              initial={
+                reduceMotion ? false : { opacity: 0, y: 25 }
+              }
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{
@@ -324,37 +249,27 @@ export default function WhyWttSection() {
                 delay: 0.15,
               }}
               className="
-                border-l
-                border-white/20
-                pl-6
-                sm:pl-8
-                lg:mt-6
+                border-l border-white/20
+                pl-6 sm:pl-8 lg:mt-6
               "
             >
               <p
                 className="
-                  text-xl
-                  font-medium
-                  leading-8
+                  text-xl font-medium leading-8
                   text-white/90
-                  sm:text-2xl
-                  sm:leading-9
+                  sm:text-2xl sm:leading-9
                 "
               >
-                A smarter way to think. A bolder way to create. A better way to
-                deliver.
+                A smarter way to think. A bolder way to create.
+                A better way to deliver.
               </p>
 
               <p
                 className="
-                  mt-6
-                  max-w-[620px]
-                  text-sm
-                  font-normal
-                  leading-7
+                  mt-6 max-w-[620px]
+                  text-sm font-normal leading-7
                   text-white/65
-                  sm:text-[15px]
-                  lg:text-base
+                  sm:text-[15px] lg:text-base
                 "
               >
                 We believe OOH Advertising deserves more than conventional
@@ -366,15 +281,11 @@ export default function WhyWttSection() {
             </motion.div>
           </div>
 
-          {/* FIVE PRINCIPLES GRID */}
+          {/* Five Principles Grid */}
           <div
             className="
-              mt-6
-              grid
-              grid-cols-1
-              border-l
-              border-t
-              border-white/20
+              mt-7 grid grid-cols-1
+              border-l border-t border-white/20
               sm:grid-cols-2
               lg:grid-cols-3
               xl:grid-cols-5
@@ -383,37 +294,34 @@ export default function WhyWttSection() {
             {principles.map((service, index) => (
               <motion.article
                 key={service.number}
-                initial={{ opacity: 0, y: 30 }}
+                initial={
+                  reduceMotion ? false : { opacity: 0, y: 20 }
+                }
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, amount: 0.1 }}
                 transition={{
-                  duration: 0.65,
-                  delay: index * 0.08,
+                  duration: 0.5,
+                  delay: index * 0.06,
                 }}
                 className="
-                  group
-                  relative
-                  flex
+                  group relative flex min-w-0 flex-col
                   min-h-[310px]
-                  flex-col
-                  border-b
-                  border-r
-                  border-white/20
-                  p-5
-                  transition-colors
-                  duration-500
-                  hover:bg-white/[0.07]
-                  sm:p-6
+                  border-b border-r border-white/20
+                  bg-transparent
+                  p-5 sm:p-6
+                  transition-colors duration-300 ease-in-out
+                  hover:bg-[#050509]
+                  focus-within:bg-[#050509]
                 "
               >
-                {/* Card number */}
+                {/* Card Number */}
                 <div className="flex items-start justify-between gap-4">
                   <span
                     className="
-                      text-[10px]
-                      font-medium
-                      tracking-[0.2em]
+                      text-[10px] font-medium tracking-[0.2em]
                       text-white/50
+                      transition-colors duration-300
+                      group-hover:text-white
                     "
                   >
                     {service.number}
@@ -424,24 +332,20 @@ export default function WhyWttSection() {
                     strokeWidth={1.4}
                     className="
                       text-white/35
-                      transition-all
-                      duration-500
-                      group-hover:-translate-y-1
-                      group-hover:translate-x-1
+                      transition-colors duration-300
                       group-hover:text-white
                     "
                   />
                 </div>
 
-                {/* Card heading */}
+                {/* Card Heading */}
                 <h3
                   className="
-                    mt-7
-                    text-xl
-                    font-semibold
-                    leading-[1.05]
-                    tracking-[-0.04em]
+                    mt-7 text-xl font-semibold
+                    leading-[1.05] tracking-[-0.04em]
                     text-white
+                    transition-colors duration-300
+                    group-hover:text-white
                     sm:text-[1.35rem]
                   "
                 >
@@ -451,11 +355,8 @@ export default function WhyWttSection() {
                 {/* Lead */}
                 <p
                   className="
-                    mt-6
-                    text-sm
-                    font-medium
-                    leading-6
-                    text-white/90
+                    mt-6 text-sm font-medium
+                    leading-6 text-white/90
                   "
                 >
                   {service.lead}
@@ -464,29 +365,23 @@ export default function WhyWttSection() {
                 {/* Description */}
                 <p
                   className="
-                    mt-5
-                    text-[13px]
-                    font-normal
-                    leading-6
-                    text-white/60
+                    mt-5 text-[13px] font-normal
+                    leading-6 text-white/60
+                    transition-colors duration-300
+                    group-hover:text-white/75
                   "
                 >
                   {service.description}
                 </p>
 
-                {/* Hover line */}
+                {/* Bottom Hover Line */}
                 <div
                   className="
-                    absolute
-                    bottom-0
-                    left-0
-                    h-[2px]
-                    w-full
-                    origin-left
-                    scale-x-0
+                    absolute bottom-0 left-0
+                    h-[2px] w-full
+                    origin-left scale-x-0
                     bg-white
-                    transition-transform
-                    duration-500
+                    transition-transform duration-300
                     group-hover:scale-x-100
                   "
                 />
@@ -494,61 +389,6 @@ export default function WhyWttSection() {
             ))}
           </div>
         </div>
-
-        {/* BOTTOM */}
-        {/* <div
-          className="
-            mt-3
-            flex
-            items-center
-            justify-between
-            border-t
-            border-white/20
-            pt-5
-          "
-        >
-          <div className="flex items-center gap-3">
-            <span className="text-[10px] text-white/50">
-              02
-            </span>
-
-            <div className="h-px w-10 bg-white/30 sm:w-12" />
-
-            <span
-              className="
-                text-[9px]
-                font-medium
-                uppercase
-                tracking-[0.25em]
-                text-white/50
-              "
-            >
-              Intelligence × Impact
-            </span>
-          </div>
-
-          <motion.div
-            animate={{ y: [0, 5, 0] }}
-            transition={{
-              duration: 1.5,
-              repeat: Infinity,
-            }}
-            className="
-              hidden
-              items-center
-              gap-3
-              text-[9px]
-              font-medium
-              uppercase
-              tracking-[0.25em]
-              text-white/50
-              md:flex
-            "
-          >
-            Scroll
-            <ArrowDown size={13} />
-          </motion.div>
-        </div> */}
       </div>
     </section>
   );
