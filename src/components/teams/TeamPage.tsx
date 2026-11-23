@@ -257,7 +257,7 @@ export default function TeamPage() {
         {/* Background Typography */}
         <div className="pointer-events-none absolute bottom-[-4vw] right-[-4vw] select-none">
           <span className="whitespace-nowrap text-[25vw] font-black leading-none tracking-[-0.1em] text-white/[0.025]">
-            PEOPLE
+            WTT
           </span>
         </div>
 
@@ -277,7 +277,7 @@ export default function TeamPage() {
               {/* Section Label */}
               <div className="mb-8 flex items-center gap-4 text-xs font-semibold uppercase tracking-[0.3em] text-[#0976b2]">
                 <span className="h-px w-12 bg-[#0976b2]" />
-                WTT / CHANGE MAKERS
+                WTT / CHANGEMAKERS
               </div>
 
               {/* Main Heading */}
@@ -291,11 +291,11 @@ export default function TeamPage() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   className="
-  wtt-display-title
-  max-w-[900px]
-  text-[clamp(3.4rem,8vw,8rem)]
-  uppercase
-"
+                    wtt-display-title
+                    max-w-[900px]
+                    text-[clamp(3.4rem,8vw,8rem)]
+                    uppercase
+                  "
                 >
                   THE PEOPLE
                   <br />
@@ -325,7 +325,7 @@ export default function TeamPage() {
                   onClick={scrollToTeam}
                   className="group flex shrink-0 cursor-pointer items-center gap-3 text-xs font-semibold uppercase tracking-[0.25em] text-white/50 transition-colors duration-300 hover:text-white"
                 >
-                  <span>MEET CHANGE MAKERS</span>
+                  <span>MEET THE CHANGEMAKERS</span>
 
                   <span className="flex h-9 w-9 items-center justify-center rounded-full border border-white/15 transition-all duration-300 group-hover:border-[#007aff] group-hover:bg-[#007aff] group-hover:text-white">
                     <ArrowDown
@@ -387,13 +387,13 @@ export default function TeamPage() {
                   {/* Card Header */}
                   <div className="mb-3 flex items-center justify-between border-b border-white/10 pb-3">
                     <span className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/30">
-                      WTT / PEOPLE
+                      WTT / STRENGTH
                     </span>
 
-                    <span className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
+                    {/* <span className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
                       Our Team
                       <span className="h-1.5 w-1.5 rounded-full bg-[#0976b2]" />
-                    </span>
+                    </span> */}
                   </div>
 
                   {/* Card Visual */}
@@ -410,10 +410,10 @@ export default function TeamPage() {
                       One Promise.
                     </span>
 
-                    <span className="relative z-10 text-4xl font-semibold uppercase leading-[0.85] tracking-[-0.07em]">
-                      People
+                    <span className="relative z-10 text-2xl font-semibold uppercase leading-[0.85] tracking-[-0.07em]">
+                      Changemakers
                       <br />
-                      Make
+                      Creating
                       <br />
                       Impact.
                     </span>
@@ -422,7 +422,7 @@ export default function TeamPage() {
                   {/* Card Footer */}
                   <div className="mt-3 flex items-center justify-between">
                     <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/30">
-                      Ideas / People / Culture
+                      PEOPLE / IDEAS / CULTURE
                     </span>
 
                     <ArrowUpRight size={18} className="text-[#0976b2]" />
@@ -431,21 +431,21 @@ export default function TeamPage() {
               </motion.div>
 
               {/* Team Members Floating Card */}
-              <div className="absolute left-0 top-[20%] z-30 border border-white/10 bg-[#0a0b10]/90 p-5 backdrop-blur-xl">
-                {/* <div className="mb-2 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/40">
+              {/* <div className="absolute left-0 top-[20%] z-30 border border-white/10 bg-[#0a0b10]/90 p-5 backdrop-blur-xl">
+                <div className="mb-2 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/40">
           <CircleDot size={11} className="text-[#0976b2]" />
           Our People
-        </div> */}
+        </div> 
 
                 <div className="text-3xl font-semibold tracking-[-0.06em]">
                   27+
                 </div>
-              </div>
+              </div> */}
 
               {/* Shared Vision Floating Card */}
               <div className="absolute bottom-[18%] right-0 z-30 border border-[#0976b2]/30 bg-[#07142a]/90 p-5 backdrop-blur-xl">
                 <div className="mb-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
-                  Shared Vision
+                  Our Force
                 </div>
 
                 <div className="text-3xl font-semibold tracking-[-0.06em]">
@@ -457,7 +457,7 @@ export default function TeamPage() {
         </div>
 
         {/* Bottom Scroll Navigation */}
-        <div className="absolute bottom-8 left-0 right-0 z-20">
+        {/* <div className="absolute bottom-8 left-0 right-0 z-20">
           <div className="mx-auto flex max-w-[1600px] items-center justify-between px-6 sm:px-10 lg:px-16">
             <button
               type="button"
@@ -475,7 +475,7 @@ export default function TeamPage() {
               People / Ideas / Culture
             </span>
           </div>
-        </div>
+        </div> */}
       </section>
 
       {/* TEAM SECTION */}
@@ -515,7 +515,7 @@ export default function TeamPage() {
           {/* Section Footer */}
           <div className="mt-10 flex items-center justify-between border-t border-black/10 pt-5">
             <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-black/30">
-              WTT / THE SQUAD
+              WTT / THE CHANGEMAKERS
             </span>
           </div>
         </div>
@@ -618,7 +618,7 @@ function SquadCard({ member, index }: { member: TeamMember; index: number }) {
               {member.role}
             </span>
 
-            {member.linkedinUrl && (
+            {/* {member.linkedinUrl && (
               <a
                 href={member.linkedinUrl}
                 target="_blank"
@@ -629,7 +629,7 @@ function SquadCard({ member, index }: { member: TeamMember; index: number }) {
               >
                 <FaLinkedin size={19} />
               </a>
-            )}
+            )} */}
           </div>
         </div>
 
