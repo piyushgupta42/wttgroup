@@ -1,10 +1,9 @@
+
 "use client";
 
 import { useState, type FormEvent } from "react";
 import { motion } from "framer-motion";
 import {
-  ArrowDown,
-  ArrowUpRight,
   Check,
   MapPin,
   MessageCircle,
@@ -15,33 +14,17 @@ import {
 import OfficeMap, { offices, type Office } from "./OfficeMap";
 import WttHero from "../../components/common/WttHero";
 
-/* ============================================================
-   ANIMATION VARIANTS
-============================================================ */
-
 const fadeUp = {
-  hidden: {
-    opacity: 0,
-    y: 35,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-  },
+  hidden: { opacity: 0, y: 25 },
+  visible: { opacity: 1, y: 0 },
 };
 
 const stagger = {
   hidden: {},
   visible: {
-    transition: {
-      staggerChildren: 0.1,
-    },
+    transition: { staggerChildren: 0.1 },
   },
 };
-
-/* ============================================================
-   CITY ORDER
-============================================================ */
 
 const cityOrder = [
   "Mumbai",
@@ -56,10 +39,6 @@ const orderedOffices = cityOrder
   .map((city) => offices.find((office) => office.city === city))
   .filter((office): office is Office => Boolean(office));
 
-/* ============================================================
-   MAIN CONTACT PAGE
-============================================================ */
-
 export default function ContactPage() {
   const [submitted, setSubmitted] = useState(false);
 
@@ -70,8 +49,6 @@ export default function ContactPage() {
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Current UI-only success feedback.
-    // Connect your API/server action here to submit enquiries.
     setSubmitted(true);
 
     setTimeout(() => {
@@ -79,137 +56,130 @@ export default function ContactPage() {
     }, 4000);
   };
 
-  const scrollToForm = () => {
-    document.getElementById("contact-form")?.scrollIntoView({
+  const scrollToSection = (id: string) => {
+    document.getElementById(id)?.scrollIntoView({
       behavior: "smooth",
       block: "start",
     });
   };
 
-  const selectOffice = (office: Office) => {
-    setActiveOffice(office);
-  };
-
   return (
-    <main className="w-full overflow-x-hidden bg-[#050509] font-sans text-white">
+    <main
+      id="contact-page"
+      className="
+        h-[100svh] w-full
+        overflow-x-hidden overflow-y-auto
+        snap-y snap-mandatory scroll-smooth
+        bg-[#050509] font-sans text-white
+      "
+    >
       {/* =====================================================
-    HERO SECTION — CONTACT US
-====================================================== */}
+          SECTION 01 — CONTACT HERO
+      ====================================================== */}
 
-      <WttHero
-        eyebrow="WTT / CONTACT US"
-        visualType="custom"
-        scrollTarget="contact-form"
-        footerText="Mumbai / Delhi / Bengaluru / Chennai / Hyderabad / Kolkata"
-        description={<>Every great idea starts with a conversation.</>}
-        heading={
-          <>
-            YOUR NEXT
-            <br />
-            <span className="text-white">BIG IDEA</span>
-            <br />
-            <span className="text-[#0976b2]">STARTS HERE.</span>
-          </>
-        }
-        rightContent={
-          <div className="relative">
-            <div className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#0976b2]/10" />
+      <section
+        id="contact-hero"
+        className="relative h-[100svh] min-h-[650px] w-full snap-start snap-always"
+      >
+        <WttHero
+          eyebrow="WTT / CONTACT US"
+          visualType="custom"
+          scrollTarget="contact-form"
+          footerText="Mumbai / Delhi / Bengaluru / Chennai / Hyderabad / Kolkata"
+          description={<>Every great idea starts with a conversation.</>}
+          heading={
+            <>
+              YOUR NEXT
+              <br />
+              <span className="text-white">BIG IDEA</span>
+              <br />
+              <span className="text-[#0976b2]">STARTS HERE.</span>
+            </>
+          }
+          rightContent={
+            <div className="relative mx-auto w-full max-w-[600px]">
+              <div className="pointer-events-none absolute left-1/2 top-1/2 aspect-square w-[115%] -translate-x-1/2 -translate-y-1/2 rounded-full border border-[#0976b2]/10" />
 
-            <div className="relative h-[200px] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-2xl sm:h-[500px] lg:h-[550px]">
-              <div className="pointer-events-none absolute left-5 top-5 z-20">
-                <div className="rounded-2xl border border-white/10 bg-[#050509]/80 px-4 py-3 backdrop-blur-xl">
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[#0976b2]">
-                    WTT Network
-                  </p>
-                  <p className="mt-1 text-sm font-semibold text-white">
-                    We are closer than you think.
-                  </p>
-                </div>
-              </div>
+              <div className="relative h-[clamp(240px,52vh,540px)] overflow-hidden rounded-[2rem] border border-white/10 bg-white/[0.03] shadow-2xl">
+                <div className="pointer-events-none absolute left-4 top-4 z-20 sm:left-5 sm:top-5">
+                  <div className="rounded-2xl border border-white/10 bg-[#050509]/80 px-3 py-3 backdrop-blur-xl sm:px-4">
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[#0976b2]">
+                      WTT Network
+                    </p>
 
-              <OfficeMap selectedOffice={activeOffice} />
-
-              <div className="pointer-events-none absolute bottom-5 left-5 right-5 z-20 flex items-end justify-between">
-                <div>
-                  <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/40">
-                    Currently viewing
-                  </p>
-                  <p className="mt-1 text-xl font-semibold text-white">
-                    {activeOffice.city}
-                  </p>
+                    <p className="mt-1 text-xs font-semibold text-white sm:text-sm">
+                      We are closer than you think.
+                    </p>
+                  </div>
                 </div>
 
-                <div className="rounded-full border border-white/10 bg-black/60 px-4 py-2 text-[9px] font-semibold uppercase tracking-[0.15em] text-white/70 backdrop-blur-xl">
-                  06 Offices
-                </div>
+                <OfficeMap selectedOffice={activeOffice} />
               </div>
             </div>
-          </div>
-        }
-      />
+          }
+        />
+      </section>
 
       {/* =====================================================
-          CONTACT FORM SECTION
+          SECTION 02 — LET'S CONNECT
       ====================================================== */}
 
       <section
         id="contact-form"
         data-snap-section
-        className="scroll-mt-20 relative bg-[#f2f2ee] px-5 py-20 text-[#050509] sm:px-8 lg:px-12 lg:py-28"
+        className="
+          relative flex h-[100svh] min-h-[700px] w-full
+          snap-start snap-always items-center
+          overflow-y-auto bg-[#f2f2ee]
+          px-5 py-8 text-[#050509]
+          sm:px-8 lg:px-12
+        "
       >
-        <div className="mx-auto max-w-[1400px]">
-          <div className="grid gap-16 lg:grid-cols-[0.75fr_1.25fr] lg:gap-24">
-            {/* Left Content */}
+        <div className="mx-auto w-full max-w-[1400px]">
+          <div className="grid items-center gap-8 lg:grid-cols-[0.8fr_1.2fr] lg:gap-16 xl:gap-24">
+
+            {/* LEFT CONTENT */}
+
             <motion.div
               initial="hidden"
               whileInView="visible"
-              viewport={{
-                once: true,
-                amount: 0.2,
-              }}
+              viewport={{ once: true, amount: 0.2 }}
               variants={stagger}
             >
-              <div className="overflow-hidden">
-                <motion.h2
-                  initial={{
-                    opacity: 0,
-                    y: 100,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.2,
-                  }}
-                  transition={{
-                    duration: 0.9,
-                    ease: [0.16, 1, 0.3, 1],
-                  }}
-                  className="wtt-display-title max-w-[800px] uppercase"
-                >
-                  LET’S
+              <motion.div variants={fadeUp}>
+                <p className="mb-5 flex items-center gap-3 text-[10px] font-semibold uppercase tracking-[0.3em] text-[#0976b2]">
+                  <span className="h-px w-10 bg-[#0976b2]" />
+                  WTT / LET'S TALK
+                </p>
+
+                <h2 className="wtt-display-title max-w-[800px] text-[clamp(2.8rem,5.5vw,6rem)] leading-[0.95] uppercase">
+                  LET'S
                   <br />
                   <span className="text-[#0976b2]">CONNECT.</span>
-                </motion.h2>
-              </div>
+                </h2>
+              </motion.div>
+              
 
               <motion.p
                 variants={fadeUp}
-                className="mt-8 max-w-md text-base font-normal leading-7 text-black/55"
+                className="mt-5 max-w-md text-sm leading-6 text-black/55 sm:text-base sm:leading-7"
               >
                 Have a brief, an ambition or simply ideas you'd like to explore?
                 We'd love to hear from you. Let's talk about how we can enrich
                 your brand and make a bigger impact out there.
               </motion.p>
 
-              {/* Contact Details */}
-              <motion.div variants={fadeUp} className="mt-10 space-y-4">
-                {/* Office Network */}
-                <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-black text-white">
-                    <MapPin size={17} />
+              {/* CONTACT DETAILS */}
+
+              <motion.div
+                variants={fadeUp}
+                className="mt-6 space-y-5 sm:mt-8"
+              >
+                {/* Network */}
+
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-black text-white">
+                    <MapPin size={16} />
                   </div>
 
                   <div>
@@ -221,16 +191,17 @@ export default function ContactPage() {
                       6 offices across India
                     </p>
 
-                    <p className="mt-1 text-xs leading-5 text-black/45">
+                    <p className="mt-1 max-w-sm text-xs leading-5 text-black/45">
                       Mumbai · Delhi · Bengaluru · Chennai · Hyderabad · Kolkata
                     </p>
                   </div>
                 </div>
 
                 {/* Email */}
-                <div className="flex items-start gap-4">
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[#0976b2] text-white">
-                    <MessageCircle size={17} />
+
+                <div className="flex items-start gap-3">
+                  <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[#0976b2] text-white">
+                    <MessageCircle size={16} />
                   </div>
 
                   <div>
@@ -253,51 +224,51 @@ export default function ContactPage() {
               </motion.div>
             </motion.div>
 
-            {/* Contact Form */}
+            {/* CONTACT FORM */}
+
             <motion.div
-              initial={{
-                opacity: 0,
-                y: 30,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-                amount: 0.2,
-              }}
-              transition={{
-                duration: 0.7,
-              }}
+              initial={{ opacity: 0, y: 25 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ duration: 0.7 }}
             >
               <form
                 onSubmit={handleSubmit}
-                className="rounded-[2rem] border border-black/10 bg-white p-6 shadow-[0_25px_80px_rgba(0,0,0,.08)] sm:p-8 lg:p-12"
+                className="
+                  rounded-[1.5rem] border border-black/10
+                  bg-white p-5 shadow-[0_25px_80px_rgba(0,0,0,.08)]
+                  sm:rounded-[2rem] sm:p-7 lg:p-9
+                  xl:p-10
+                "
               >
-                {/* Form Heading */}
-                <div className="mb-10 flex items-start justify-between gap-5">
+                {/* Form Header */}
+
+                <div className="mb-6 flex items-start justify-between gap-4 sm:mb-8">
                   <div>
-                    <p className="text-[10px] font-semibold uppercase tracking-[0.25em] text-[#0976b2]">
+                    <p className="text-[9px] font-semibold uppercase tracking-[0.25em] text-[#0976b2]">
                       Something Brewing?
                     </p>
 
-                    <h3 className="mt-2 text-2xl font-semibold tracking-tight sm:text-3xl">
+                    <h3 className="mt-2 text-xl font-semibold tracking-tight sm:text-2xl">
                       We Are All Ears
                     </h3>
                   </div>
 
-                  <div className="hidden h-11 w-11 items-center justify-center rounded-full bg-[#0976b2]/10 text-[#0976b2] sm:flex">
-                    <Sparkles size={19} />
+                  <div className="hidden h-10 w-10 items-center justify-center rounded-full bg-[#0976b2]/10 text-[#0976b2] sm:flex">
+                    <Sparkles size={17} />
                   </div>
                 </div>
 
-                <div className="space-y-7">
+                {/* FORM FIELDS */}
+
+                <div className="space-y-5 sm:space-y-6">
+
                   {/* Name */}
-                  <div className="group relative">
+
+                  <div>
                     <label
                       htmlFor="name"
-                      className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.2em] text-black/40"
+                      className="mb-2 block text-[9px] font-semibold uppercase tracking-[0.2em] text-black/40"
                     >
                       Your name
                     </label>
@@ -309,15 +280,22 @@ export default function ContactPage() {
                       autoComplete="name"
                       required
                       placeholder="Enter your name"
-                      className="w-full border-b border-black/15 bg-transparent px-0 py-3 text-base outline-none transition placeholder:text-black/25 focus:border-[#0976b2]"
+                      className="
+                        w-full border-b border-black/15
+                        bg-transparent px-0 py-2.5 text-sm
+                        outline-none transition
+                        placeholder:text-black/25
+                        focus:border-[#0976b2]
+                      "
                     />
                   </div>
 
                   {/* Mobile */}
-                  <div className="group relative">
+
+                  <div>
                     <label
                       htmlFor="mobile"
-                      className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.2em] text-black/40"
+                      className="mb-2 block text-[9px] font-semibold uppercase tracking-[0.2em] text-black/40"
                     >
                       Mobile number
                     </label>
@@ -329,15 +307,22 @@ export default function ContactPage() {
                       autoComplete="tel"
                       required
                       placeholder="+91 98765 43210"
-                      className="w-full border-b border-black/15 bg-transparent px-0 py-3 text-base outline-none transition placeholder:text-black/25 focus:border-[#0976b2]"
+                      className="
+                        w-full border-b border-black/15
+                        bg-transparent px-0 py-2.5 text-sm
+                        outline-none transition
+                        placeholder:text-black/25
+                        focus:border-[#0976b2]
+                      "
                     />
                   </div>
 
                   {/* Message */}
-                  <div className="group relative">
+
+                  <div>
                     <label
                       htmlFor="message"
-                      className="mb-2 block text-[10px] font-semibold uppercase tracking-[0.2em] text-black/40"
+                      className="mb-2 block text-[9px] font-semibold uppercase tracking-[0.2em] text-black/40"
                     >
                       Tell us about it
                     </label>
@@ -346,16 +331,23 @@ export default function ContactPage() {
                       id="message"
                       name="message"
                       required
-                      rows={5}
+                      rows={3}
                       placeholder="What are we creating together?"
-                      className="w-full resize-none border-b border-black/15 bg-transparent px-0 py-3 text-base outline-none transition placeholder:text-black/25 focus:border-[#0976b2]"
+                      className="
+                        w-full resize-none border-b border-black/15
+                        bg-transparent px-0 py-2.5 text-sm
+                        outline-none transition
+                        placeholder:text-black/25
+                        focus:border-[#0976b2]
+                      "
                     />
                   </div>
                 </div>
 
-                {/* Submit */}
-                <div className="mt-10 flex flex-col gap-5 sm:flex-row sm:items-center sm:justify-between">
-                  <p className="max-w-xs text-[10px] leading-5 text-black/35">
+                {/* SUBMIT */}
+
+                <div className="mt-6 flex flex-col gap-4 sm:mt-7 sm:flex-row sm:items-center sm:justify-between">
+                  <p className="max-w-xs text-[9px] leading-4 text-black/35">
                     By sending this note, you agree to be contacted by the WTT
                     Team regarding your request.
                   </p>
@@ -363,18 +355,24 @@ export default function ContactPage() {
                   <button
                     type="submit"
                     disabled={submitted}
-                    className="group flex shrink-0 items-center justify-center gap-3 rounded-full bg-[#050509] px-7 py-4 text-xs font-semibold uppercase tracking-[0.15em] text-white transition hover:bg-[#0976b2] disabled:cursor-default"
+                    className="
+                      group flex shrink-0 items-center justify-center gap-3
+                      rounded-full bg-[#050509] px-6 py-3
+                      text-[10px] font-semibold uppercase tracking-[0.15em]
+                      text-white transition hover:bg-[#0976b2]
+                      disabled:cursor-default
+                    "
                   >
                     {submitted ? (
                       <>
                         Sent successfully
-                        <Check size={16} />
+                        <Check size={15} />
                       </>
                     ) : (
                       <>
                         Send
                         <Send
-                          size={15}
+                          size={14}
                           className="transition-transform group-hover:translate-x-1"
                         />
                       </>
@@ -388,14 +386,21 @@ export default function ContactPage() {
       </section>
 
       {/* =====================================================
-          CITY NETWORK SECTION
+          SECTION 03 — SIX OFFICES / ONE OUTLOOK
       ====================================================== */}
 
       <section
+        id="offices"
         data-snap-section
-        className="relative overflow-hidden bg-[#0976b2] px-5 py-24 text-white sm:px-8 lg:px-12 lg:py-32"
+        className="
+          relative flex h-[100svh] min-h-[700px] w-full
+          snap-start snap-always items-center
+          overflow-y-auto bg-[#0976b2]
+          px-5 py-8 text-white sm:px-8 lg:px-12
+        "
       >
-        {/* Background Decoration */}
+        {/* BACKGROUND DECORATION */}
+
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -right-40 -top-40 h-[500px] w-[500px] rounded-full border border-white/10" />
 
@@ -404,66 +409,52 @@ export default function ContactPage() {
           <div className="absolute bottom-0 left-0 h-[350px] w-[350px] rounded-full bg-white/[0.04] blur-[100px]" />
         </div>
 
-        <div className="relative z-10 mx-auto max-w-[1400px]">
-          {/* Heading */}
-          <div className="mb-16 grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-end">
+        <div className="relative z-10 mx-auto w-full max-w-[1400px]">
+
+          {/* HEADER */}
+
+          <div className="mb-7 grid gap-4 lg:grid-cols-[1.2fr_0.8fr] lg:items-end lg:mb-10">
             <motion.h2
-              initial={{
-                opacity: 0,
-                y: 40,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.8,
-              }}
-              className="wtt-display-title max-w-[900px] text-white uppercase"
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.8 }}
+              className="
+                wtt-display-title max-w-[900px]
+                text-[clamp(2.5rem,5.5vw,6rem)]
+                leading-[0.95] uppercase text-white
+              "
             >
-              SIX CITIES.
+              SIX OFFICES
               <br />
-              <span className="text-white/40">ONE WTT.</span>
+              <span className="text-white/40">ONE OUTLOOK</span>
             </motion.h2>
 
             <motion.div
-              initial={{
-                opacity: 0,
-                x: 25,
-              }}
-              whileInView={{
-                opacity: 1,
-                x: 0,
-              }}
-              viewport={{
-                once: true,
-              }}
-              transition={{
-                duration: 0.7,
-              }}
-              className="lg:pb-2"
+              initial={{ opacity: 0, x: 25 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
             >
-              <p className="max-w-md text-base font-normal leading-8 text-white sm:text-lg">
-                From Mumbai to Hyderabad, our teams work across culture,
-                creativity, technology and experiences. One network. Six cities.
-                Countless possibilities.
+              <p className="max-w-md text-xs leading-6 text-white/80 sm:text-sm sm:leading-7">
+                North or South, East or West, our teams work across culture,
+                creativity, technology and experiences. One Network. Six Offices.
+                Countless Possibilities.
               </p>
 
-              <div className="mt-7 flex items-center gap-3">
-                <span className="h-px w-12 bg-white/60" />
+              <div className="mt-4 flex items-center gap-3">
+                <span className="h-px w-10 bg-white/60" />
 
-                <span className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
-                  Explore our locations
+                <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white sm:text-[10px]">
+                  DROP IN FOR A COFFEE
                 </span>
               </div>
             </motion.div>
           </div>
 
-          {/* City Cards */}
-          <div className="grid border-l border-t border-white/25 sm:grid-cols-2 lg:grid-cols-3">
+          {/* CITY GRID */}
+
+          <div className="grid grid-cols-2 border-l border-t border-white/25 lg:grid-cols-3">
             {cityOrder.map((city, index) => {
               const office = offices.find((item) => item.city === city);
 
@@ -473,113 +464,52 @@ export default function ContactPage() {
 
               return (
                 <motion.button
-                  key={office.city}
-                  type="button"
-                  onClick={() => selectOffice(office)}
-                  initial={{
-                    opacity: 0,
-                    y: 30,
-                  }}
-                  whileInView={{
-                    opacity: 1,
-                    y: 0,
-                  }}
-                  viewport={{
-                    once: true,
-                    amount: 0.15,
-                  }}
-                  transition={{
-                    duration: 0.6,
-                    delay: index * 0.07,
-                  }}
-                  aria-pressed={isActive}
-                  className={`
-                    group relative flex min-h-[260px] flex-col
-                    justify-between border-b border-r
-                    border-white/25 p-7 text-left
-                    transition-all duration-500
-                    sm:p-8 lg:min-h-[285px] lg:p-9
-                    ${
-                      isActive
-                        ? "bg-[#050509] shadow-2xl"
-                        : "bg-white/[0.035] hover:bg-white/[0.12]"
-                    }
-                  `}
-                >
-                  {/* Card Top */}
-                  <div className="flex items-center justify-between">
-                    <span className="text-xs font-semibold tracking-[0.25em] text-white">
-                      0{index + 1}
-                    </span>
+  key={office.city}
+  type="button"
+  onClick={() => setActiveOffice(office)}
+  initial={{ opacity: 0, y: 20 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  viewport={{ once: true, amount: 0.15 }}
+  transition={{ duration: 0.5, delay: index * 0.05 }}
+  aria-pressed={isActive}
+  className="
+    group relative flex flex-col justify-center
+    border-b border-r border-white/25
+    p-4 text-left
+    min-h-[120px] sm:min-h-[145px] sm:p-5 lg:p-6
+    bg-white/[0.035]
+    transition-all duration-300
+    hover:bg-[#050509]
+    hover:shadow-2xl
+  "
+>
+  <h3 className="text-xl font-semibold tracking-[-0.04em] sm:text-2xl lg:text-3xl">
+    {office.city}
+  </h3>
 
-                    <span
-                      className={`
-                        flex h-10 w-10 items-center justify-center
-                        rounded-full border border-white/30
-                        transition-all duration-300
-                        ${
-                          isActive
-                            ? "bg-white text-black"
-                            : "text-white group-hover:bg-white group-hover:text-black"
-                        }
-                      `}
-                    >
-                      <ArrowUpRight
-                        size={18}
-                        className="transition-transform duration-300 group-hover:translate-x-1 group-hover:-translate-y-1"
-                      />
-                    </span>
-                  </div>
+  <p className="mt-2 text-[10px] leading-5 text-white/70 sm:text-xs sm:leading-6">
+    {office.address}
+  </p>
 
-                  {/* Card Bottom */}
-                  <div className="mt-12">
-                    <h3
-                      className={`
-                        text-3xl font-semibold tracking-[-0.04em]
-                        transition-colors duration-300
-                        ${isActive ? "text-white" : "text-white"}
-                      `}
-                    >
-                      {office.city}
-                    </h3>
-
-                    <p className="mt-4 max-w-sm text-sm font-normal leading-7 text-white/75">
-                      {office.address}
-                    </p>
-
-                    <div className="mt-5 flex items-center gap-2">
-                      <span
-                        className={`h-1.5 w-1.5 rounded-full ${
-                          isActive ? "bg-white" : "bg-white/50"
-                        }`}
-                      />
-
-                      <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-white/80">
-                        {isActive ? "Currently selected" : "Explore office"}
-                      </span>
-                    </div>
-                  </div>
-
-                  {/* Active Indicator */}
-                  {isActive && (
-                    <motion.div
-                      layoutId="active-office-indicator"
-                      className="absolute bottom-0 left-0 h-1 w-full bg-white"
-                    />
-                  )}
-                </motion.button>
+  {/* Hover indicator */}
+  <div
+    className="
+      absolute bottom-0 left-0 h-1 w-full
+      scale-x-0 bg-white
+      transition-transform duration-300
+      group-hover:scale-x-100
+    "
+  />
+</motion.button>
               );
             })}
           </div>
 
-          {/* Section Footer */}
-          <div className="mt-8 flex flex-col justify-between gap-4 border-t border-white/25 pt-6 sm:flex-row sm:items-center">
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              One network. Six locations. Endless possibilities.
-            </p>
+          {/* SECTION FOOTER */}
 
-            <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white">
-              06 / Offices across India
+          <div className="mt-5 flex flex-col justify-between gap-3 border-t border-white/25 pt-4 sm:flex-row sm:items-center">
+            <p className="text-[9px] font-semibold uppercase tracking-[0.15em] sm:text-[10px] sm:tracking-[0.2em]">
+              ONE NETWORK. SIX OFFICES. ENDLESS POSSIBILITIES.
             </p>
           </div>
         </div>
