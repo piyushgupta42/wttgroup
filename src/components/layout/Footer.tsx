@@ -16,7 +16,7 @@ import {
 const companyLinks = [
   { label: "HOME", href: "/" },
   { label: "ABOUT US", href: "/about" },
-  { label: "CHANGE MAKERS", href: "/teams" },
+  { label: "CHANGEMAKERS", href: "/teams" },
   { label: "CONTACT US", href: "/contact" },
   { label: "PRIVACY POLICY", href: "/privacy-policy" },
 ];
