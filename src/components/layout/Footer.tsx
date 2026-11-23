@@ -371,10 +371,7 @@ export default function Footer() {
             "
           >
             <Image
-              src={
-                footerData.logo ||
-                "/images/WTT_Logo_Brand_Blue.png"
-              }
+              src="/images/WTT_Logo_Brand_Blue.png"
               alt="Walk The Talk - Let's Do It Together"
               width={650}
               height={220}
