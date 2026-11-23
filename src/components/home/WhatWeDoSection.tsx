@@ -1,9 +1,9 @@
+
 "use client";
 
 import Image from "next/image";
-import { useEffect, useRef } from "react";
-import { motion } from "framer-motion";
-import { ArrowDown, ArrowUpRight } from "lucide-react";
+import { motion, useReducedMotion } from "framer-motion";
+import { ArrowUpRight } from "lucide-react";
 
 const services = [
   {
@@ -45,341 +45,158 @@ const services = [
 ];
 
 export default function WhatWeDoSection() {
-  const sectionRef = useRef<HTMLElement | null>(null);
-
-  /*
-  ==========================================================
-  DESKTOP SECTION SNAP
-  Small wheel movement → next / previous section
-  ==========================================================
-  */
-  useEffect(() => {
-    const section = sectionRef.current;
-
-    if (!section) return;
-
-    let locked = false;
-
-    const handleWheel = (event: WheelEvent) => {
-      // Keep normal mobile scrolling
-      if (window.innerWidth < 768) return;
-
-      const rect = section.getBoundingClientRect();
-
-      const isSectionActive =
-        rect.top <= window.innerHeight * 0.25 &&
-        rect.bottom >= window.innerHeight * 0.75;
-
-      if (!isSectionActive) return;
-      if (Math.abs(event.deltaY) < 8) return;
-
-      event.preventDefault();
-
-      if (locked) return;
-
-      locked = true;
-
-      const nextSection =
-        event.deltaY > 0
-          ? section.nextElementSibling
-          : section.previousElementSibling;
-
-      if (nextSection instanceof HTMLElement) {
-        nextSection.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
-      }
-
-      window.setTimeout(() => {
-        locked = false;
-      }, 900);
-    };
-
-    window.addEventListener("wheel", handleWheel, {
-      passive: false,
-    });
-
-    return () => {
-      window.removeEventListener("wheel", handleWheel);
-    };
-  }, []);
+  const reduceMotion = useReducedMotion();
 
   return (
     <section
-      ref={sectionRef}
       id="what-we-do"
       data-snap-section
       className="
         relative
-        flex
-        min-h-[100svh]
+        min-h-screen
         w-full
-        max-w-[100vw]
-        items-center
         overflow-hidden
         bg-[#050509]
         text-white
+        lg:h-[100svh]
+        lg:min-h-0
       "
     >
-      {/* =====================================================
-          BACKGROUND
-      ====================================================== */}
+      {/* Background */}
       <div className="pointer-events-none absolute inset-0">
-        {/* Grid */}
         <div
           className="
-            absolute
-            inset-0
-            opacity-[0.045]
+            absolute inset-0 opacity-[0.045]
             [background-image:linear-gradient(rgba(255,255,255,.5)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.5)_1px,transparent_1px)]
             [background-size:80px_80px]
           "
         />
 
-        {/* Blue glow */}
-        <motion.div
-          animate={{
-            x: [0, 40, 0],
-            y: [0, -30, 0],
-            scale: [1, 1.08, 1],
-          }}
-          transition={{
-            duration: 9,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
-          className="
-            absolute
-            -right-[15%]
-            top-[5%]
-            h-[650px]
-            w-[650px]
-            rounded-full
-            bg-[#0976b2]/10
-            blur-[150px]
-          "
-        />
+        {!reduceMotion && (
+          <motion.div
+            animate={{
+              x: [0, 30, 0],
+              y: [0, -20, 0],
+            }}
+            transition={{
+              duration: 9,
+              repeat: Infinity,
+              ease: "easeInOut",
+            }}
+            className="
+              absolute -right-[15%] top-[5%]
+              h-[550px] w-[550px]
+              rounded-full bg-[#0976b2]/10 blur-[140px]
+            "
+          />
+        )}
 
-        {/* Left subtle glow */}
-        <div
-          className="
-            absolute
-            -left-[20%]
-            bottom-[-20%]
-            h-[500px]
-            w-[500px]
-            rounded-full
-            bg-[#0976b2]/5
-            blur-[140px]
-          "
-        />
+        <div className="absolute -left-[20%] bottom-[-20%] h-[400px] w-[400px] rounded-full bg-[#0976b2]/5 blur-[120px]" />
 
-        {/* Vertical borders */}
         <div className="absolute left-0 top-0 h-full w-px bg-white/[0.08]" />
         <div className="absolute right-0 top-0 h-full w-px bg-white/[0.08]" />
       </div>
 
-      {/* =====================================================
-          CONTENT
-      ====================================================== */}
+      {/* Main Container */}
       <div
         className="
-          relative
-          z-10
-          mx-auto
-          flex
-          min-h-[100svh]
-          w-full
-          max-w-[1700px]
-          flex-col
-          justify-center
-          px-5
-          py-10
+          relative z-10 mx-auto flex w-full max-w-[1700px]
+          flex-col justify-center
+          px-5 py-10
           sm:px-8
           md:px-10
-          lg:px-14
+          lg:h-full lg:min-h-0 lg:py-5
+          lg:px-12
           xl:px-16
         "
       >
-        {/* =================================================
-            TOP LABEL
-        ================================================== */}
-        {/* <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 0.7 }}
-          className="
-            mb-10
-            flex
-            items-center
-            justify-between
-            border-b
-            border-white/10
-            pb-2
-          "
-        >
-          <div className="flex items-center gap-4">
-            <span className="h-2 w-2 rounded-full bg-[#0976b2]" />
-
-            <span
-              className="
-                text-[10px]
-                font-medium
-                uppercase
-                tracking-[0.3em]
-                text-white/60
-                sm:text-[11px]
-              "
-            >
-              What We Do
-            </span>
-          </div>
-
-          <span
-            className="
-              hidden
-              text-[10px]
-              uppercase
-              tracking-[0.25em]
-              text-white/30
-              sm:block
-            "
-          >
-            Planning · Buying · Innovation
-          </span>
-        </motion.div> */}
-
-        {/* =================================================
-            MAIN GRID
-        ================================================== */}
+        {/* Main Grid */}
         <div
           className="
-            grid
-            grid-cols-1
-            items-start
-            gap-12
+            grid grid-cols-1 items-center
+            gap-10
+            lg:min-h-0
             lg:grid-cols-[1.2fr_0.8fr]
-            lg:gap-14
-            xl:gap-20
+            lg:gap-10
+            xl:gap-14
           "
         >
-          {/* =================================================
-              LEFT CONTENT
-          ================================================== */}
-          <div className="relative">
-            <div className="overflow-hidden">
-              <motion.h2
-                initial={{ opacity: 0, y: 100 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{
-                  duration: 0.9,
-                  ease: [0.16, 1, 0.3, 1],
-                }}
-                className="
-                  max-w-[800px]
-                  text-[clamp(3.4rem,6vw,7.2rem)]
-                  font-semibold
-                  leading-[0.84]
-                  tracking-[-0.07em]
-                "
-              >
-                FROM SPACE
-                <br />
-                TO{" "}
-                <span className="text-[#0976b2]">
-                  IMPACT.
-                </span>
-              </motion.h2>
-            </div>
+          {/* LEFT CONTENT */}
+          <div className="min-w-0">
+            {/* Heading */}
+            <motion.h2
+              initial={reduceMotion ? false : { opacity: 0, y: 35 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.7 }}
+              className="
+                max-w-[800px]
+                text-[clamp(3rem,5.2vw,6.5rem)]
+                font-semibold
+                leading-[0.86]
+                tracking-[-0.07em]
+              "
+            >
+              FROM SPACE
+              <br />
+              TO <span className="text-[#0976b2]">IMPACT.</span>
+            </motion.h2>
 
-            <div className="mt-2 max-w-[760px] sm:mt-6">
-            <motion.p
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: 0.25 }}
-                className="
-                  mt-5
-                  max-w-[700px]
-                  text-sm
-                  leading-7
-                  text-white/55
-                  sm:text-[15px]
-                  sm:leading-7
-                  lg:text-base
-                "
-              >
+            {/* Description */}
+            <div className="mt-5 max-w-[700px]">
+              <p className="text-base font-medium leading-7 text-white/90 xl:text-lg">
                 OOH is our medium. Making it work for brands is our business.
-              {/* </motion.p>
+              </p>
 
-              <motion.p
-                initial={{ opacity: 0, y: 25 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                viewport={{ once: true, amount: 0.2 }}
-                transition={{ duration: 0.7, delay: 0.25 }}
-                className="
-                  mt-5
-                  max-w-[700px]
-                  text-sm
-                  leading-7
-                  text-white/55
-                  sm:text-[15px]
-                  sm:leading-7
-                  lg:text-base
-                "
-              > */}
+              <p className="mt-3 text-sm leading-6 text-white/55 xl:text-[15px]">
                 From strategic planning, efficient buying to creative innovation
-                and execution, we bring every part of OOH Advertising together to
-                make brands more visible, more relevant and more impactful.
-              </motion.p>
+                and execution, we bring every part of OOH Advertising together
+                to make brands more visible, more relevant and more impactful.
+              </p>
             </div>
 
-            {/* Service cards */}
+            {/* Service Grid */}
             <div
               className="
-                mt-6
-                grid
-                grid-cols-1
-                border-l
-                border-t
-                border-white/10
-                sm:grid-cols-3
+                mt-6 grid grid-cols-1
+                border-l border-t border-white/10
+                sm:grid-cols-2
+                lg:grid-cols-3
               "
             >
               {services.map((service, index) => (
-                <motion.div
+                <motion.article
                   key={service.number}
-                  initial={{ opacity: 0, y: 28 }}
+                  initial={
+                    reduceMotion ? false : { opacity: 0, y: 15 }
+                  }
                   whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true, amount: 0.1 }}
+                  viewport={{ once: true }}
                   transition={{
-                    duration: 0.65,
-                    delay: 0.1 + index * 0.06,
+                    duration: 0.45,
+                    delay: index * 0.05,
                   }}
                   className="
-                    group
-                    relative
-                    min-h-[190px]
-                    border-b
-                    border-r
-                    border-white/10
-                    p-5
-                    transition-colors
-                    duration-500
-                    hover:bg-white/[0.035]
-                    sm:p-2
+                    group relative flex
+                    min-h-[155px] flex-col
+                    border-b border-r border-white/10
+                    bg-transparent
+                    p-4
+                    transition-colors duration-300 ease-out
+                    hover:bg-[#0976b2]
+                    focus-within:bg-[#0976b2]
+                    xl:min-h-[165px]
+                    xl:p-5
                   "
                 >
-                  <div className="flex items-start justify-between gap-5">
+                  {/* Number and Arrow */}
+                  <div className="flex items-center justify-between">
                     <span
                       className="
-                        text-[10px]
-                        font-medium
-                        tracking-[0.2em]
+                        text-[10px] font-medium tracking-[0.2em]
                         text-[#0976b2]
+                        transition-colors duration-300
+                        group-hover:text-white
                       "
                     >
                       {service.number}
@@ -389,90 +206,76 @@ export default function WhatWeDoSection() {
                       size={16}
                       strokeWidth={1.4}
                       className="
-                        text-white/25
-                        transition-all
-                        duration-500
-                        group-hover:-translate-y-1
-                        group-hover:translate-x-1
-                        group-hover:text-[#0976b2]
+                        text-[#0976b2]
+                        transition-colors duration-300
+                        group-hover:text-white
                       "
                     />
                   </div>
 
+                  {/* Title */}
                   <h3
                     className="
-                      mt-7
-                      text-base
-                      font-medium
-                      tracking-[-0.03em]
-                      text-white
-                      sm:text-[17px]
+                      mt-5 text-[15px] font-medium
+                      tracking-[-0.03em] text-white
+                      transition-colors duration-300
+                      group-hover:text-white
+                      xl:text-base
                     "
                   >
                     {service.title}
                   </h3>
 
+                  {/* Description */}
                   <p
                     className="
-                      mt-3
-                      text-[13px]
-                      leading-6
+                      mt-2 text-[12px] leading-[1.65]
                       text-white/50
+                      transition-colors duration-300
+                      group-hover:text-white/90
+                      xl:text-[13px]
                     "
                   >
                     {service.description}
                   </p>
-                </motion.div>
+                </motion.article>
               ))}
             </div>
           </div>
 
-          {/* =================================================
-              RIGHT IMAGE
-          ================================================== */}
+          {/* RIGHT IMAGE */}
           <motion.div
-            initial={{ opacity: 0, x: 80, scale: 0.94 }}
-            whileInView={{ opacity: 1, x: 0, scale: 1 }}
-            viewport={{ once: true, amount: 0.2 }}
-            transition={{
-              duration: 1,
-              ease: [0.16, 1, 0.3, 1],
-            }}
+            initial={
+              reduceMotion
+                ? false
+                : { opacity: 0, x: 35 }
+            }
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.8 }}
             className="
-              relative
-              mx-auto
-              w-full
-              max-w-[650px]
-              lg:sticky
-              lg:top-10
-              lg:mx-0
+              relative mx-auto w-full max-w-[650px]
+              lg:mx-0 lg:min-w-0
             "
           >
-            {/* Blue frame */}
+            {/* Blue Frame */}
             <div
               className="
-                pointer-events-none
-                absolute
-                -bottom-4
-                -right-4
-                h-full
-                w-full
-                border
-                border-[#0976b2]/40
+                pointer-events-none absolute
+                -bottom-3 -right-3
+                h-full w-full
+                border border-[#0976b2]/40
               "
             />
 
             {/* Image */}
             <div
               className="
-                group
-                relative
-                aspect-[1/1.05]
-                w-full
-                overflow-hidden
-                bg-[#0b0b10]
+                group relative aspect-[1/1.05]
+                w-full overflow-hidden bg-[#0b0b10]
                 sm:aspect-[1.2/1]
-                lg:aspect-[0.85/1]
+                lg:aspect-[0.82/1]
+                lg:max-h-[calc(100svh-100px)]
               "
             >
               <Image
@@ -486,208 +289,86 @@ export default function WhatWeDoSection() {
                   36vw
                 "
                 className="
-                  object-cover
-                  grayscale
-                  transition-transform
-                  duration-[1400ms]
-                  ease-out
+                  object-cover grayscale
+                  transition-all duration-[1200ms] ease-out
                   group-hover:scale-105
                   group-hover:grayscale-0
                 "
               />
 
-              {/* Dark overlay */}
+              {/* Dark Overlay */}
               <div
                 className="
-                  absolute
-                  inset-0
+                  pointer-events-none absolute inset-0
                   bg-gradient-to-t
-                  from-black
-                  via-black/15
-                  to-transparent
+                  from-black via-black/15 to-transparent
                   opacity-80
                 "
               />
 
-              {/* Blue tint */}
+              {/* Blue Tint */}
               <div
                 className="
-                  absolute
-                  inset-0
-                  bg-[#0976b2]/10
-                  mix-blend-screen
-                  transition-opacity
-                  duration-700
+                  pointer-events-none absolute inset-0
+                  bg-[#0976b2]/10 mix-blend-screen
+                  transition-opacity duration-700
                   group-hover:opacity-0
                 "
               />
 
-              {/* Image label */}
-              <div
-                className="
-                  absolute
-                  left-5
-                  top-5
-                  flex
-                  items-center
-                  gap-3
-                  sm:left-7
-                  sm:top-7
-                "
-              >
+              {/* Image Label */}
+              <div className="absolute left-5 top-5 flex items-center gap-3 sm:left-7 sm:top-7">
                 <span className="h-2 w-2 rounded-full bg-[#0976b2]" />
 
-                <span
-                  className="
-                    text-[9px]
-                    uppercase
-                    tracking-[0.25em]
-                    text-white/70
-                  "
-                >
-                  WTT / OOH
+                <span className="text-[9px] uppercase tracking-[0.25em] text-white/70">
+                  WTT / PROMISE
                 </span>
               </div>
 
-              {/* Bottom image content */}
-              <div
-                className="
-                  absolute
-                  bottom-5
-                  left-5
-                  right-5
-                  flex
-                  items-end
-                  justify-between
-                  gap-5
-                  sm:bottom-7
-                  sm:left-7
-                  sm:right-7
-                "
-              >
+              {/* Bottom Content */}
+              <div className="absolute bottom-5 left-5 right-5 flex items-end justify-between gap-4 sm:bottom-7 sm:left-7 sm:right-7">
                 <div>
-                  <div
-                    className="
-                      mb-2
-                      text-[9px]
-                      uppercase
-                      tracking-[0.25em]
-                      text-white/40
-                    "
-                  >
-                    Media on the moves
+                  <div className="mb-2 text-[9px] uppercase tracking-[0.25em] text-white/40">
+                    Media on the move
                   </div>
 
-                  <div
-                    className="
-                      max-w-[300px]
-                      text-2xl
-                      font-medium
-                      leading-[0.95]
-                      tracking-[-0.04em]
-                      sm:text-3xl
-                    "
-                  >
+                  <div className="text-2xl font-medium leading-[0.95] tracking-[-0.04em] sm:text-3xl">
                     Visible.
-                    <span className="text-[#0976b2]">
-                      {" "}Relevant.
-                    </span>
+                    <span className="text-[#0976b2]"> Relevant.</span>
                     <br />
                     Impactful.
                   </div>
                 </div>
 
-                <motion.div
-                  whileHover={{ rotate: 45 }}
-                  className="
-                    flex
-                    h-12
-                    w-12
-                    shrink-0
-                    items-center
-                    justify-center
-                    rounded-full
-                    bg-[#0976b2]
-                    sm:h-14
-                    sm:w-14
-                  "
-                >
+                <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-full bg-[#0976b2] sm:h-14 sm:w-14">
                   <ArrowUpRight size={20} strokeWidth={1.5} />
-                </motion.div>
+                </div>
               </div>
             </div>
 
-            {/* Corner detail */}
+            {/* Corner Detail */}
             <div
               className="
-                pointer-events-none
-                absolute
-                -left-4
-                top-8
-                h-10
-                w-10
-                border-l
-                border-t
-                border-[#0976b2]
+                pointer-events-none absolute
+                -left-3 top-8 h-10 w-10
+                border-l border-t border-[#0976b2]
               "
             />
           </motion.div>
         </div>
 
-        {/* =================================================
-            BOTTOM META
-        ================================================== */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.7, delay: 0.5 }}
+        {/* Bottom Meta */}
+        {/* <div
           className="
-            mt-10
-            flex
-            items-center
-            justify-between
-            border-t
-            border-white/10
-            pt-5
+            mt-7 flex items-center justify-between
+            border-t border-white/10 pt-4
+            lg:mt-5
           "
         >
-          <div
-            className="
-              text-[9px]
-              uppercase
-              tracking-[0.25em]
-              text-white/25
-            "
-          >
+          <p className="text-[9px] uppercase tracking-[0.2em] text-white/30">
             Strategy · Buying · Innovation · Technology · Measurement
-          </div>
-
-          {/* <div
-            className="
-              hidden
-              items-center
-              gap-3
-              text-[9px]
-              uppercase
-              tracking-[0.25em]
-              text-white/30
-              sm:flex
-            "
-          >
-            <span>Scroll to continue</span>
-
-            <motion.span
-              animate={{ y: [0, 5, 0] }}
-              transition={{
-                duration: 1.5,
-                repeat: Infinity,
-              }}
-            >
-              <ArrowDown size={13} />
-            </motion.span>
-          </div> */}
-        </motion.div>
+          </p>
+        </div> */}
       </div>
     </section>
   );
