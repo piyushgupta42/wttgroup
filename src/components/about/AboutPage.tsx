@@ -1,9 +1,9 @@
+
 "use client";
 
 import Image from "next/image";
 import { motion, useTransform, useMotionValue, useSpring } from "framer-motion";
-import { ArrowDown, ArrowUpRight, CircleDot } from "lucide-react";
-import { FaLinkedin } from "react-icons/fa6";
+import { ArrowUpRight } from "lucide-react";
 import WttHero from "../../components/common/WttHero";
 
 type Leader = {
@@ -67,13 +67,6 @@ const leaders: Leader[] = [
   },
 ];
 
-const scrollToSection = (id: string) => {
-  document.getElementById(id)?.scrollIntoView({
-    behavior: "smooth",
-    block: "start",
-  });
-};
-
 export default function AboutPage() {
   const mouseX = useMotionValue(0);
   const mouseY = useMotionValue(0);
@@ -92,54 +85,64 @@ export default function AboutPage() {
   const orbY = useTransform(smoothY, [-500, 500], [-35, 35]);
 
   return (
-    <main className="overflow-hidden bg-[#050509] font-sans text-white">
+    <main
+      className="
+        h-[100svh] w-full max-w-[100vw]
+        overflow-x-hidden overflow-y-auto
+        snap-y snap-mandatory scroll-smooth
+        bg-[#050509] font-sans text-white
+      "
+    >
       {/* =====================================================
           HERO SECTION
       ===================================================== */}
-
-      {/* Hero Content */}
-      <WttHero
-        eyebrow="WTT / ABOUT US"
-        heading={
-          <>
-            TALK IS EASY
-            <br />
-            <span className="text-[#0976b2]">THE WALK IS</span>
-            <br />
-            WHAT COUNTS
-          </>
-        }
-        scrollTarget="why-wtt"
-        footerText=""
-      />
+      <section
+        id="about-hero"
+        data-snap-section
+        className="
+          h-[100svh] min-h-[650px]
+          w-full shrink-0 snap-start snap-always
+          overflow-hidden
+        "
+      >
+        <WttHero
+          eyebrow="WTT / ABOUT US"
+          heading={
+            <>
+              TALK IS EASY
+              <br />
+              <span className="text-[#0976b2]">THE WALK IS</span>
+              <br />
+              WHAT COUNTS
+            </>
+          }
+          scrollTarget="why-wtt"
+          footerText=""
+        />
+      </section>
 
       {/* =====================================================
           WHY WTT SECTION
       ===================================================== */}
-
       <section
         id="why-wtt"
         data-snap-section
         className="
-          relative flex min-h-[100svh]
-          w-full max-w-[100vw] items-center
-          overflow-hidden bg-[#0976b2]
-          font-sans text-white
+          relative h-[100svh] min-h-[650px]
+          w-full shrink-0 snap-start snap-always
+          overflow-x-hidden overflow-y-auto
+          bg-[#0976b2] font-sans text-white
         "
       >
         {/* Background Design */}
-        <div
-          className="
-          pointer-events-none absolute inset-0 overflow-hidden
-        "
-        >
+        <div className="pointer-events-none absolute inset-0 overflow-hidden">
           {/* Grid */}
           <div
             className="
-            absolute inset-0 opacity-[0.09]
-            [background-image:linear-gradient(rgba(255,255,255,.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.7)_1px,transparent_1px)]
-            [background-size:80px_80px]
-          "
+              absolute inset-0 opacity-[0.09]
+              [background-image:linear-gradient(rgba(255,255,255,.7)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.7)_1px,transparent_1px)]
+              [background-size:80px_80px]
+            "
           />
 
           {/* Animated Circles */}
@@ -184,12 +187,7 @@ export default function AboutPage() {
           />
 
           {/* Noise */}
-          <div
-            className="
-            absolute inset-0 opacity-[0.035]
-            mix-blend-overlay
-          "
-          >
+          <div className="absolute inset-0 opacity-[0.035] mix-blend-overlay">
             <svg className="h-full w-full">
               <filter id="wtt-noise">
                 <feTurbulence
@@ -204,44 +202,35 @@ export default function AboutPage() {
           </div>
 
           {/* Side Borders */}
-          <div
-            className="
-            absolute left-0 top-0 h-full w-px bg-white/15
-          "
-          />
-
-          <div
-            className="
-            absolute right-0 top-0 h-full w-px bg-white/15
-          "
-          />
+          <div className="absolute left-0 top-0 h-full w-px bg-white/15" />
+          <div className="absolute right-0 top-0 h-full w-px bg-white/15" />
 
           {/* Decorative Light */}
           <div
             className="
-            absolute -right-40 -top-40
-            h-[500px] w-[500px] rounded-full
-            bg-white/[0.06] blur-[120px]
-          "
+              absolute -right-40 -top-40
+              h-[500px] w-[500px] rounded-full
+              bg-white/[0.06] blur-[120px]
+            "
           />
         </div>
 
         {/* Main Content */}
         <div
           className="
-          relative z-10 mx-auto flex min-h-[100svh]
-          w-full max-w-[1700px] flex-col justify-center
-          px-5 py-8 sm:px-8 md:px-10
-          lg:px-14 lg:py-10 xl:px-16
-        "
+            relative z-10 mx-auto flex min-h-full
+            w-full max-w-[1700px] flex-col justify-center
+            px-5 py-7 sm:px-8 md:px-10
+            lg:px-14 lg:py-8 xl:px-16
+          "
         >
           {/* Heading and Description */}
           <div
             className="
-            grid items-center gap-10
-            lg:grid-cols-[1.15fr_0.85fr]
-            lg:gap-16 xl:gap-24
-          "
+              grid items-center gap-7
+              lg:grid-cols-[1.15fr_0.85fr]
+              lg:gap-12 xl:gap-20
+            "
           >
             {/* Left Heading */}
             <div className="relative">
@@ -255,8 +244,7 @@ export default function AboutPage() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   className="
-                    wtt-display-title
-                    max-w-[1050px]
+                    wtt-display-title max-w-[1050px]
                     text-[clamp(3.1rem,6.4vw,7.8rem)]
                     uppercase
                   "
@@ -267,7 +255,8 @@ export default function AboutPage() {
                   <br />
                   <span className="text-white/45">
                     OUR ACTIONS
-                    <br className="hidden xl:block" /> PROVE US.
+                    <br className="hidden xl:block" />
+                    PROVE US.
                   </span>
                 </motion.h2>
               </div>
@@ -278,7 +267,7 @@ export default function AboutPage() {
                 whileInView={{ width: 90 }}
                 viewport={{ once: true }}
                 transition={{ duration: 1, delay: 0.5 }}
-                className="mt-8 h-1 bg-white"
+                className="mt-5 h-1 bg-white"
               />
             </div>
 
@@ -288,27 +277,23 @@ export default function AboutPage() {
               whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true, amount: 0.2 }}
               transition={{ duration: 0.85, delay: 0.15 }}
-              className="relative lg:mt-8"
+              className="relative lg:mt-4"
             >
               <div
                 className="
-                absolute -left-6 top-0 hidden
-                h-full w-[2px] bg-white/40 lg:block
-              "
+                  absolute -left-6 top-0 hidden
+                  h-full w-[2px] bg-white/40 lg:block
+                "
               />
 
-              <div
-                className="
-                mb-6 flex items-center gap-3
-              "
-              >
+              <div className="mb-4 flex items-center gap-3">
                 <span
                   className="
-                  text-[11px] font-semibold uppercase
-                  tracking-[0.3em] text-white
-                "
+                    text-[11px] font-semibold uppercase
+                    tracking-[0.3em] text-white
+                  "
                 >
-                  Our Belife
+                  Our Belief
                 </span>
 
                 <span className="h-px flex-1 bg-white/30" />
@@ -316,10 +301,10 @@ export default function AboutPage() {
 
               <p
                 className="
-                max-w-[650px] text-[15px]
-                font-medium leading-[1.9]
-                text-white sm:text-base lg:text-[17px]
-              "
+                  max-w-[650px] text-[14px]
+                  font-medium leading-[1.8]
+                  text-white sm:text-base lg:text-[16px]
+                "
               >
                 At Walk The Talk, we believe that great advertising is built on
                 more than visibility. It takes an understanding of people, the
@@ -331,12 +316,12 @@ export default function AboutPage() {
                 It&apos;s built through what we do.
               </p>
 
-              <div className="mt-8 flex items-center gap-4">
+              <div className="mt-6 flex items-center gap-4">
                 <span
                   className="
-                  text-[11px] font-semibold uppercase
-                  tracking-[0.2em] text-white
-                "
+                    text-[11px] font-semibold uppercase
+                    tracking-[0.2em] text-white
+                  "
                 >
                   Walk The Talk
                 </span>
@@ -349,11 +334,11 @@ export default function AboutPage() {
           {/* Principles */}
           <div
             className="
-            mt-14 grid grid-cols-1
-            border-l border-t border-white/30
-            sm:grid-cols-2
-            lg:mt-16 lg:grid-cols-4
-          "
+              mt-8 grid grid-cols-1
+              border-l border-t border-white/30
+              sm:grid-cols-2
+              lg:mt-10 lg:grid-cols-4
+            "
           >
             {principles.map((principle, index) => (
               <motion.article
@@ -366,57 +351,53 @@ export default function AboutPage() {
                   delay: index * 0.1,
                 }}
                 className="
-                  group relative flex min-h-[260px]
+                  group relative flex min-h-[180px]
                   flex-col overflow-hidden
                   border-b border-r border-white/30
-                  bg-white/[0.025] p-6
+                  bg-white/[0.025] p-5
                   transition-all duration-500
                   hover:bg-[#050509]
-                  sm:min-h-[280px] sm:p-7
-                  lg:min-h-[300px] lg:p-8
+                  sm:min-h-[200px] sm:p-6
+                  lg:min-h-[220px] lg:p-6
+                  xl:min-h-[240px]
                 "
               >
                 {/* Background Number */}
                 <span
                   className="
-                  pointer-events-none absolute -right-2 top-10
-                  text-[100px] font-black leading-none
-                  tracking-[-0.1em] text-white/[0.045]
-                  transition-all duration-700
-                  group-hover:scale-110
-                  group-hover:text-white/[0.09]
-                "
+                    pointer-events-none absolute -right-2 top-8
+                    text-[100px] font-black leading-none
+                    tracking-[-0.1em] text-white/[0.045]
+                    transition-all duration-700
+                    group-hover:scale-110
+                    group-hover:text-white/[0.09]
+                  "
                 >
                   {principle.number}
                 </span>
 
                 {/* Card Top */}
-                <div
-                  className="
-                  relative z-10 flex items-center
-                  justify-between
-                "
-                >
+                <div className="relative z-10 flex items-center justify-between">
                   <span
                     className="
-                    text-[11px] font-semibold
-                    tracking-[0.25em] text-white
-                  "
+                      text-[11px] font-semibold
+                      tracking-[0.25em] text-white
+                    "
                   >
                     {principle.number}
                   </span>
 
                   <div
                     className="
-                    flex h-9 w-9 items-center justify-center
-                    rounded-full border border-white/40
-                    text-white transition-all duration-500
-                    group-hover:border-white
-                    group-hover:bg-white group-hover:text-black
-                  "
+                      flex h-8 w-8 items-center justify-center
+                      rounded-full border border-white/40
+                      text-white transition-all duration-500
+                      group-hover:border-white
+                      group-hover:bg-white group-hover:text-black
+                    "
                   >
                     <ArrowUpRight
-                      size={17}
+                      size={16}
                       strokeWidth={1.5}
                       className="
                         transition-transform duration-500
@@ -428,25 +409,25 @@ export default function AboutPage() {
                 </div>
 
                 {/* Card Content */}
-                <div className="relative z-10 mt-auto pt-10">
+                <div className="relative z-10 mt-auto pt-7">
                   <h3
                     className="
-                    max-w-[260px] text-[21px]
-                    font-semibold leading-[1.12]
-                    tracking-[-0.045em] text-white
-                    transition-transform duration-500
-                    group-hover:translate-x-1 sm:text-[23px]
-                  "
+                      max-w-[260px] text-[19px]
+                      font-semibold leading-[1.12]
+                      tracking-[-0.045em] text-white
+                      transition-transform duration-500
+                      group-hover:translate-x-1 sm:text-[21px]
+                    "
                   >
                     {principle.title}
                   </h3>
 
                   <p
                     className="
-                    mt-5 max-w-[320px]
-                    text-[13px] font-normal
-                    leading-[1.85] text-white/80
-                  "
+                      mt-3 max-w-[320px]
+                      text-[12px] font-normal
+                      leading-[1.75] text-white/80
+                    "
                   >
                     {principle.description}
                   </p>
@@ -455,12 +436,12 @@ export default function AboutPage() {
                 {/* Bottom Hover Line */}
                 <div
                   className="
-                  absolute bottom-0 left-0
-                  h-[3px] w-full origin-left
-                  scale-x-0 bg-white
-                  transition-transform duration-500
-                  group-hover:scale-x-100
-                "
+                    absolute bottom-0 left-0
+                    h-[3px] w-full origin-left
+                    scale-x-0 bg-white
+                    transition-transform duration-500
+                    group-hover:scale-x-100
+                  "
                 />
               </motion.article>
             ))}
@@ -469,24 +450,24 @@ export default function AboutPage() {
           {/* Bottom Statement */}
           <div
             className="
-            mt-7 flex flex-col justify-between
-            gap-4 sm:flex-row sm:items-center
-          "
+              mt-5 flex flex-col justify-between
+              gap-3 sm:flex-row sm:items-center
+            "
           >
             <p
               className="
-              text-[10px] font-semibold uppercase
-              tracking-[0.25em] text-white
-            "
+                text-[10px] font-semibold uppercase
+                tracking-[0.25em] text-white
+              "
             >
               Creativity. Technology. Excellence. Trust.
             </p>
 
             <p
               className="
-              text-[10px] font-semibold uppercase
-              tracking-[0.25em] text-white
-            "
+                text-[10px] font-semibold uppercase
+                tracking-[0.25em] text-white
+              "
             >
               Where actions speak louder
             </p>
@@ -497,34 +478,38 @@ export default function AboutPage() {
       {/* =====================================================
           LEADERSHIP SECTION
       ===================================================== */}
-
       <section
+        id="leadership"
+        data-snap-section
         className="
-        relative overflow-hidden bg-[#050509]
-        py-20 font-sans sm:py-28 lg:py-32
-      "
+          relative h-[100svh] min-h-[650px]
+          w-full shrink-0 snap-start snap-always
+          overflow-x-hidden overflow-y-auto
+          bg-[#050509] font-sans
+        "
       >
         {/* Background Grid */}
         <div
           className="
-          pointer-events-none absolute inset-0 opacity-[0.04]
-          [background-image:linear-gradient(rgba(255,255,255,.45)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.45)_1px,transparent_1px)]
-          [background-size:80px_80px]
-        "
+            pointer-events-none absolute inset-0 opacity-[0.04]
+            [background-image:linear-gradient(rgba(255,255,255,.45)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,.45)_1px,transparent_1px)]
+            [background-size:80px_80px]
+          "
         />
 
         <div
           className="
-          relative z-10 mx-auto w-full max-w-[1600px]
-          px-6 sm:px-10 lg:px-16
-        "
+            relative z-10 mx-auto flex min-h-full
+            w-full max-w-[1600px] flex-col justify-center
+            px-6 py-8 sm:px-10 lg:px-16
+          "
         >
           {/* Section Introduction */}
           <div
             className="
-            mb-12 grid gap-8
-            lg:mb-16 lg:grid-cols-12 lg:items-end
-          "
+              mb-7 grid gap-6
+              lg:mb-9 lg:grid-cols-12 lg:items-end
+            "
           >
             <div className="lg:col-span-8">
               <div className="overflow-hidden">
@@ -537,8 +522,7 @@ export default function AboutPage() {
                     ease: [0.16, 1, 0.3, 1],
                   }}
                   className="
-                    wtt-display-title
-                    max-w-[900px]
+                    wtt-display-title max-w-[900px]
                     text-[clamp(3.2rem,6vw,7.2rem)]
                     uppercase
                   "
@@ -552,24 +536,19 @@ export default function AboutPage() {
 
             <div
               className="
-              border-l border-[#0976b2]/40
-              pl-5 sm:pl-7 lg:col-span-4
-            "
-            >
-              <p
-                className="
-                text-lg font-medium leading-8
-                text-white/90 sm:text-xl
+                border-l border-[#0976b2]/40
+                pl-5 sm:pl-7 lg:col-span-4
               "
-              >
+            >
+              <p className="text-base font-medium leading-7 text-white/90 sm:text-lg">
                 Different strengths, and a shared belief in doing things right.
               </p>
 
               <p
                 className="
-                mt-5 text-sm leading-7
-                text-white/55 sm:text-[15px] lg:text-base
-              "
+                  mt-4 text-sm leading-6
+                  text-white/55 sm:text-[15px] lg:text-base
+                "
               >
                 Behind every ambitious idea, enduring relationship and a
                 successful enterprise is a collaboration of minds that believes
@@ -582,9 +561,9 @@ export default function AboutPage() {
           {/* Leadership Cards */}
           <div
             className="
-            grid grid-cols-2 gap-4
-            sm:gap-5 lg:grid-cols-4 lg:gap-7
-          "
+              grid grid-cols-2 gap-3
+              sm:gap-5 lg:grid-cols-4 lg:gap-6
+            "
           >
             {leaders.map((leader, index) => (
               <motion.article
@@ -601,10 +580,10 @@ export default function AboutPage() {
                 {/* Leader Image */}
                 <div
                   className="
-                  relative aspect-[4/4.8]
-                  overflow-hidden border border-white/10
-                  bg-[#111116]
-                "
+                    relative aspect-[4/4.8]
+                    overflow-hidden border border-white/10
+                    bg-[#111116]
+                  "
                 >
                   <motion.div
                     whileHover={{ scale: 1.06 }}
@@ -615,10 +594,7 @@ export default function AboutPage() {
                       src={leader.image}
                       alt={leader.name}
                       fill
-                      sizes="
-                        (max-width: 640px) 50vw,
-                        25vw
-                      "
+                      sizes="(max-width: 640px) 50vw, 25vw"
                       className="
                         object-cover grayscale
                         transition-all duration-700
@@ -629,58 +605,34 @@ export default function AboutPage() {
 
                   <div
                     className="
-                    absolute inset-0
-                    bg-gradient-to-t from-black/60
-                    via-transparent to-transparent
-                  "
+                      absolute inset-0
+                      bg-gradient-to-t from-black/60
+                      via-transparent to-transparent
+                    "
                   />
                 </div>
 
                 {/* Leader Details */}
                 <div
                   className="
-                  flex items-center justify-between
-                  gap-3 border-b border-white/10 py-4
-                "
+                    flex items-center justify-between
+                    gap-3 border-b border-white/10 py-3
+                  "
                 >
                   <h3
                     className="
-                    min-w-0 flex-1 text-lg
-                    font-semibold uppercase
-                    leading-tight tracking-[-0.05em]
-                    transition-colors duration-300
-                    group-hover:text-[#0976b2]
-                    sm:text-2xl
-                  "
+                      min-w-0 flex-1 text-base
+                      font-semibold uppercase
+                      leading-tight tracking-[-0.05em]
+                      transition-colors duration-300
+                      group-hover:text-[#0976b2]
+                      sm:text-xl lg:text-2xl
+                    "
                   >
                     {leader.name}
                   </h3>
 
-                  {/* {leader.linkedinUrl && (
-                    <a
-                      href={leader.linkedinUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View ${leader.name} on LinkedIn`}
-                      title={`View ${leader.name} on LinkedIn`}
-                      className="
-                        relative z-10 inline-flex
-                        h-10 w-10 shrink-0
-                        items-center justify-center
-                        rounded-full border border-white/20
-                        bg-[#0A66C2] text-white shadow-md
-                        transition-colors duration-200
-                        hover:bg-[#004182]
-                        focus-visible:outline-none
-                        focus-visible:ring-2
-                        focus-visible:ring-[#0A66C2]
-                        focus-visible:ring-offset-2
-                        focus-visible:ring-offset-[#050509]
-                      "
-                    >
-                      <FaLinkedin size={19} aria-hidden="true" />
-                    </a>
-                  )} */}
+                  {/* LinkedIn can be enabled once real profile URLs are added */}
                 </div>
               </motion.article>
             ))}
@@ -689,9 +641,9 @@ export default function AboutPage() {
           {/* Closing Statement */}
           <p
             className="
-            mt-12 text-center text-sm
-            italic leading-7 text-white/65 sm:text-base
-          "
+              mt-8 text-center text-xs
+              italic leading-6 text-white/65 sm:text-sm
+            "
           >
             Leadership is not about setting the direction alone. It&apos;s about
             building a team that moves forward together.
