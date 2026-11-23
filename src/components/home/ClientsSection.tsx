@@ -78,7 +78,7 @@ export default function ClientsSection() {
             text-black/[0.025]
           "
         >
-          CLIENTS
+          TRUST
         </div>
 
         {/* Blue glow */}
