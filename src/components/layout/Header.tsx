@@ -24,7 +24,7 @@ const menus = [
   },
   {
     number: "03",
-    label: "Change Makers",
+    label: "Changemakers",
     href: "/teams",
   },
   {
