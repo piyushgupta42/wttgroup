@@ -110,7 +110,7 @@ export default function WttHero({
           font-black leading-none
           tracking-[-0.1em] text-white/[0.025]
         ">
-          {backgroundText}
+          /* {backgroundText} */ WTT
         </span>
       </div>
 
