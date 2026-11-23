@@ -67,13 +67,13 @@ export default function WttHeroVisual() {
         <div className="border border-white/15 bg-[#0c0d12] p-3 shadow-2xl">
           <div className="mb-3 flex items-center justify-between border-b border-white/10 pb-3">
             <span className="text-[9px] font-semibold uppercase tracking-[0.25em] text-white/30">
-              WTT / OOH
+              WTT / ETHOS
             </span>
 
-            <span className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
+            {/* <span className="flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
               Live
               <span className="h-1.5 w-1.5 rounded-full bg-[#0976b2]" />
-            </span>
+            </span> */}
           </div>
 
           <div className="relative flex h-[250px] flex-col justify-between overflow-hidden bg-[#0976b2] p-6">
@@ -82,25 +82,25 @@ export default function WttHeroVisual() {
             <div className="absolute bottom-[-80px] left-[-30px] h-52 w-52 rounded-full border border-white/20" />
 
             <span className="relative z-10 text-[10px] font-bold uppercase tracking-[0.25em] text-white/70">
-              Outdoor
+              Not
               <br />
-              Is Not
+              Just Out
               <br />
-              Background.
+              There.
             </span>
 
             <span className="relative z-10 text-4xl font-semibold uppercase leading-[0.85] tracking-[-0.07em]">
-              It&apos;s
+              We
               <br />
-              The
+              Make It 
               <br />
-              Stage.
+              Stand Out.
             </span>
           </div>
 
           <div className="mt-3 flex items-center justify-between">
             <span className="text-[9px] font-semibold uppercase tracking-[0.2em] text-white/30">
-              Mumbai / Delhi
+            PEOPLE / PLACES / POSSIBILITIES
             </span>
 
             <ArrowUpRight size={18} className="text-[#0976b2]" />
@@ -109,7 +109,7 @@ export default function WttHeroVisual() {
       </motion.div>
 
       {/* City Reach */}
-      <div className="absolute left-0 top-[20%] z-30 border border-white/10 bg-[#0a0b10]/90 p-5 backdrop-blur-xl">
+      {/* <div className="absolute left-0 top-[20%] z-30 border border-white/10 bg-[#0a0b10]/90 p-5 backdrop-blur-xl">
         <div className="mb-2 flex items-center gap-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-white/40">
           <CircleDot size={11} className="text-[#0976b2]" />
           City Reach
@@ -118,16 +118,16 @@ export default function WttHeroVisual() {
         <div className="text-3xl font-semibold tracking-[-0.06em]">
           360°
         </div>
-      </div>
+      </div> */}
 
       {/* Brand Visibility */}
       <div className="absolute bottom-[18%] right-0 z-30 border border-[#0976b2]/30 bg-[#07142a]/90 p-5 backdrop-blur-xl">
         <div className="mb-2 text-[9px] font-semibold uppercase tracking-[0.2em] text-[#0976b2]">
-          Brand Visibility
+          WTT
         </div>
 
         <div className="text-3xl font-semibold tracking-[-0.06em]">
-          24/7
+        360&deg;
         </div>
       </div>
     </motion.div>
