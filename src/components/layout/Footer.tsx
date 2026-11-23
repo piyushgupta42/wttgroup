@@ -371,11 +371,16 @@ export default function Footer() {
             "
           >
             <Image
-              src="/images/WTT_Logo_Brand_Blue.png"
+              src={
+                footerData.logo ||
+                "/images/WTT_Logo_Brand_Blue.png"
+              }
               alt="Walk The Talk - Let's Do It Together"
               width={650}
               height={220}
-              className="mx-auto h-auto w-full object-contain"
+              className="mx-auto h-auto w-full object-contain  w-[170px]
+      sm:w-[200px]
+      lg:w-[220px]"
             />
           </Link>
         </motion.div>
