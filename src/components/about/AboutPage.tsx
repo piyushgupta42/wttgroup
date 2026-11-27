@@ -85,14 +85,7 @@ export default function AboutPage() {
   const orbY = useTransform(smoothY, [-500, 500], [-35, 35]);
 
   return (
-    <main
-      className="
-        h-[100svh] w-full max-w-[100vw]
-        overflow-x-hidden overflow-y-auto
-        snap-y snap-mandatory scroll-smooth
-        bg-[#050509] font-sans text-white
-      "
-    >
+    <main>
       {/* =====================================================
           HERO SECTION
       ===================================================== */}
