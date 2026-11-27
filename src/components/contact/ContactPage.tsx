@@ -64,15 +64,7 @@ export default function ContactPage() {
   };
 
   return (
-    <main
-      id="contact-page"
-      className="
-        h-[100svh] w-full
-        overflow-x-hidden overflow-y-auto
-        snap-y snap-mandatory scroll-smooth
-        bg-[#050509] font-sans text-white
-      "
-    >
+    <main>
       {/* =====================================================
           SECTION 01 — CONTACT HERO
       ====================================================== */}
